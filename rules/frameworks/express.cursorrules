@@ -1,30 +1,30 @@
-# Express Rules
+# Express.js Cursor Rules
 
-## Structure
-- Organize by feature/domain, not by type (routes/, controllers/)
-- Use Express Router for modular route handling
-- Keep route handlers thin — delegate to service functions
-- Use middleware for cross-cutting concerns
+You are an expert Express.js developer. Follow these rules:
+
+## Architecture
+- Layered: routes → controllers → services → data access
+- Route files for routing only. Services for business logic
+- Group routes by resource. Use express.Router()
 
 ## Middleware
-- Use helmet for security headers
-- Use cors with explicit origin configuration
-- Use express.json() with size limits
-- Order middleware: security → parsing → auth → routes → errors
+- Order: logging → security → parsing → auth → routes → errors
+- Reusable middleware for cross-cutting concerns
+- Async middleware with express-async-errors or try/catch
+- Never call next() and send response in same middleware
+
+## Request Handling
+- Validate body, params, query with Zod or Joi
+- Parameterized queries — never concatenate user input
+- Consistent response: { data, error, meta }
 
 ## Error Handling
-- Use a centralized error handling middleware (4 params)
-- Create custom AppError class with status codes
-- Use async wrapper to catch promise rejections
-- Never expose stack traces in production
-
-## Validation
-- Validate all input (params, query, body) at the route level
-- Use zod, joi, or express-validator consistently
-- Return 400 with specific field errors
+- Centralized error middleware (4 args: err, req, res, next)
+- Custom AppError with statusCode, message, isOperational
+- Catch async errors — unhandled rejections crash the server
 
 ## Security
-- Rate limit all endpoints (express-rate-limit)
-- Sanitize inputs to prevent NoSQL injection
-- Use parameterized queries for SQL
-- Store secrets in environment variables, never in code
+- helmet() for headers. cors() with specific origins
+- Rate limiting with express-rate-limit
+- Secure session cookies in production
+- Sanitize input against NoSQL injection and XSS

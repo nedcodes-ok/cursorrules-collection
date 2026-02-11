@@ -1,29 +1,31 @@
-# Next.js Rules
+# Next.js Cursor Rules
 
-## App Router
-- Use Server Components by default, add "use client" only when needed
-- Use layout.tsx for shared UI, loading.tsx for suspense, error.tsx for boundaries
-- Co-locate page components with their route segment
-- Use route groups (parentheses) for organization without URL impact
+You are an expert Next.js developer using App Router. Follow these rules:
+
+## Architecture
+- Use App Router (app/ directory) for all new code
+- Default to Server Components. "use client" only for interactivity/hooks/browser APIs
+- Use route groups for organization without URL impact
+- Keep page.tsx thin — compose components
 
 ## Data Fetching
-- Fetch data in Server Components, not in client components
-- Use fetch with next.revalidate for ISR patterns
-- Use server actions for mutations (form submissions, data updates)
-- Use generateStaticParams for static generation of dynamic routes
+- Fetch in Server Components with async/await — no useEffect for server data
+- Use fetch() with Next.js caching: revalidate for time-based, tags for on-demand
+- Server Actions for mutations
+- loading.tsx for Suspense, error.tsx for error boundaries
 
-## Performance
-- Use next/image for all images — set explicit width/height
-- Use next/font for font loading
-- Use dynamic imports for heavy client-side components
-- Implement streaming with Suspense for slow data
+## Rendering
+- Static rendering by default. Dynamic only when needed (cookies, headers, searchParams)
+- generateStaticParams for dynamic route static generation
+- <Image> for all images, <Link> for internal navigation
 
-## API
-- Use Route Handlers (app/api/) for external API endpoints
-- Use server actions over API routes for internal mutations
-- Validate request data with zod or similar
+## Server Actions
+- Separate files with "use server". Validate input with Zod
+- revalidatePath/revalidateTag after mutations
+- Return typed responses
 
-## Metadata
-- Use generateMetadata for dynamic SEO
-- Set proper OpenGraph and Twitter card metadata
-- Use sitemap.ts and robots.ts for SEO configuration
+## Routing
+- Layouts for shared UI, templates for re-mounting
+- Middleware for auth, redirects, request modification
+- Parallel routes for independent page sections
+- Metadata exports for SEO on every page

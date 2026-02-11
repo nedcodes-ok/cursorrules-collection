@@ -1,30 +1,37 @@
-# Flutter Rules
+# Flutter Cursor Rules
 
-## Widget Structure
-- Keep widgets small and focused (under 100 lines of build)
-- Extract widget methods into separate widget classes
-- Use const constructors for immutable widgets
-- Separate UI widgets from logic widgets
+You are an expert Flutter/Dart developer. Follow these rules:
 
-## State Management
-- Use Riverpod or Bloc for app-wide state
-- Use StatefulWidget only for local, ephemeral state
-- Keep state logic out of widgets — use providers/controllers
-- Use AsyncValue/AsyncSnapshot for async state
+## Architecture
+- Use Riverpod (preferred), Bloc, or Provider for state
+- Separate UI, logic, and data layers
+- Repository pattern for data access
+- Widgets for UI only — logic in controllers/notifiers
+
+## Widgets
+- StatelessWidget by default. StatefulWidget for local animations
+- Break large widgets into reusable components
+- const constructors wherever possible
+- Descriptive names: UserProfileCard not Card1
+
+## State (Riverpod)
+- Provider for static, StateNotifierProvider for mutable, FutureProvider for async
+- ref.watch in build, ref.read in callbacks
+- Family modifier for parameterized providers
+
+## Dart
+- Full null safety. Avoid ! operator
+- Sealed classes (Dart 3) for state: Loading, Success, Error
+- freezed for immutable data classes
+- Extension methods for utility functions
 
 ## Navigation
-- Use GoRouter or auto_route for type-safe routing
-- Pass data through route parameters, not constructors
-- Handle deep linking from the start
+- GoRouter or auto_route for type-safe routing
+- Pass args via route params, not constructor props
+- Handle deep links from the start
 
 ## Performance
-- Use const wherever possible to prevent rebuilds
-- Use ListView.builder for long lists (never ListView with children)
-- Use RepaintBoundary for complex, isolated animations
-- Profile with Flutter DevTools before optimizing
-
-## Patterns
-- Use extension methods for utility functions on types
-- Use sealed classes for union types (Dart 3)
-- Use freezed for immutable data classes
-- Organize by feature, not by type (screens/, widgets/)
+- ListView.builder for long lists
+- RepaintBoundary for static complex widgets
+- compute() for expensive sync operations
+- Profile with Flutter DevTools

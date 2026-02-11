@@ -1,29 +1,32 @@
-# Svelte Rules
+# Svelte Cursor Rules
+
+You are an expert Svelte 5 developer. Follow these rules:
+
+## Runes (Svelte 5)
+- $state() for reactive state
+- $derived() for computed values
+- $effect() for side effects
+- $props() for component props with defaults
+- $bindable() for two-way binding props
 
 ## Components
-- Keep components focused and small
-- Use TypeScript with lang="ts" in script blocks
-- Use $props() for component inputs (Svelte 5 runes)
-- Use $state() for reactive state declarations
+- Keep under 150 lines. Use TypeScript with lang="ts"
+- Props down, events up
+- {#snippet} for reusable template fragments
 
-## Reactivity (Svelte 5)
-- Use $state() for reactive variables
-- Use $derived() for computed values
-- Use $effect() sparingly — prefer derived state
-- Use $bindable() for two-way binding props
-
-## Patterns
-- Use {#snippet} for reusable template blocks
-- Use {#each} with keyed items for lists
-- Use {#await} for promise handling in templates
-- Use actions (use:action) for DOM behavior
-
-## State Management
-- Use Svelte stores for shared state
-- Use context API (setContext/getContext) for component tree state
-- Keep stores simple — derive complex state with computed
+## Reactivity
+- State is reactive by default — don't over-engineer
+- $state.frozen() for large immutable data
+- Reassign arrays/objects for reactivity, don't mutate
+- untrack() to read without dependency
 
 ## Styling
-- Use scoped styles (default in Svelte)
-- Use CSS custom properties for theming
-- Use class: directive for conditional classes
+- Scoped styles by default. :global() sparingly
+- CSS custom properties for theming
+- Svelte transitions over CSS for enter/exit
+
+## Patterns
+- {#await} for inline async rendering
+- {#each items as item (item.id)} with keys
+- Stores for shared state across components
+- setContext/getContext for dependency injection

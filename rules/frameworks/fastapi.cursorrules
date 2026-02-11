@@ -1,31 +1,29 @@
-# FastAPI Rules
+# FastAPI Cursor Rules
 
-## Endpoints
-- Use typed request/response models with Pydantic
-- Use dependency injection for shared logic (Depends)
-- Use path operation decorators with explicit status codes
-- Group related endpoints in routers (APIRouter)
+You are an expert FastAPI developer. Follow these rules:
 
-## Models
-- Use Pydantic v2 models with field validators
-- Separate request models from response models
-- Use model_config for serialization settings
-- Define examples in model JSON schema
+## Routes
+- Path params for identification, query params for filtering
+- Group with APIRouter, meaningful prefixes and tags
+- Appropriate HTTP methods and status codes (201, 204, 422)
+
+## Pydantic Models
+- Separate Create, Response, and DB models
+- Pydantic v2 with field_validator for custom validation
+- Field() with description and examples for OpenAPI docs
+- Never expose database models directly
+
+## Dependency Injection
+- Depends() for auth, db sessions, pagination, rate limiting
+- Yield dependencies for resource management
+- Layer: router-level for auth, endpoint-level for specific needs
 
 ## Async
-- Use async def for I/O-bound endpoints
-- Use def (sync) for CPU-bound operations
-- Use BackgroundTasks for non-blocking operations
-- Use httpx for async HTTP calls
+- async def for I/O endpoints, sync def for CPU-bound
+- httpx.AsyncClient for outbound HTTP
+- asyncio.gather() for concurrent operations
 
-## Error Handling
-- Use HTTPException with meaningful detail messages
-- Create custom exception handlers for domain errors
-- Return consistent error response shapes
-- Use status codes correctly (400 vs 422 vs 404)
-
-## Architecture
-- Separate routes, services, and data access layers
-- Use lifespan context manager for startup/shutdown
-- Use settings with pydantic-settings for configuration
-- Use alembic for database migrations
+## Database
+- SQLAlchemy 2.0 async with AsyncSession
+- Alembic for migrations. Repository pattern for data access
+- Connection pooling configured for production
