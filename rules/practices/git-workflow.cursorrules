@@ -1,0 +1,31 @@
+# Git Workflow Rules
+
+## Commits
+- Write clear commit messages: imperative mood, under 72 chars
+- Format: type(scope): description (feat, fix, refactor, docs, test, chore)
+- One logical change per commit — don't mix refactors with features
+- Never commit secrets, credentials, or .env files
+
+## Branches
+- Use feature branches from main/develop
+- Name branches: type/short-description (feature/add-auth, fix/login-crash)
+- Keep branches short-lived — merge within days, not weeks
+- Delete branches after merging
+
+## Pull Requests
+- Write descriptive PR titles and descriptions
+- Include: what changed, why, how to test, screenshots if UI
+- Keep PRs focused and reviewable (under 400 lines changed)
+- Request reviews from relevant code owners
+
+## History
+- Use rebase for feature branches (clean linear history)
+- Use merge commits for main branch merges (preserve context)
+- Squash fixup commits before merging
+- Never force-push shared branches
+
+## Protection
+- Protect main/production branches — require PR reviews
+- Run CI checks before merge is allowed
+- Use signed commits for release branches
+- Tag releases with semantic versioning

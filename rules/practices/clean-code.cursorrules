@@ -1,0 +1,31 @@
+# Clean Code Rules
+
+## Naming
+- Use descriptive, intention-revealing names
+- Avoid abbreviations unless universally understood (URL, ID, HTTP)
+- Name booleans as questions: isActive, hasPermission, canEdit
+- Name functions as actions: fetchUser, calculateTotal, validateInput
+
+## Functions
+- Do one thing — if you can extract a paragraph, it's doing too much
+- Keep parameter count to 3 or fewer — use objects for more
+- Return early to avoid deep nesting (guard clauses)
+- Avoid side effects in functions that return values
+
+## Structure
+- Keep files under 300 lines — split when larger
+- Group related code together (co-location)
+- One concept per file in most cases
+- Order: exports/public first, helpers/private last
+
+## Comments
+- Write code that explains itself — comments for WHY, not WHAT
+- Use comments for: business rules, workarounds, non-obvious decisions
+- Delete commented-out code — that's what git is for
+- Keep TODO comments with ticket numbers
+
+## Simplicity
+- Prefer simple, boring solutions over clever ones
+- Don't abstract prematurely — wait for the third instance
+- Remove dead code aggressively
+- Optimize for readability first, performance when measured

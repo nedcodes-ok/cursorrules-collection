@@ -1,0 +1,30 @@
+# Express Rules
+
+## Structure
+- Organize by feature/domain, not by type (routes/, controllers/)
+- Use Express Router for modular route handling
+- Keep route handlers thin — delegate to service functions
+- Use middleware for cross-cutting concerns
+
+## Middleware
+- Use helmet for security headers
+- Use cors with explicit origin configuration
+- Use express.json() with size limits
+- Order middleware: security → parsing → auth → routes → errors
+
+## Error Handling
+- Use a centralized error handling middleware (4 params)
+- Create custom AppError class with status codes
+- Use async wrapper to catch promise rejections
+- Never expose stack traces in production
+
+## Validation
+- Validate all input (params, query, body) at the route level
+- Use zod, joi, or express-validator consistently
+- Return 400 with specific field errors
+
+## Security
+- Rate limit all endpoints (express-rate-limit)
+- Sanitize inputs to prevent NoSQL injection
+- Use parameterized queries for SQL
+- Store secrets in environment variables, never in code

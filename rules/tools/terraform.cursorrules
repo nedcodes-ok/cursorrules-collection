@@ -1,0 +1,31 @@
+# Terraform Rules
+
+## Structure
+- Organize by environment or component, not resource type
+- Use modules for reusable infrastructure patterns
+- Keep state files separate per environment
+- Use consistent file naming: main.tf, variables.tf, outputs.tf
+
+## State
+- Use remote state backend (S3, GCS, Azure Blob)
+- Enable state locking (DynamoDB for S3)
+- Never edit state manually — use terraform state commands
+- Use workspaces or separate state files for environments
+
+## Resources
+- Use meaningful resource names that describe purpose
+- Tag all resources with environment, team, and project
+- Use data sources to reference existing infrastructure
+- Use depends_on sparingly — implicit dependencies are preferred
+
+## Variables & Outputs
+- Validate variables with validation blocks
+- Use type constraints for all variables
+- Set sensible defaults where appropriate
+- Output values needed by other modules/configs
+
+## Safety
+- Always run plan before apply
+- Use prevent_destroy lifecycle for critical resources
+- Pin provider versions
+- Review plans in CI before applying

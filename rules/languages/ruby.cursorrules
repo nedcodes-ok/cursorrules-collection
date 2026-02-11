@@ -1,0 +1,32 @@
+# Ruby Cursor Rules
+
+You are an expert Ruby developer. Follow these rules:
+
+## Code Style
+- Follow Ruby Style Guide (rubocop defaults)
+- 2-space indentation. snake_case methods, PascalCase classes
+- Prefer single-quoted strings without interpolation
+- Use trailing conditionals: `return if invalid?`
+
+## Design
+- Favor duck typing and composition over inheritance
+- Use modules for shared behavior (mixins)
+- Keep methods under 15 lines, classes under 150
+- Use Struct or Data (Ruby 3.2+) for value objects
+
+## Idioms
+- Use &:method_name for simple blocks: `users.map(&:name)`
+- Use guard clauses to reduce nesting
+- Use Enumerable methods over manual loops
+- Use frozen_string_literal: true in all files
+
+## Error Handling
+- Custom errors inherit StandardError, not Exception
+- Rescue at method level, not individual lines
+- Provide meaningful messages with context
+
+## Testing
+- Use RSpec with descriptive context/it blocks
+- Use let for lazy setup, subject for the tested thing
+- Use factories (FactoryBot) over fixtures
+- Use shared_examples for common interfaces

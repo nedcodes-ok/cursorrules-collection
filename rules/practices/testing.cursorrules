@@ -1,0 +1,31 @@
+# Testing Rules
+
+## Test Structure
+- Use Arrange-Act-Assert (AAA) pattern consistently
+- One assertion concept per test (multiple asserts OK if testing one behavior)
+- Name tests: whatIsBeingTested_scenario_expectedBehavior
+- Keep tests independent — no shared mutable state between tests
+
+## Test Quality
+- Test behavior, not implementation details
+- Test edge cases: empty inputs, boundaries, error paths, nulls
+- Don't test framework code or third-party libraries
+- Each test should fail for exactly one reason
+
+## Mocking
+- Mock external dependencies (APIs, databases, file system)
+- Don't mock the thing you're testing
+- Use fakes/stubs over mocks when possible
+- Verify interactions only when the interaction IS the behavior
+
+## Coverage
+- Aim for meaningful coverage, not 100%
+- Cover happy paths, error paths, and edge cases
+- Critical paths need integration tests, not just unit tests
+- Use coverage to find untested code, not as a quality metric
+
+## Speed
+- Unit tests should run in milliseconds
+- Use in-memory databases for integration tests
+- Parallelize test suites when possible
+- Skip slow tests in CI with a fast-feedback stage

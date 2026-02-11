@@ -1,0 +1,31 @@
+# Performance Rules
+
+## Measurement First
+- Profile before optimizing — never guess where bottlenecks are
+- Set performance budgets (load time, bundle size, response time)
+- Monitor production performance, not just dev benchmarks
+- Use lighthouse, WebPageTest, or custom metrics
+
+## Database
+- Index columns used in WHERE, JOIN, and ORDER BY
+- Use pagination for list endpoints — never return unbounded results
+- Avoid N+1 queries — use eager loading/joins
+- Cache expensive queries with appropriate TTLs
+
+## Frontend
+- Lazy-load below-the-fold content and routes
+- Optimize images (WebP, proper sizing, lazy loading)
+- Minimize JavaScript bundle size — analyze with bundlesize tools
+- Use CDN for static assets
+
+## Backend
+- Use connection pooling for databases
+- Cache at the right level (HTTP, application, database)
+- Use async I/O for concurrent operations
+- Return only needed fields — avoid over-fetching
+
+## General
+- Prefer algorithms with better time complexity first
+- Use streaming for large data sets
+- Batch operations where possible (bulk inserts, batch APIs)
+- Set timeouts on all external calls

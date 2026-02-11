@@ -1,0 +1,30 @@
+# Kubernetes Rules
+
+## Pods & Deployments
+- Always set resource requests and limits
+- Use readiness and liveness probes
+- Don't run containers as root (runAsNonRoot: true)
+- Use rolling update strategy with maxSurge and maxUnavailable
+
+## Configuration
+- Use ConfigMaps for non-sensitive config
+- Use Secrets for sensitive data (better: external secrets manager)
+- Use environment variables or volume mounts, not baked-in config
+- Use namespaces for environment/team isolation
+
+## Networking
+- Use Services for internal communication
+- Use Ingress with TLS for external traffic
+- Set NetworkPolicies to restrict pod-to-pod communication
+- Use DNS names, not IP addresses
+
+## Storage
+- Use PersistentVolumeClaims for stateful data
+- Set appropriate storage classes and reclaim policies
+- Use StatefulSets for stateful workloads, not Deployments
+
+## Operations
+- Use labels consistently for selection and organization
+- Set pod disruption budgets for high-availability workloads
+- Use Horizontal Pod Autoscaler for dynamic scaling
+- Store manifests in version control — use GitOps

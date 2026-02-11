@@ -1,0 +1,30 @@
+# Vue Rules
+
+## Composition API
+- Use <script setup> syntax for components
+- Use ref() for primitives, reactive() for objects
+- Use computed() for derived state
+- Use composables (useXxx) for reusable logic
+
+## Components
+- Use single-file components (.vue)
+- Keep templates readable — extract complex logic to computed/methods
+- Use defineProps with TypeScript type syntax
+- Use defineEmits for type-safe event emission
+
+## State Management
+- Use Pinia for global state management
+- Keep stores focused on a single domain
+- Use getters for derived state in stores
+- Use composables for shared logic that isn't global state
+
+## Patterns
+- Use v-model with defineModel for two-way binding
+- Use provide/inject for deep component tree data
+- Use Suspense with async setup for loading states
+- Use Teleport for modals and overlays
+
+## Performance
+- Use v-once for static content
+- Use shallowRef/shallowReactive for large objects
+- Lazy-load routes with defineAsyncComponent

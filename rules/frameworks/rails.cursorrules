@@ -1,0 +1,31 @@
+# Rails Rules
+
+## Models
+- Use ActiveRecord validations for data integrity
+- Keep models focused — extract concerns for shared behavior
+- Use scopes for common queries
+- Use strong parameters in controllers, not models
+
+## Controllers
+- Keep controllers thin — 5 methods max (CRUD + custom)
+- Use before_action for shared setup
+- Use service objects for complex business logic
+- Return appropriate HTTP status codes
+
+## Routes
+- Use resourceful routes as the foundation
+- Nest routes only one level deep
+- Use concerns for shared route patterns
+- Use constraints for route validation
+
+## Views
+- Use partials for reusable view components
+- Use helpers for view-specific logic
+- Use Turbo Frames/Streams for dynamic updates
+- Keep logic out of views — use presenters/decorators
+
+## Testing
+- Use RSpec with request specs for integration tests
+- Use FactoryBot for test data
+- Test happy path and edge cases
+- Use VCR or WebMock for external API tests

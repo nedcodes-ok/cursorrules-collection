@@ -1,0 +1,30 @@
+# Flutter Rules
+
+## Widget Structure
+- Keep widgets small and focused (under 100 lines of build)
+- Extract widget methods into separate widget classes
+- Use const constructors for immutable widgets
+- Separate UI widgets from logic widgets
+
+## State Management
+- Use Riverpod or Bloc for app-wide state
+- Use StatefulWidget only for local, ephemeral state
+- Keep state logic out of widgets — use providers/controllers
+- Use AsyncValue/AsyncSnapshot for async state
+
+## Navigation
+- Use GoRouter or auto_route for type-safe routing
+- Pass data through route parameters, not constructors
+- Handle deep linking from the start
+
+## Performance
+- Use const wherever possible to prevent rebuilds
+- Use ListView.builder for long lists (never ListView with children)
+- Use RepaintBoundary for complex, isolated animations
+- Profile with Flutter DevTools before optimizing
+
+## Patterns
+- Use extension methods for utility functions on types
+- Use sealed classes for union types (Dart 3)
+- Use freezed for immutable data classes
+- Organize by feature, not by type (screens/, widgets/)

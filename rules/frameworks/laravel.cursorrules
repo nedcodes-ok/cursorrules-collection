@@ -1,0 +1,31 @@
+# Laravel Rules
+
+## Architecture
+- Follow Laravel conventions — don't fight the framework
+- Use Form Requests for validation
+- Use Eloquent relationships, avoid raw joins
+- Use service classes for complex business logic
+
+## Models
+- Use fillable or guarded, never leave both empty
+- Define relationships explicitly with return types
+- Use accessors/mutators (Attribute casts) for data transformation
+- Use model events/observers for side effects
+
+## Controllers
+- Keep controllers resourceful (index, store, show, update, destroy)
+- Use dependency injection via constructor or method
+- Use API Resources for response transformation
+- Return consistent JSON responses with proper status codes
+
+## Database
+- Always use migrations for schema changes
+- Use database transactions for multi-step operations
+- Eager load relationships to prevent N+1 (with/load)
+- Use chunking for processing large datasets
+
+## Security
+- Validate all input through Form Requests
+- Use policies for authorization
+- Use config/env for sensitive values
+- Use rate limiting on authentication endpoints

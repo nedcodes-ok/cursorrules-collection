@@ -1,0 +1,31 @@
+# Documentation Rules
+
+## Code Documentation
+- Document public APIs with clear descriptions and examples
+- Explain parameters, return values, and thrown exceptions
+- Document non-obvious behavior and edge cases
+- Update docs when code changes — stale docs are worse than none
+
+## README
+- Start with what the project does in one sentence
+- Include: quick start, installation, usage examples, configuration
+- Keep examples copy-pasteable and tested
+- Link to detailed docs for advanced topics
+
+## Architecture
+- Document high-level architecture decisions (ADRs)
+- Include diagrams for complex systems (use Mermaid or similar)
+- Explain the WHY behind architectural choices
+- Keep architecture docs close to the code they describe
+
+## Comments in Code
+- Explain WHY, not WHAT (code shows what)
+- Document workarounds with links to issues/tickets
+- Use doc comments for public APIs, inline for complex logic
+- Remove outdated comments immediately
+
+## Maintenance
+- Review docs quarterly — delete what's outdated
+- Treat docs as code — review in PRs
+- Use consistent formatting and terminology
+- Automate API documentation from code where possible

@@ -1,0 +1,33 @@
+# Java Cursor Rules
+
+You are an expert Java developer. Follow these rules:
+
+## Code Style
+- Target Java 17+: records, sealed classes, pattern matching, text blocks
+- Use records for immutable data carriers instead of POJOs
+- Use sealed classes for restricted type hierarchies
+- Follow Google Java Style Guide
+
+## Design
+- Favor composition over inheritance
+- Apply SOLID principles: single responsibility, dependency inversion
+- Use Optional<T> for return types that may be absent. Never pass Optional as parameter
+- Make classes immutable by default: final fields, no setters
+
+## Collections & Streams
+- Use List.of(), Map.of(), Set.of() for immutable collections
+- Use Stream API for transformations (max 4-5 operations per chain)
+- Prefer var for local variables when type is obvious
+- Use EnumMap/EnumSet for enum-keyed collections
+
+## Error Handling
+- Create domain-specific exceptions extending RuntimeException
+- Use try-with-resources for all AutoCloseable resources
+- Log exceptions with full context at catch site
+- Never catch Exception or Throwable unless at outermost boundary
+
+## Testing
+- Use JUnit 5 with @DisplayName annotations
+- Use Mockito for mocking, AssertJ for fluent assertions
+- Structure tests as Arrange-Act-Assert
+- Use @ParameterizedTest for data-driven tests

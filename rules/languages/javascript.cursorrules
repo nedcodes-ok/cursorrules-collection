@@ -1,0 +1,30 @@
+# JavaScript Rules
+
+## Modern Syntax
+- Use const by default, let when reassignment is needed, never var
+- Use arrow functions for callbacks and short functions
+- Use template literals over string concatenation
+- Destructure objects and arrays at point of use
+- Use optional chaining (?.) and nullish coalescing (??) over manual checks
+
+## Async
+- Use async/await over .then() chains
+- Always handle errors with try/catch in async functions
+- Use Promise.all() for independent concurrent operations
+- Never mix callbacks and promises in the same flow
+
+## Functions
+- Keep functions pure when possible — same input, same output
+- Use default parameters over manual defaults
+- Return early to reduce nesting
+- Prefer named exports for better tree-shaking
+
+## Arrays & Objects
+- Use map/filter/reduce over for loops for transformations
+- Use structuredClone() or spread for shallow copies
+- Use Object.entries/Object.keys/Object.values over for...in
+
+## Error Handling
+- Throw Error objects, not strings
+- Use custom error classes for domain-specific errors
+- Handle promise rejections — never leave them unhandled

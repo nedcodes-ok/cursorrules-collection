@@ -1,0 +1,31 @@
+# FastAPI Rules
+
+## Endpoints
+- Use typed request/response models with Pydantic
+- Use dependency injection for shared logic (Depends)
+- Use path operation decorators with explicit status codes
+- Group related endpoints in routers (APIRouter)
+
+## Models
+- Use Pydantic v2 models with field validators
+- Separate request models from response models
+- Use model_config for serialization settings
+- Define examples in model JSON schema
+
+## Async
+- Use async def for I/O-bound endpoints
+- Use def (sync) for CPU-bound operations
+- Use BackgroundTasks for non-blocking operations
+- Use httpx for async HTTP calls
+
+## Error Handling
+- Use HTTPException with meaningful detail messages
+- Create custom exception handlers for domain errors
+- Return consistent error response shapes
+- Use status codes correctly (400 vs 422 vs 404)
+
+## Architecture
+- Separate routes, services, and data access layers
+- Use lifespan context manager for startup/shutdown
+- Use settings with pydantic-settings for configuration
+- Use alembic for database migrations

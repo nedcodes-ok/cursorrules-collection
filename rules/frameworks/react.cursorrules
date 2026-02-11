@@ -1,0 +1,31 @@
+# React Rules
+
+## Components
+- Use functional components exclusively
+- Keep components under 150 lines — extract when larger
+- Use named exports for components
+- Co-locate styles, tests, and types with components
+
+## Hooks
+- Follow Rules of Hooks strictly
+- Extract custom hooks for reusable logic (useXxx naming)
+- Use useMemo/useCallback only for expensive operations or stable references
+- Keep useEffect dependencies minimal and accurate
+
+## State Management
+- Lift state only as high as needed
+- Use useReducer for complex state logic
+- Derive state from existing state — don't sync with useEffect
+- Use context for truly global state (theme, auth, locale)
+
+## Patterns
+- Use composition over prop drilling
+- Use children prop for wrapper components
+- Use render props or custom hooks over HOCs
+- Handle loading/error/empty states explicitly
+
+## Performance
+- Use React.lazy for route-level code splitting
+- Use key prop correctly — stable, unique identifiers
+- Avoid inline object/function creation in JSX props
+- Use React.memo sparingly — profile before optimizing

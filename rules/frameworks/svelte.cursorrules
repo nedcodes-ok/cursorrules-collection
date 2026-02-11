@@ -1,0 +1,29 @@
+# Svelte Rules
+
+## Components
+- Keep components focused and small
+- Use TypeScript with lang="ts" in script blocks
+- Use $props() for component inputs (Svelte 5 runes)
+- Use $state() for reactive state declarations
+
+## Reactivity (Svelte 5)
+- Use $state() for reactive variables
+- Use $derived() for computed values
+- Use $effect() sparingly — prefer derived state
+- Use $bindable() for two-way binding props
+
+## Patterns
+- Use {#snippet} for reusable template blocks
+- Use {#each} with keyed items for lists
+- Use {#await} for promise handling in templates
+- Use actions (use:action) for DOM behavior
+
+## State Management
+- Use Svelte stores for shared state
+- Use context API (setContext/getContext) for component tree state
+- Keep stores simple — derive complex state with computed
+
+## Styling
+- Use scoped styles (default in Svelte)
+- Use CSS custom properties for theming
+- Use class: directive for conditional classes

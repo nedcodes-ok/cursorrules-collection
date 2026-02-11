@@ -1,0 +1,31 @@
+# VS Code / Cursor Rules
+
+## Workspace Setup
+- Use .vscode/settings.json for project-specific settings
+- Configure formatters to run on save
+- Use recommended extensions list (.vscode/extensions.json)
+- Set consistent editor config (indent, line endings, trim whitespace)
+
+## Debugging
+- Configure launch.json for common debug scenarios
+- Use compound configurations for multi-service debugging
+- Set meaningful breakpoint conditions
+- Use logpoints instead of console.log
+
+## Productivity
+- Use multi-cursor editing for repetitive changes
+- Use workspace search with file/folder filters
+- Configure task runners for common build commands
+- Use snippets for frequently typed patterns
+
+## Cursor AI Specific
+- Place .cursorrules in project root for auto-loading
+- Keep rules focused and specific to the project
+- Update rules as project conventions evolve
+- Use rules to enforce team standards consistently
+
+## Project Config
+- Include editor config in version control
+- Document required extensions in README
+- Use consistent formatting across the team
+- Configure file associations for custom extensions

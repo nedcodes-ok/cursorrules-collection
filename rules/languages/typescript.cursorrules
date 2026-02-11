@@ -1,0 +1,28 @@
+# TypeScript Rules
+
+## Types
+- Define explicit return types for public functions
+- Use interfaces for object shapes, type aliases for unions/intersections
+- Prefer unknown over any — narrow types before use
+- Use const assertions for literal types (as const)
+- Use discriminated unions for state management
+
+## Generics
+- Use generics for reusable utilities, not for everything
+- Name generic params descriptively: TItem over T when multiple generics
+- Constrain generics with extends when possible
+
+## Strict Mode
+- Enable strict: true in tsconfig — no exceptions
+- Use noUncheckedIndexedAccess for safer array/object access
+- Never use @ts-ignore — use @ts-expect-error with explanation if needed
+
+## Patterns
+- Use satisfies operator to validate types without widening
+- Use Readonly<T> for data that shouldn't be mutated
+- Prefer Record<K, V> over { [key: string]: V }
+- Use Extract/Exclude/Pick/Omit for type transformations
+
+## Enums
+- Prefer const enums or union types over regular enums
+- Use string values for enums that appear in serialized data

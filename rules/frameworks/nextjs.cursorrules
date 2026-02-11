@@ -1,0 +1,29 @@
+# Next.js Rules
+
+## App Router
+- Use Server Components by default, add "use client" only when needed
+- Use layout.tsx for shared UI, loading.tsx for suspense, error.tsx for boundaries
+- Co-locate page components with their route segment
+- Use route groups (parentheses) for organization without URL impact
+
+## Data Fetching
+- Fetch data in Server Components, not in client components
+- Use fetch with next.revalidate for ISR patterns
+- Use server actions for mutations (form submissions, data updates)
+- Use generateStaticParams for static generation of dynamic routes
+
+## Performance
+- Use next/image for all images — set explicit width/height
+- Use next/font for font loading
+- Use dynamic imports for heavy client-side components
+- Implement streaming with Suspense for slow data
+
+## API
+- Use Route Handlers (app/api/) for external API endpoints
+- Use server actions over API routes for internal mutations
+- Validate request data with zod or similar
+
+## Metadata
+- Use generateMetadata for dynamic SEO
+- Set proper OpenGraph and Twitter card metadata
+- Use sitemap.ts and robots.ts for SEO configuration

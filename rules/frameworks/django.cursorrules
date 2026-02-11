@@ -1,0 +1,31 @@
+# Django Rules
+
+## Models
+- Keep models focused — one concept per model
+- Use verbose_name and help_text for documentation
+- Define __str__ method on all models
+- Use model managers for common queries
+- Index fields used in filters and ordering
+
+## Views
+- Use class-based views for CRUD, function views for simple logic
+- Keep view logic thin — move business logic to services/models
+- Use select_related/prefetch_related to avoid N+1 queries
+- Return proper HTTP status codes
+
+## Forms & Validation
+- Use Django forms/serializers for all input validation
+- Clean data in form clean methods, not in views
+- Use model validators for data integrity rules
+
+## Security
+- Never trust user input — validate everything
+- Use Django ORM, never raw SQL unless absolutely necessary
+- Set CSRF, CORS, and security headers properly
+- Use environment variables for secrets (django-environ)
+
+## Testing
+- Use TestCase for DB tests, SimpleTestCase for unit tests
+- Use factory_boy for test data
+- Test views through the test client
+- Test business logic independently from views
