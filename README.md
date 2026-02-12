@@ -7,6 +7,19 @@
 
 If you've never used `.cursorrules` - it's a file in your project root that Cursor reads as context for every AI interaction. Think of it as a style guide the AI actually follows.
 
+## Before / After
+
+Same prompts, different output. Left side is vanilla Cursor, right side is with rules applied.
+
+**React component:**
+![React before/after](before-after-react.png)
+
+**Python API endpoint:**
+![Python before/after](before-after-python.png)
+
+**TypeScript function:**
+![TypeScript before/after](before-after-ts.png)
+
 ## Rules
 
 ### Languages
