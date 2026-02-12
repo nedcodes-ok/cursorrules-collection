@@ -89,7 +89,9 @@ PRs welcome. See [CONTRIBUTING.md](CONTRIBUTING.md). The bar: rules should be sp
 
 These cover the basics well. If you want deeper, more opinionated rule sets built for specific stacks:
 
-**[cursorrulespacks.gumroad.com](https://cursorrulespacks.gumroad.com)** - React/Next.js, TypeScript Strict, Python Backend, Debugging, and a free Starter Pack.
+**[Complete Bundle ($29)](https://cursorrulespacks.gumroad.com/l/complete-cursor-rules-bundle)** — all 4 packs in one download (43% off vs individual).
+
+Individual packs: [React & Next.js](https://cursorrulespacks.gumroad.com/l/react-nextjs-rules-pack) · [TypeScript Strict](https://cursorrulespacks.gumroad.com/l/typescript-strict-rules-pack) · [Python Backend](https://cursorrulespacks.gumroad.com/l/python-backend-rules-pack) · [Debugging](https://cursorrulespacks.gumroad.com/l/debugging-rules-pack) · [Free Starter Pack](https://cursorrulespacks.gumroad.com/l/cursor-starter)
 
 ## License
 
