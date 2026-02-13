@@ -11,7 +11,9 @@ If you've never used `.cursorrules` - it's a file in your project root that Curs
 
 Want to understand the thinking behind these rules? Read the deep dives on Dev.to:
 
-- [dev.to/nedcodes](https://dev.to/nedcodes) — all articles on .cursorrules testing, patterns, and results
+- [5 .cursorrules That Actually Changed Cursor's Output](https://dev.to/nedcodes/5-cursorrules-that-actually-changed-cursors-output-and-2-that-were-useless-gel)
+- [How to Write .cursorrules That Actually Work](https://dev.to/nedcodes/how-to-write-cursorrules-that-actually-work-2imd)
+- [5 .cursorrules That Actually Changed What Cursor Generates (React/Next.js)](https://dev.to/nedcodes/5-cursorrules-that-actually-changed-what-cursor-generates-reactnextjs-3888)
 
 ## Before / After
 
