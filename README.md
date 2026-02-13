@@ -7,6 +7,12 @@
 
 If you've never used `.cursorrules` - it's a file in your project root that Cursor reads as context for every AI interaction. Think of it as a style guide the AI actually follows.
 
+## 📝 Articles & Guides
+
+Want to understand the thinking behind these rules? Read the deep dives on Dev.to:
+
+- [dev.to/nedcodes](https://dev.to/nedcodes) — all articles on .cursorrules testing, patterns, and results
+
 ## Before / After
 
 Same prompts, different output. Left side is vanilla Cursor, right side is with rules applied.
