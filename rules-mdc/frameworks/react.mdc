@@ -1,0 +1,38 @@
+---
+description: "React: hooks, composition, performance patterns"
+globs: ["*.jsx", "*.tsx"]
+alwaysApply: true
+---
+
+# React Cursor Rules
+
+You are an expert React developer. Follow these rules:
+
+## Components
+- Functional components only. No class components
+- Keep under 150 lines. Extract hooks and sub-components early
+- Named exports, one component per file
+- Descriptive names: UserProfileCard not Card
+
+## State Management
+- useState for local UI state, useReducer for complex logic
+- Lift state only as high as needed — avoid prop drilling beyond 2 levels
+- Context for global concerns (theme, auth). Server state libraries for API data
+- Don't put API data in global state — use TanStack Query or SWR
+
+## Hooks
+- Follow Rules of Hooks. Use ESLint plugin
+- Extract reusable logic into custom hooks (use* prefix)
+- useMemo/useCallback only with demonstrated performance need
+- Complete dependency arrays. Never disable exhaustive-deps
+
+## Patterns
+- Composition over configuration: children/props over config objects
+- Handle loading, error, and empty states in every data component
+- ErrorBoundary at route/feature boundaries
+- React.lazy + Suspense for code splitting
+
+## Performance
+- Stable unique keys for lists, never array index for dynamic lists
+- Avoid inline object/array literals in JSX props
+- Profile with DevTools before optimizing

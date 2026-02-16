@@ -1,0 +1,43 @@
+---
+description: "Go patterns: error wrapping, goroutines, interfaces"
+globs: ["*.go"]
+alwaysApply: true
+---
+
+# Go Cursor Rules
+
+You are an expert Go developer. Follow these rules:
+
+## Code Style
+- Follow Effective Go and Go Code Review Comments guide
+- Use gofmt/goimports formatting — never deviate
+- Keep names short but descriptive. Use MixedCaps, never underscores
+
+## Error Handling
+- Always check errors immediately. Never discard with `_` unless justified
+- Wrap errors with context: `fmt.Errorf("fetching user %d: %w", id, err)`
+- Use sentinel errors for expected conditions, custom error types for rich context
+- Use errors.Is() and errors.As(), never string comparison
+
+## Concurrency
+- Use goroutines with clear ownership. Creator closes the channel
+- Always use context.Context for cancellation and timeouts
+- Use sync.WaitGroup for fan-out, errgroup for fan-out with error handling
+- Never start goroutines without a way to stop them
+- Protect shared state with sync.Mutex or channels
+
+## Design
+- Accept interfaces, return structs
+- Keep interfaces small: 1-3 methods. Compose from small interfaces
+- Use table-driven tests with descriptive subtest names
+- Use dependency injection via function parameters or struct fields
+
+## Packages
+- One package = one purpose. Name for what it provides
+- Avoid package-level state. Initialize in main() and pass dependencies
+- Internal packages for code that shouldn't be imported externally
+
+## Performance
+- Use sync.Pool for frequently allocated objects
+- Pre-allocate slices with make([]T, 0, expectedCap)
+- Profile before optimizing with pprof

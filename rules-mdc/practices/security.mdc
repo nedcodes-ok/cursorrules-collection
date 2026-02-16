@@ -1,0 +1,36 @@
+---
+description: "Security: input validation, auth, data protection"
+alwaysApply: true
+---
+
+# Security Rules
+
+## Input Validation
+- Validate ALL user input — type, length, format, range
+- Use allowlists over denylists for input validation
+- Sanitize output based on context (HTML, SQL, shell, URL)
+- Never trust client-side validation alone
+
+## Authentication
+- Use bcrypt/argon2 for password hashing, never MD5/SHA
+- Implement rate limiting on auth endpoints
+- Use secure session management with httpOnly, secure cookies
+- Implement proper logout (invalidate tokens/sessions)
+
+## Authorization
+- Check permissions on every request, not just UI
+- Use role-based or attribute-based access control
+- Validate object ownership — don't rely on obscurity
+- Fail closed — deny by default
+
+## Data Protection
+- Encrypt sensitive data at rest and in transit (TLS)
+- Never log passwords, tokens, or PII
+- Use environment variables for secrets
+- Rotate credentials regularly
+
+## Dependencies
+- Keep dependencies updated — automate with Dependabot/Renovate
+- Audit dependencies for known vulnerabilities
+- Minimize dependencies — fewer deps = smaller attack surface
+- Pin dependency versions in production

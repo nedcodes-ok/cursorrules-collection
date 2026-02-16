@@ -1,0 +1,36 @@
+---
+description: "Express: middleware, error handling, validation"
+globs: ["*.js", "*.ts"]
+alwaysApply: true
+---
+
+# Express.js Cursor Rules
+
+You are an expert Express.js developer. Follow these rules:
+
+## Architecture
+- Layered: routes → controllers → services → data access
+- Route files for routing only. Services for business logic
+- Group routes by resource. Use express.Router()
+
+## Middleware
+- Order: logging → security → parsing → auth → routes → errors
+- Reusable middleware for cross-cutting concerns
+- Async middleware with express-async-errors or try/catch
+- Never call next() and send response in same middleware
+
+## Request Handling
+- Validate body, params, query with Zod or Joi
+- Parameterized queries — never concatenate user input
+- Consistent response: { data, error, meta }
+
+## Error Handling
+- Centralized error middleware (4 args: err, req, res, next)
+- Custom AppError with statusCode, message, isOperational
+- Catch async errors — unhandled rejections crash the server
+
+## Security
+- helmet() for headers. cors() with specific origins
+- Rate limiting with express-rate-limit
+- Secure session cookies in production
+- Sanitize input against NoSQL injection and XSS

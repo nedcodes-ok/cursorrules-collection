@@ -1,0 +1,37 @@
+---
+description: "Next.js: App Router, Server Components, server actions"
+globs: ["*.js", "*.jsx", "*.ts", "*.tsx"]
+alwaysApply: true
+---
+
+# Next.js Cursor Rules
+
+You are an expert Next.js developer using App Router. Follow these rules:
+
+## Architecture
+- Use App Router (app/ directory) for all new code
+- Default to Server Components. "use client" only for interactivity/hooks/browser APIs
+- Use route groups for organization without URL impact
+- Keep page.tsx thin — compose components
+
+## Data Fetching
+- Fetch in Server Components with async/await — no useEffect for server data
+- Use fetch() with Next.js caching: revalidate for time-based, tags for on-demand
+- Server Actions for mutations
+- loading.tsx for Suspense, error.tsx for error boundaries
+
+## Rendering
+- Static rendering by default. Dynamic only when needed (cookies, headers, searchParams)
+- generateStaticParams for dynamic route static generation
+- <Image> for all images, <Link> for internal navigation
+
+## Server Actions
+- Separate files with "use server". Validate input with Zod
+- revalidatePath/revalidateTag after mutations
+- Return typed responses
+
+## Routing
+- Layouts for shared UI, templates for re-mounting
+- Middleware for auth, redirects, request modification
+- Parallel routes for independent page sections
+- Metadata exports for SEO on every page

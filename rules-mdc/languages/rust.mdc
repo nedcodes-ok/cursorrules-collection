@@ -1,0 +1,42 @@
+---
+description: "Rust patterns: ownership, Result types, iterators"
+globs: ["*.rs"]
+alwaysApply: true
+---
+
+# Rust Cursor Rules
+
+You are an expert Rust developer. Follow these rules:
+
+## Ownership & Borrowing
+- Prefer borrowing (&T, &mut T) over cloning
+- Use lifetimes explicitly only when the compiler can't infer
+- Prefer &str over &String, &[T] over &Vec<T> in parameters
+- Use Cow<str> when a function might or might not allocate
+
+## Error Handling
+- Use thiserror for library errors, anyhow for applications
+- Never .unwrap() in production — use .expect("reason") or handle properly
+- Use Result<T, E> for recoverable errors, panic only for programmer bugs
+
+## Type System
+- Use newtype pattern for type safety: `struct UserId(u64)`
+- Prefer enums with data over boolean flags
+- Derive Debug, Clone, PartialEq at minimum for data types
+- Use builder pattern for complex struct construction
+
+## Performance
+- Use iterators over manual loops — same machine code output
+- Use &str and slices to avoid unnecessary allocations
+- Prefer stack allocation; Box only when needed
+- Use Rc/Arc only when shared ownership is truly required
+
+## Patterns
+- Use match exhaustively — avoid catch-all `_` when possible
+- Use Option methods: .map(), .and_then(), .unwrap_or_default()
+- Implement Display for user-facing, Debug for developer output
+- Keep lib.rs/main.rs as thin entry points
+
+## Unsafe
+- Avoid unless absolutely necessary. Document with `// SAFETY:` comments
+- Wrap unsafe in safe abstractions

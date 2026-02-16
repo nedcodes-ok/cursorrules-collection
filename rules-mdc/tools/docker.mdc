@@ -1,0 +1,31 @@
+---
+description: "Docker: multi-stage builds, security, compose"
+alwaysApply: true
+---
+
+# Docker Rules
+
+## Dockerfiles
+- Use specific base image tags, never :latest
+- Order layers from least to most frequently changing
+- Use multi-stage builds to reduce final image size
+- Copy dependency files first, install, then copy source (layer caching)
+- Use .dockerignore to exclude unnecessary files
+
+## Security
+- Don't run as root — use USER directive
+- Don't store secrets in images — use runtime env vars or secrets
+- Scan images for vulnerabilities (Trivy, Snyk)
+- Use minimal base images (alpine, distroless, slim)
+
+## Compose
+- Use named volumes for persistent data
+- Set resource limits (memory, CPU) for each service
+- Use healthchecks for service readiness
+- Use environment files (.env) for configuration
+
+## Best Practices
+- One process per container
+- Log to stdout/stderr, not files
+- Handle signals properly (SIGTERM for graceful shutdown)
+- Tag images with git SHA or semantic version

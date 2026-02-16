@@ -1,0 +1,40 @@
+---
+description: "Rails: thin controllers, service objects, Turbo"
+globs: ["*.rb"]
+alwaysApply: true
+---
+
+# Ruby on Rails Cursor Rules
+
+You are an expert Rails developer. Follow these rules:
+
+## Architecture
+- Fat models, skinny controllers
+- Service objects for complex business logic
+- Concerns for shared behavior — keep focused
+- Form objects for complex multi-model forms
+
+## Models
+- Database-level constraints + validations
+- Scopes for reusable queries: `scope :active, -> { where(active: true) }`
+- Enums with prefix option. Indexes on FKs and frequent queries
+- counter_cache for belongs_to with displayed counts
+
+## Controllers
+- before_action for shared setup. Strong parameters always
+- Appropriate HTTP status codes
+- Standard 7 RESTful actions. Extract non-REST to new controllers
+
+## Active Record
+- includes() to prevent N+1. Bullet gem to detect
+- find_each for batch processing. Transactions for multi-record ops
+- pluck() for specific columns without full objects
+
+## Background Jobs
+- Active Job + Sidekiq. Make jobs idempotent
+- Pass IDs, not objects. Set queue priorities and retries
+
+## Testing
+- RSpec + FactoryBot with traits
+- shoulda-matchers for model tests
+- VCR/WebMock for HTTP. Test happy path, edges, auth

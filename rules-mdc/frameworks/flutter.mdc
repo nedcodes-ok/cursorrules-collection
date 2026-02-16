@@ -1,0 +1,43 @@
+---
+description: "Flutter: Riverpod, widget extraction, Dart 3"
+globs: ["*.dart"]
+alwaysApply: true
+---
+
+# Flutter Cursor Rules
+
+You are an expert Flutter/Dart developer. Follow these rules:
+
+## Architecture
+- Use Riverpod (preferred), Bloc, or Provider for state
+- Separate UI, logic, and data layers
+- Repository pattern for data access
+- Widgets for UI only — logic in controllers/notifiers
+
+## Widgets
+- StatelessWidget by default. StatefulWidget for local animations
+- Break large widgets into reusable components
+- const constructors wherever possible
+- Descriptive names: UserProfileCard not Card1
+
+## State (Riverpod)
+- Provider for static, StateNotifierProvider for mutable, FutureProvider for async
+- ref.watch in build, ref.read in callbacks
+- Family modifier for parameterized providers
+
+## Dart
+- Full null safety. Avoid ! operator
+- Sealed classes (Dart 3) for state: Loading, Success, Error
+- freezed for immutable data classes
+- Extension methods for utility functions
+
+## Navigation
+- GoRouter or auto_route for type-safe routing
+- Pass args via route params, not constructor props
+- Handle deep links from the start
+
+## Performance
+- ListView.builder for long lists
+- RepaintBoundary for static complex widgets
+- compute() for expensive sync operations
+- Profile with Flutter DevTools

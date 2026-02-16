@@ -3,17 +3,36 @@
 [![Stars](https://img.shields.io/github/stars/cursorrulespacks/cursorrules-collection?style=social)](https://github.com/cursorrulespacks/cursorrules-collection)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-33 `.cursorrules` files you can drop into any project. Copy one to your project root and Cursor actually writes code the way you want it to.
+33 rules for Cursor AI in both `.mdc` and `.cursorrules` format. Copy to your project and Cursor actually writes code the way you want it to.
 
-If you've never used `.cursorrules` - it's a file in your project root that Cursor reads as context for every AI interaction. Think of it as a style guide the AI actually follows.
+> **⚠️ Using Cursor agent mode?** Use the `.mdc` files in `rules-mdc/`. Agent mode silently ignores `.cursorrules` files. [We tested this](https://dev.to/nedcodes/cursor-agent-mode-ignores-cursorrules-use-mdc-instead-5flb) and got 0/9 compliance with `.cursorrules` vs 9/9 with `.mdc`.
+
+## Quick Start
+
+**For agent mode (recommended):**
+
+```bash
+# Copy the .mdc file into your project's .cursor/rules/ directory
+mkdir -p .cursor/rules
+curl -o .cursor/rules/typescript.mdc https://raw.githubusercontent.com/cursorrulespacks/cursorrules-collection/main/rules-mdc/languages/typescript.mdc
+```
+
+**For regular Cursor sessions (composer, chat):**
+
+```bash
+curl -o .cursorrules https://raw.githubusercontent.com/cursorrulespacks/cursorrules-collection/main/rules/languages/typescript.cursorrules
+```
+
+Each `.mdc` file includes:
+- `alwaysApply: true` (required for agent mode)
+- `globs` for file-type scoping where applicable (e.g. Python rules only apply to `*.py`)
+- `description` for Cursor's context
 
 ## 📝 Articles & Guides
 
-Want to understand the thinking behind these rules? Read the deep dives on Dev.to:
-
+- [Cursor Agent Mode Ignores .cursorrules — Use .mdc Instead](https://dev.to/nedcodes/cursor-agent-mode-ignores-cursorrules-use-mdc-instead-5flb)
 - [5 .cursorrules That Actually Changed Cursor's Output](https://dev.to/nedcodes/5-cursorrules-that-actually-changed-cursors-output-and-2-that-were-useless-gel)
 - [How to Write .cursorrules That Actually Work](https://dev.to/nedcodes/how-to-write-cursorrules-that-actually-work-2imd)
-- [Cursor Agent Mode Ignores .cursorrules — Use .mdc Instead](https://dev.to/nedcodes/cursor-agent-mode-ignores-cursorrules-use-mdc-instead-5flb)
 - [5 .cursorrules That Actually Changed What Cursor Generates (React/Next.js)](https://dev.to/nedcodes/5-cursorrules-that-actually-changed-what-cursor-generates-reactnextjs-3888)
 
 ## Before / After
@@ -33,58 +52,69 @@ Same prompts, different output. Left side is vanilla Cursor, right side is with 
 
 ### Languages
 
-- [Python](rules/languages/python.cursorrules) - type hints, pathlib, pytest, clean error handling
-- [JavaScript](rules/languages/javascript.cursorrules) - modern ES6+, async/await, pure functions
-- [TypeScript](rules/languages/typescript.cursorrules) - strict mode, generics, discriminated unions
-- [Go](rules/languages/go.cursorrules) - error wrapping, goroutines, interfaces
-- [Rust](rules/languages/rust.cursorrules) - ownership patterns, Result types, iterators
-- [Java](rules/languages/java.cursorrules) - records, sealed classes, streams
-- [C#](rules/languages/csharp.cursorrules) - async/await, nullable refs, LINQ
-- [Ruby](rules/languages/ruby.cursorrules) - idiomatic Ruby, blocks, RSpec
-- [PHP](rules/languages/php.cursorrules) - PHP 8.x+, typed properties, PSR standards
-- [Swift](rules/languages/swift.cursorrules) - SwiftUI, actors, async/await, value types
+| Rule | .mdc (agent mode) | .cursorrules (legacy) |
+|------|---|---|
+| Python | [python.mdc](rules-mdc/languages/python.mdc) | [python.cursorrules](rules/languages/python.cursorrules) |
+| JavaScript | [javascript.mdc](rules-mdc/languages/javascript.mdc) | [javascript.cursorrules](rules/languages/javascript.cursorrules) |
+| TypeScript | [typescript.mdc](rules-mdc/languages/typescript.mdc) | [typescript.cursorrules](rules/languages/typescript.cursorrules) |
+| Go | [go.mdc](rules-mdc/languages/go.mdc) | [go.cursorrules](rules/languages/go.cursorrules) |
+| Rust | [rust.mdc](rules-mdc/languages/rust.mdc) | [rust.cursorrules](rules/languages/rust.cursorrules) |
+| Java | [java.mdc](rules-mdc/languages/java.mdc) | [java.cursorrules](rules/languages/java.cursorrules) |
+| C# | [csharp.mdc](rules-mdc/languages/csharp.mdc) | [csharp.cursorrules](rules/languages/csharp.cursorrules) |
+| Ruby | [ruby.mdc](rules-mdc/languages/ruby.mdc) | [ruby.cursorrules](rules/languages/ruby.cursorrules) |
+| PHP | [php.mdc](rules-mdc/languages/php.mdc) | [php.cursorrules](rules/languages/php.cursorrules) |
+| Swift | [swift.mdc](rules-mdc/languages/swift.mdc) | [swift.cursorrules](rules/languages/swift.cursorrules) |
 
 ### Frameworks
 
-- [React](rules/frameworks/react.cursorrules) - hooks, composition, performance patterns
-- [Next.js](rules/frameworks/nextjs.cursorrules) - App Router, Server Components, server actions
-- [Vue](rules/frameworks/vue.cursorrules) - Composition API, Pinia, script setup
-- [Svelte](rules/frameworks/svelte.cursorrules) - Svelte 5 runes, reactivity, stores
-- [Django](rules/frameworks/django.cursorrules) - models, views, ORM best practices
-- [FastAPI](rules/frameworks/fastapi.cursorrules) - Pydantic v2, dependency injection, async
-- [Express](rules/frameworks/express.cursorrules) - middleware, error handling, validation
-- [Rails](rules/frameworks/rails.cursorrules) - thin controllers, service objects, Turbo
-- [Laravel](rules/frameworks/laravel.cursorrules) - Eloquent, Form Requests, policies
-- [Flutter](rules/frameworks/flutter.cursorrules) - Riverpod, widget extraction, Dart 3
+| Rule | .mdc (agent mode) | .cursorrules (legacy) |
+|------|---|---|
+| React | [react.mdc](rules-mdc/frameworks/react.mdc) | [react.cursorrules](rules/frameworks/react.cursorrules) |
+| Next.js | [nextjs.mdc](rules-mdc/frameworks/nextjs.mdc) | [nextjs.cursorrules](rules/frameworks/nextjs.cursorrules) |
+| Vue | [vue.mdc](rules-mdc/frameworks/vue.mdc) | [vue.cursorrules](rules/frameworks/vue.cursorrules) |
+| Svelte | [svelte.mdc](rules-mdc/frameworks/svelte.mdc) | [svelte.cursorrules](rules/frameworks/svelte.cursorrules) |
+| Django | [django.mdc](rules-mdc/frameworks/django.mdc) | [django.cursorrules](rules/frameworks/django.cursorrules) |
+| FastAPI | [fastapi.mdc](rules-mdc/frameworks/fastapi.mdc) | [fastapi.cursorrules](rules/frameworks/fastapi.cursorrules) |
+| Express | [express.mdc](rules-mdc/frameworks/express.mdc) | [express.cursorrules](rules/frameworks/express.cursorrules) |
+| Rails | [rails.mdc](rules-mdc/frameworks/rails.mdc) | [rails.cursorrules](rules/frameworks/rails.cursorrules) |
+| Laravel | [laravel.mdc](rules-mdc/frameworks/laravel.mdc) | [laravel.cursorrules](rules/frameworks/laravel.cursorrules) |
+| Flutter | [flutter.mdc](rules-mdc/frameworks/flutter.mdc) | [flutter.cursorrules](rules/frameworks/flutter.cursorrules) |
 
 ### Practices
 
-- [Clean Code](rules/practices/clean-code.cursorrules) - naming, functions, simplicity
-- [Testing](rules/practices/testing.cursorrules) - AAA pattern, mocking, coverage strategy
-- [Documentation](rules/practices/documentation.cursorrules) - code docs, READMEs, ADRs
-- [Git Workflow](rules/practices/git-workflow.cursorrules) - commits, branches, PRs
-- [Code Review](rules/practices/code-review.cursorrules) - reviewing, authoring, conventions
-- [Security](rules/practices/security.cursorrules) - input validation, auth, data protection
-- [Performance](rules/practices/performance.cursorrules) - profiling, caching, optimization
-- [Accessibility](rules/practices/accessibility.cursorrules) - semantic HTML, ARIA, keyboard nav
+| Rule | .mdc (agent mode) | .cursorrules (legacy) |
+|------|---|---|
+| Clean Code | [clean-code.mdc](rules-mdc/practices/clean-code.mdc) | [clean-code.cursorrules](rules/practices/clean-code.cursorrules) |
+| Testing | [testing.mdc](rules-mdc/practices/testing.mdc) | [testing.cursorrules](rules/practices/testing.cursorrules) |
+| Documentation | [documentation.mdc](rules-mdc/practices/documentation.mdc) | [documentation.cursorrules](rules/practices/documentation.cursorrules) |
+| Git Workflow | [git-workflow.mdc](rules-mdc/practices/git-workflow.mdc) | [git-workflow.cursorrules](rules/practices/git-workflow.cursorrules) |
+| Code Review | [code-review.mdc](rules-mdc/practices/code-review.mdc) | [code-review.cursorrules](rules/practices/code-review.cursorrules) |
+| Security | [security.mdc](rules-mdc/practices/security.mdc) | [security.cursorrules](rules/practices/security.cursorrules) |
+| Performance | [performance.mdc](rules-mdc/practices/performance.mdc) | [performance.cursorrules](rules/practices/performance.cursorrules) |
+| Accessibility | [accessibility.mdc](rules-mdc/practices/accessibility.mdc) | [accessibility.cursorrules](rules/practices/accessibility.cursorrules) |
 
 ### Tools
 
-- [Docker](rules/tools/docker.cursorrules) - multi-stage builds, security, compose
-- [Terraform](rules/tools/terraform.cursorrules) - state management, modules, safety
-- [Kubernetes](rules/tools/kubernetes.cursorrules) - pods, networking, operations
-- [CI/CD](rules/tools/ci-cd.cursorrules) - pipeline design, deployment, security
-- [VS Code / Cursor](rules/tools/vscode.cursorrules) - workspace setup, debugging, config
+| Rule | .mdc (agent mode) | .cursorrules (legacy) |
+|------|---|---|
+| Docker | [docker.mdc](rules-mdc/tools/docker.mdc) | [docker.cursorrules](rules/tools/docker.cursorrules) |
+| Terraform | [terraform.mdc](rules-mdc/tools/terraform.mdc) | [terraform.cursorrules](rules/tools/terraform.cursorrules) |
+| Kubernetes | [kubernetes.mdc](rules-mdc/tools/kubernetes.mdc) | [kubernetes.cursorrules](rules/tools/kubernetes.cursorrules) |
+| CI/CD | [ci-cd.mdc](rules-mdc/tools/ci-cd.mdc) | [ci-cd.cursorrules](rules/tools/ci-cd.cursorrules) |
+| VS Code / Cursor | [vscode.mdc](rules-mdc/tools/vscode.mdc) | [vscode.cursorrules](rules/tools/vscode.cursorrules) |
 
-## How to use
+## Using Multiple Rules
 
-Grab a rule and drop it in your project root:
+**With .mdc (recommended):** Just copy multiple files into `.cursor/rules/`. Each one works independently. Glob patterns keep them scoped to the right files.
 
 ```bash
-curl -o .cursorrules https://raw.githubusercontent.com/cursorrulespacks/cursorrules-collection/main/rules/languages/typescript.cursorrules
+mkdir -p .cursor/rules
+cp rules-mdc/languages/typescript.mdc .cursor/rules/
+cp rules-mdc/frameworks/nextjs.mdc .cursor/rules/
+cp rules-mdc/practices/testing.mdc .cursor/rules/
 ```
 
-Need multiple? Just combine them:
+**With .cursorrules:** Combine them into one file:
 
 ```bash
 cat rules/languages/typescript.cursorrules rules/frameworks/nextjs.cursorrules > .cursorrules
@@ -102,7 +132,7 @@ A one-page checklist covering the most common ways Cursor agent mode can silentl
 
 ## Want production-ready versions?
 
-These community rules are a great starting point. The [production packs](https://cursorrulespacks.gumroad.com) go deeper: stricter type enforcement, error boundary patterns, auth-aware generation, and stack-specific configs tested on real codebases.
+These community rules are a great starting point. The [production packs](https://cursorrulespacks.gumroad.com) go deeper: stricter type enforcement, error boundary patterns, auth-aware generation, and stack-specific configs tested on real codebases. All packs ship as `.mdc` files with `alwaysApply: true` for agent mode compatibility.
 
 [Browse the packs](https://cursorrulespacks.gumroad.com) · [Free Starter Pack](https://cursorrulespacks.gumroad.com/l/cursor-starter)
 

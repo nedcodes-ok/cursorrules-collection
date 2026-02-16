@@ -1,0 +1,35 @@
+---
+description: "Python best practices: type hints, pathlib, pytest, clean error handling"
+globs: ["*.py"]
+alwaysApply: true
+---
+
+# Python Rules
+
+## Style & Structure
+- Use type hints for all function signatures and return types
+- Prefer f-strings over .format() or % formatting
+- Use pathlib instead of os.path for file operations
+- Prefer list/dict/set comprehensions over map/filter when readable
+- Use dataclasses or Pydantic models instead of plain dicts for structured data
+
+## Error Handling
+- Use specific exception types, never bare except
+- Use contextlib.suppress() for expected exceptions
+- Return early to avoid deep nesting
+
+## Imports
+- Group imports: stdlib, third-party, local (separated by blank lines)
+- Use absolute imports over relative imports
+- Never use wildcard imports (from x import *)
+
+## Functions
+- Keep functions under 30 lines — extract helpers
+- Use *args and **kwargs sparingly and document when used
+- Prefer returning values over modifying mutable arguments
+- Use generators for large sequences (yield over building lists)
+
+## Testing
+- Use pytest over unittest
+- Name tests descriptively: test_<function>_<scenario>_<expected>
+- Use fixtures for shared setup, parametrize for multiple cases

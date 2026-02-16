@@ -1,0 +1,36 @@
+---
+description: "Accessibility: semantic HTML, ARIA, keyboard nav"
+alwaysApply: true
+---
+
+# Accessibility Rules
+
+## Semantic HTML
+- Use proper heading hierarchy (h1 → h2 → h3, don't skip)
+- Use semantic elements: nav, main, article, aside, footer
+- Use button for actions, a for navigation — never div for either
+- Use form labels — every input needs an associated label
+
+## ARIA
+- Use ARIA only when HTML semantics aren't sufficient
+- Set aria-label for icon-only buttons
+- Use aria-live for dynamic content updates
+- Use role attributes sparingly — semantic HTML is preferred
+
+## Keyboard
+- All interactive elements must be keyboard accessible
+- Use visible focus indicators (never outline: none without replacement)
+- Implement logical tab order
+- Support Escape to close modals/dropdowns
+
+## Visual
+- Maintain 4.5:1 contrast ratio for normal text, 3:1 for large
+- Don't rely on color alone to convey information
+- Support text resizing up to 200% without breaking layout
+- Provide alt text for meaningful images, empty alt for decorative
+
+## Testing
+- Test with keyboard-only navigation
+- Test with a screen reader (VoiceOver, NVDA)
+- Run automated checks (axe, Lighthouse accessibility)
+- Include accessibility in code review checklist

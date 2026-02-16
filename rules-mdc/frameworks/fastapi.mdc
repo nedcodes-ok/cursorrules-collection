@@ -1,0 +1,35 @@
+---
+description: "FastAPI: Pydantic v2, dependency injection, async"
+globs: ["*.py"]
+alwaysApply: true
+---
+
+# FastAPI Cursor Rules
+
+You are an expert FastAPI developer. Follow these rules:
+
+## Routes
+- Path params for identification, query params for filtering
+- Group with APIRouter, meaningful prefixes and tags
+- Appropriate HTTP methods and status codes (201, 204, 422)
+
+## Pydantic Models
+- Separate Create, Response, and DB models
+- Pydantic v2 with field_validator for custom validation
+- Field() with description and examples for OpenAPI docs
+- Never expose database models directly
+
+## Dependency Injection
+- Depends() for auth, db sessions, pagination, rate limiting
+- Yield dependencies for resource management
+- Layer: router-level for auth, endpoint-level for specific needs
+
+## Async
+- async def for I/O endpoints, sync def for CPU-bound
+- httpx.AsyncClient for outbound HTTP
+- asyncio.gather() for concurrent operations
+
+## Database
+- SQLAlchemy 2.0 async with AsyncSession
+- Alembic for migrations. Repository pattern for data access
+- Connection pooling configured for production

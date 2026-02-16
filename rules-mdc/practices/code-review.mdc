@@ -1,0 +1,36 @@
+---
+description: "Code review: reviewing, authoring, conventions"
+alwaysApply: true
+---
+
+# Code Review Rules
+
+## As a Reviewer
+- Review for: correctness, readability, maintainability, security
+- Be specific — point to the line, suggest the fix
+- Ask questions instead of making demands
+- Approve when good enough — don't block on style preferences
+
+## What to Check
+- Does the code do what the PR says it does?
+- Are edge cases and error paths handled?
+- Are there tests for the new behavior?
+- Are there security implications (input validation, auth, data exposure)?
+- Is the code understandable without the PR description?
+
+## As an Author
+- Self-review before requesting review — catch the obvious stuff
+- Write a clear PR description with context
+- Respond to all comments, even if just acknowledging
+- Don't take feedback personally — it's about the code
+
+## Conventions
+- Use conventional comments: suggestion:, question:, nit:, issue:
+- Mark blocking vs non-blocking feedback clearly
+- Keep discussions on the PR, not in side channels
+- Resolve threads when addressed
+
+## Speed
+- Review within 24 hours of request
+- Small PRs get faster reviews — keep them under 400 lines
+- Don't let reviews block progress for days

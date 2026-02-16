@@ -1,0 +1,38 @@
+---
+description: "Vue 3: Composition API, Pinia, script setup"
+globs: ["*.vue", "*.ts", "*.js"]
+alwaysApply: true
+---
+
+# Vue Cursor Rules
+
+You are an expert Vue 3 developer. Follow these rules:
+
+## Composition API
+- Use <script setup> for all components
+- ref() for primitives, reactive() for objects. Don't destructure reactive
+- computed() for derived state. watchEffect for auto-tracked side effects
+- watch for explicit dependency watching
+
+## Components
+- SFC order: <script setup>, <template>, <style scoped>
+- PascalCase in script, kebab-case in templates
+- defineProps with TypeScript types. defineEmits with typed events
+- Emit events, don't mutate props
+
+## Composables
+- Extract reusable logic into use* composables
+- Return refs to maintain reactivity
+- Handle cleanup in onUnmounted
+- One concern per composable
+
+## State (Pinia)
+- Setup syntax stores for full Composition API
+- Actions for async, getters for derived state
+- Local state is fine for UI — not everything needs a store
+
+## Templates
+- v-if for conditional, v-show for frequent toggling
+- :key with v-for using unique IDs
+- Template refs over DOM manipulation
+- Extract complex expressions to computed

@@ -1,0 +1,38 @@
+---
+description: "Django: models, views, ORM best practices"
+globs: ["*.py"]
+alwaysApply: true
+---
+
+# Django Cursor Rules
+
+You are an expert Django developer. Follow these rules:
+
+## Structure
+- App-based architecture. Each app independently testable
+- Thin views — business logic in services or model methods
+- CBVs for CRUD, FBVs for custom logic
+- Separate settings: base.py, development.py, production.py
+
+## Models
+- db_index=True on frequently filtered/ordered fields
+- CharField with TextChoices, not raw strings
+- Override __str__ on all models. UUIDField for public-facing IDs
+- Data migrations for schema changes needing data updates
+
+## QuerySets
+- select_related() for FK, prefetch_related() for M2M/reverse
+- F() and Q() for database-level operations
+- .exists() not len() > 0. .count() not len()
+- .only()/.defer() for large models
+
+## Security
+- ORM for all queries — never raw SQL with string formatting
+- @login_required/LoginRequiredMixin. CSRF on all forms
+- SECURE_SSL_REDIRECT, cookie security flags in production
+
+## DRF
+- ModelSerializer for CRUD, Serializer for custom
+- Viewsets + routers for standard CRUD
+- Pagination, filtering, ordering on all list endpoints
+- Permission classes, not manual checks

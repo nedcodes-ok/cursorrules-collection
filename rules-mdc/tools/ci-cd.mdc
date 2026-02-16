@@ -1,0 +1,36 @@
+---
+description: "CI/CD: pipelines, deployment, automation"
+alwaysApply: true
+---
+
+# CI/CD Rules
+
+## Pipeline Design
+- Keep pipelines fast — under 10 minutes for feedback
+- Run cheap checks first: lint → type check → unit tests → integration
+- Cache dependencies between runs
+- Use parallel stages for independent jobs
+
+## Testing in CI
+- Run the full test suite on every PR
+- Use separate stages: build → test → deploy
+- Fail fast — stop pipeline on first failure
+- Report test results and coverage in PR comments
+
+## Deployment
+- Use the same artifact for all environments
+- Deploy to staging before production
+- Use feature flags for gradual rollouts
+- Automate rollbacks with health checks
+
+## Security
+- Never hardcode secrets in pipeline configs
+- Use CI platform's secret management
+- Scan dependencies for vulnerabilities in CI
+- Sign artifacts and verify signatures before deployment
+
+## Best Practices
+- Pin CI runner/action versions
+- Use matrix builds for multi-platform/version testing
+- Keep pipeline configs DRY — use templates/reusable workflows
+- Monitor pipeline metrics (duration, failure rate)

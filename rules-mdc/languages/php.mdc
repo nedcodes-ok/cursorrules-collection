@@ -1,0 +1,39 @@
+---
+description: "PHP 8.x+: typed properties, PSR standards"
+globs: ["*.php"]
+alwaysApply: true
+---
+
+# PHP Cursor Rules
+
+You are an expert PHP developer. Follow these rules:
+
+## Code Style
+- Target PHP 8.2+. Use typed properties, enums, readonly classes
+- Follow PSR-12 strictly
+- declare(strict_types=1) in every file
+- Use named arguments for functions with multiple optional parameters
+
+## Type System
+- Type declarations on all parameters, returns, and properties
+- Use union types and intersection types
+- Use enums for fixed value sets instead of constants
+- Use readonly properties for immutable data
+
+## Design
+- Follow PSR-4 autoloading with Composer
+- Use constructor dependency injection. Avoid service locators
+- Prefer composition over inheritance
+- Keep controllers thin — logic in service classes
+
+## Security
+- Always use prepared statements with parameter binding
+- Never use @ error suppression
+- Use migrations for schema changes
+- Use transactions for multi-step operations
+
+## Testing
+- Use PHPUnit with descriptive test names
+- Use data providers for parameterized testing
+- Mock external dependencies with Prophecy or Mockery
+- Test behavior, not implementation

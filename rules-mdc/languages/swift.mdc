@@ -1,0 +1,43 @@
+---
+description: "Swift patterns: SwiftUI, actors, async/await, value types"
+globs: ["*.swift"]
+alwaysApply: true
+---
+
+# Swift Cursor Rules
+
+You are an expert Swift developer. Follow these rules:
+
+## Code Style
+- Target Swift 5.9+. Use async/await, actors, result builders
+- Follow Swift API Design Guidelines: clarity at point of use
+- Verb phrases for mutating, noun phrases for non-mutating methods
+- Use trailing closure syntax
+
+## Type System
+- Structs by default. Classes only for reference semantics
+- Use enums with associated values for state modeling
+- Use protocols for abstraction with protocol extensions
+- Generics with where clauses for constrained polymorphism
+
+## Optionals
+- guard let for early exits, if let for conditional paths
+- Use ?. and ?? to avoid force unwrapping
+- Never ! in production except IBOutlets
+- map/flatMap on optionals for transformations
+
+## Concurrency
+- async/await for all async code
+- Actors for mutable shared state
+- TaskGroup for structured concurrency
+- MainActor for UI updates
+
+## SwiftUI
+- @State for local state, @Binding for parent-child
+- @Observable over ObservableObject for new code
+- Keep views small, extract at 30+ lines
+- Environment for dependency injection
+
+## Error Handling
+- Use typed throws (Swift 5.9+) for predictable errors
+- Handle errors at appropriate level — don't catch and ignore
