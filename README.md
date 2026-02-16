@@ -93,13 +93,11 @@ cat rules/languages/typescript.cursorrules rules/frameworks/nextjs.cursorrules >
 
 PRs welcome. See [CONTRIBUTING.md](CONTRIBUTING.md). The bar: rules should be specific enough to actually change Cursor's output. "Write clean code" doesn't count.
 
-## Premium packs
+## Want production-ready versions?
 
-These cover the basics well. If you want deeper, more opinionated rule sets built for specific stacks:
+These community rules are a great starting point. The [production packs](https://cursorrulespacks.gumroad.com) go deeper: stricter type enforcement, error boundary patterns, auth-aware generation, and stack-specific configs tested on real codebases.
 
-**[Complete Bundle ($29)](https://cursorrulespacks.gumroad.com/l/complete-cursor-rules-bundle)** — all 4 packs in one download (43% off vs individual).
-
-Individual packs: [React & Next.js](https://cursorrulespacks.gumroad.com/l/react-nextjs-rules-pack) · [TypeScript Strict](https://cursorrulespacks.gumroad.com/l/typescript-strict-rules-pack) · [Python Backend](https://cursorrulespacks.gumroad.com/l/python-backend-rules-pack) · [Debugging](https://cursorrulespacks.gumroad.com/l/debugging-rules-pack) · [Free Starter Pack](https://cursorrulespacks.gumroad.com/l/cursor-starter)
+[Browse the packs](https://cursorrulespacks.gumroad.com) · [Free Starter Pack](https://cursorrulespacks.gumroad.com/l/cursor-starter)
 
 ## License
 
