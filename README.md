@@ -5,7 +5,7 @@
 
 33 rules for Cursor AI in both `.mdc` and `.cursorrules` format. Copy to your project and Cursor actually writes code the way you want it to.
 
-> **⚠️ Using Cursor agent mode?** Use the `.mdc` files in `rules-mdc/`. Agent mode silently ignores `.cursorrules` files. [We tested this](https://dev.to/nedcodes/cursor-agent-mode-ignores-cursorrules-use-mdc-instead-5flb) and got 0/9 compliance with `.cursorrules` vs 9/9 with `.mdc`.
+> **⚠️ Using Cursor agent mode?** Use the `.mdc` files in `rules-mdc/`. Both `.cursorrules` and `.mdc` are loaded, but `.mdc` takes precedence on conflicts and gives you frontmatter (`alwaysApply`, globs). [More details](https://dev.to/nedcodes/cursor-agent-mode-ignores-cursorrules-use-mdc-instead-5flb).
 
 ## Quick Start
 
