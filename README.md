@@ -13,6 +13,7 @@ Want to understand the thinking behind these rules? Read the deep dives on Dev.t
 
 - [5 .cursorrules That Actually Changed Cursor's Output](https://dev.to/nedcodes/5-cursorrules-that-actually-changed-cursors-output-and-2-that-were-useless-gel)
 - [How to Write .cursorrules That Actually Work](https://dev.to/nedcodes/how-to-write-cursorrules-that-actually-work-2imd)
+- [Cursor Agent Mode Ignores .cursorrules — Use .mdc Instead](https://dev.to/nedcodes/cursor-agent-mode-ignores-cursorrules-use-mdc-instead-5flb)
 - [5 .cursorrules That Actually Changed What Cursor Generates (React/Next.js)](https://dev.to/nedcodes/5-cursorrules-that-actually-changed-what-cursor-generates-reactnextjs-3888)
 
 ## Before / After
@@ -92,6 +93,12 @@ cat rules/languages/typescript.cursorrules rules/frameworks/nextjs.cursorrules >
 ## Contributing
 
 PRs welcome. See [CONTRIBUTING.md](CONTRIBUTING.md). The bar: rules should be specific enough to actually change Cursor's output. "Write clean code" doesn't count.
+
+## 🛡️ Free Safety Checklist
+
+A one-page checklist covering the most common ways Cursor agent mode can silently break your codebase, based on testing with Cursor CLI 2.4.35.
+
+[Download the checklist (free, no email required)](https://cursorrulespacks.gumroad.com/l/cursor-safety-checklist)
 
 ## Want production-ready versions?
 
