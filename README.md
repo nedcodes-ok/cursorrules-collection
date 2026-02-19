@@ -64,6 +64,10 @@ Same prompts, different output. Left side is vanilla Cursor, right side is with 
 | Ruby | [ruby.mdc](rules-mdc/languages/ruby.mdc) | [ruby.cursorrules](rules/languages/ruby.cursorrules) |
 | PHP | [php.mdc](rules-mdc/languages/php.mdc) | [php.cursorrules](rules/languages/php.cursorrules) |
 | Swift | [swift.mdc](rules-mdc/languages/swift.mdc) | [swift.cursorrules](rules/languages/swift.cursorrules) |
+| Kotlin | [kotlin.mdc](rules-mdc/languages/kotlin.mdc) | [kotlin.cursorrules](rules/languages/kotlin.cursorrules) |
+| Elixir | [elixir.mdc](rules-mdc/languages/elixir.mdc) | [elixir.cursorrules](rules/languages/elixir.cursorrules) |
+| Scala | [scala.mdc](rules-mdc/languages/scala.mdc) | [scala.cursorrules](rules/languages/scala.cursorrules) |
+| C++ | [cpp.mdc](rules-mdc/languages/cpp.mdc) | [cpp.cursorrules](rules/languages/cpp.cursorrules) |
 
 ### Frameworks
 
@@ -79,6 +83,13 @@ Same prompts, different output. Left side is vanilla Cursor, right side is with 
 | Rails | [rails.mdc](rules-mdc/frameworks/rails.mdc) | [rails.cursorrules](rules/frameworks/rails.cursorrules) |
 | Laravel | [laravel.mdc](rules-mdc/frameworks/laravel.mdc) | [laravel.cursorrules](rules/frameworks/laravel.cursorrules) |
 | Flutter | [flutter.mdc](rules-mdc/frameworks/flutter.mdc) | [flutter.cursorrules](rules/frameworks/flutter.cursorrules) |
+| Angular | [angular.mdc](rules-mdc/frameworks/angular.mdc) | [angular.cursorrules](rules/frameworks/angular.cursorrules) |
+| Astro | [astro.mdc](rules-mdc/frameworks/astro.mdc) | [astro.cursorrules](rules/frameworks/astro.cursorrules) |
+| Remix | [remix.mdc](rules-mdc/frameworks/remix.mdc) | [remix.cursorrules](rules/frameworks/remix.cursorrules) |
+| Nuxt | [nuxt.mdc](rules-mdc/frameworks/nuxt.mdc) | [nuxt.cursorrules](rules/frameworks/nuxt.cursorrules) |
+| Tailwind CSS | [tailwind-css.mdc](rules-mdc/frameworks/tailwind-css.mdc) | [tailwind-css.cursorrules](rules/frameworks/tailwind-css.cursorrules) |
+| Gatsby | [gatsby.mdc](rules-mdc/frameworks/gatsby.mdc) | [gatsby.cursorrules](rules/frameworks/gatsby.cursorrules) |
+| SolidJS | [solid-js.mdc](rules-mdc/frameworks/solid-js.mdc) | [solid-js.cursorrules](rules/frameworks/solid-js.cursorrules) |
 
 ### Practices
 
@@ -92,6 +103,10 @@ Same prompts, different output. Left side is vanilla Cursor, right side is with 
 | Security | [security.mdc](rules-mdc/practices/security.mdc) | [security.cursorrules](rules/practices/security.cursorrules) |
 | Performance | [performance.mdc](rules-mdc/practices/performance.mdc) | [performance.cursorrules](rules/practices/performance.cursorrules) |
 | Accessibility | [accessibility.mdc](rules-mdc/practices/accessibility.mdc) | [accessibility.cursorrules](rules/practices/accessibility.cursorrules) |
+| API Design | [api-design.mdc](rules-mdc/practices/api-design.mdc) | [api-design.cursorrules](rules/practices/api-design.cursorrules) |
+| Error Handling | [error-handling.mdc](rules-mdc/practices/error-handling.mdc) | [error-handling.cursorrules](rules/practices/error-handling.cursorrules) |
+| Logging | [logging.mdc](rules-mdc/practices/logging.mdc) | [logging.cursorrules](rules/practices/logging.cursorrules) |
+| Monitoring | [monitoring.mdc](rules-mdc/practices/monitoring.mdc) | [monitoring.cursorrules](rules/practices/monitoring.cursorrules) |
 
 ### Tools
 
@@ -102,6 +117,14 @@ Same prompts, different output. Left side is vanilla Cursor, right side is with 
 | Kubernetes | [kubernetes.mdc](rules-mdc/tools/kubernetes.mdc) | [kubernetes.cursorrules](rules/tools/kubernetes.cursorrules) |
 | CI/CD | [ci-cd.mdc](rules-mdc/tools/ci-cd.mdc) | [ci-cd.cursorrules](rules/tools/ci-cd.cursorrules) |
 | VS Code / Cursor | [vscode.mdc](rules-mdc/tools/vscode.mdc) | [vscode.cursorrules](rules/tools/vscode.cursorrules) |
+| GraphQL | [graphql.mdc](rules-mdc/tools/graphql.mdc) | [graphql.cursorrules](rules/tools/graphql.cursorrules) |
+| Prisma | [prisma.mdc](rules-mdc/tools/prisma.mdc) | [prisma.cursorrules](rules/tools/prisma.cursorrules) |
+| Supabase | [supabase.mdc](rules-mdc/tools/supabase.mdc) | [supabase.cursorrules](rules/tools/supabase.cursorrules) |
+| MongoDB | [mongodb.mdc](rules-mdc/tools/mongodb.mdc) | [mongodb.cursorrules](rules/tools/mongodb.cursorrules) |
+| PostgreSQL | [postgresql.mdc](rules-mdc/tools/postgresql.mdc) | [postgresql.cursorrules](rules/tools/postgresql.cursorrules) |
+| AWS | [aws.mdc](rules-mdc/tools/aws.mdc) | [aws.cursorrules](rules/tools/aws.cursorrules) |
+| Redis | [redis.mdc](rules-mdc/tools/redis.mdc) | [redis.cursorrules](rules/tools/redis.cursorrules) |
+| Nginx | [nginx.mdc](rules-mdc/tools/nginx.mdc) | [nginx.cursorrules](rules/tools/nginx.cursorrules) |
 
 ## Using Multiple Rules
 
@@ -124,17 +147,16 @@ cat rules/languages/typescript.cursorrules rules/frameworks/nextjs.cursorrules >
 
 PRs welcome. See [CONTRIBUTING.md](CONTRIBUTING.md). The bar: rules should be specific enough to actually change Cursor's output. "Write clean code" doesn't count.
 
-## 🛡️ Free Safety Checklist
+## Need help with your Cursor setup?
 
-A one-page checklist covering the most common ways Cursor agent mode can silently break your codebase, based on testing with Cursor CLI 2.4.35.
+If your rules aren't working the way you expect, or you're not sure how to set up Cursor for your specific project, I do async setup reviews. You share your config, I tell you what's broken and how to fix it. No calls, just a written report.
 
-[Download the checklist (free, no email required)](https://cursorrulespacks.gumroad.com/l/cursor-safety-checklist)
+DM me on [Dev.to](https://dev.to/nedcodes) or the [Cursor Forum](https://forum.cursor.com) (nedcodes on both).
 
-## Want production-ready versions?
+## Other tools
 
-These community rules are a great starting point. The [production packs](https://cursorrulespacks.gumroad.com) go deeper: stricter type enforcement, error boundary patterns, auth-aware generation, and stack-specific configs tested on real codebases. All packs ship as `.mdc` files with `alwaysApply: true` for agent mode compatibility.
-
-[Browse the packs](https://cursorrulespacks.gumroad.com) · [Free Starter Pack](https://cursorrulespacks.gumroad.com/l/cursor-starter)
+- [cursor-lint](https://github.com/cursorrulespacks/cursor-lint) — Lint your Cursor rules. Catches common mistakes before they break your workflow.
+- [More articles on Dev.to](https://dev.to/nedcodes) — Tests, guides, and things I've learned about making Cursor actually listen.
 
 ## License
 
