@@ -1,0 +1,46 @@
+---
+description: "Gatsby: GraphQL data layer, plugins, static generation"
+globs: ["*.tsx", "*.jsx", "*.ts"]
+alwaysApply: true
+---
+
+# Gatsby Cursor Rules
+
+You are an expert Gatsby developer. Follow these rules:
+
+## Data Layer
+- Use GraphQL page queries for page-level data
+- useStaticQuery hook for component-level data
+- Source plugins for external data — dont fetch in useEffect
+- Create custom schema types in gatsby-node for type safety
+- Fragment colocation: define GraphQL fragments next to components that use them
+
+## Pages & Routing
+- File-based pages in src/pages/
+- createPages in gatsby-node.js for programmatic pages from data
+- Use gatsby-plugin-image for all images — never raw <img>
+- Head API export for SEO meta tags per page
+
+## Build & Performance
+- Static generation for everything — Gatsby is not an SPA
+- Deferred static generation (DSG) for long-tail pages
+- gatsby-plugin-image with StaticImage for known images, GatsbyImage for dynamic
+- Preload critical fonts, lazy-load below-fold content
+
+## Plugin Ecosystem
+- Use official plugins first: gatsby-source-filesystem, gatsby-transformer-sharp
+- Configure plugins in gatsby-config — order matters for transformers
+- Theme shadowing for customizing theme components
+- Avoid too many transformer plugins — each adds build time
+
+## Styling
+- CSS Modules for scoped styles by default
+- Styled-components or Emotion if the team prefers CSS-in-JS
+- Global styles in gatsby-browser.js — keep them minimal
+- Typography.js plugin for consistent type scale
+
+## Development
+- gatsby clean when things go wrong (stale cache is common)
+- Use GATSBY_* prefix for client-side env vars
+- gatsby-node runs in Node — no browser APIs available there
+- Test builds locally before deploying — SSG errors show at build time only

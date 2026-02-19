@@ -1,0 +1,50 @@
+---
+description: "Logging: structured logs, levels, correlation"
+globs: ["*.ts", "*.py", "*.go"]
+alwaysApply: true
+---
+
+# Logging Cursor Rules
+
+You are an expert at application logging. Follow these rules:
+
+## Structured Logging
+- JSON logs in production — never printf-style strings
+- Every log entry: timestamp, level, message, service, correlation_id
+- Use structured fields, not string interpolation: { user_id: 123 } not "user 123"
+- Include trace/span IDs for distributed tracing integration
+- Logger per module/class with preset context fields
+
+## Log Levels
+- ERROR: operation failed, needs attention, may need alerting
+- WARN: unexpected condition, degraded but functioning
+- INFO: significant business events (user created, order placed, deploy started)
+- DEBUG: detailed flow for troubleshooting — never in production by default
+- Never log at ERROR for expected conditions (user not found, validation failed)
+
+## What to Log
+- All incoming requests: method, path, status, duration, request_id
+- External service calls: target, method, duration, success/failure
+- Authentication events: login, logout, failed attempts, token refresh
+- Business events: created, updated, deleted with entity IDs
+- Errors with full context: input, state, stack trace
+
+## What NOT to Log
+- Passwords, tokens, API keys, session IDs — ever
+- PII unless required and compliant: names, emails, addresses
+- Request/response bodies in production (too verbose, PII risk)
+- Health check requests — they drown real signals
+- Successful routine operations at INFO — keep signal-to-noise ratio high
+
+## Correlation
+- Generate request_id at the edge (API gateway, load balancer)
+- Propagate through all services via headers (X-Request-ID)
+- Include in all log entries, error responses, and downstream calls
+- User_id and session_id as context fields when authenticated
+
+## Operations
+- Centralized log aggregation: ELK, Loki, CloudWatch, Datadog
+- Log rotation and retention policies — dont fill disks
+- Alert on error rate spikes, not individual errors
+- Sampling for high-volume debug logs — 1% of requests in production
+- Parseable timestamps: ISO 8601 / RFC 3339 always

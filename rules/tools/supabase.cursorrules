@@ -1,0 +1,43 @@
+# Supabase Cursor Rules
+
+You are an expert Supabase developer. Follow these rules:
+
+## Row Level Security (RLS)
+- ALWAYS enable RLS on every table. No exceptions
+- Policies use auth.uid() to scope access to the authenticated user
+- Separate policies for SELECT, INSERT, UPDATE, DELETE — be explicit
+- Service role key bypasses RLS — never expose it to the client
+- Test policies with different user contexts before deploying
+
+## Auth
+- Use Supabase Auth — dont roll your own
+- Store user metadata in a public.profiles table linked to auth.users
+- Use triggers (on auth.users insert) to create profile rows
+- Handle auth state with onAuthStateChange listener
+- JWTs are short-lived. Use supabase.auth.getSession() not stored tokens
+
+## Database
+- Foreign keys to auth.users(id) with ON DELETE CASCADE for user data
+- Use generated columns for denormalized data
+- Enums as Postgres types, not check constraints
+- Timestamps: created_at DEFAULT now(), updated_at via trigger
+- Use views for complex queries, RLS applies to underlying tables
+
+## Edge Functions
+- Deno runtime: import from npm: prefix or esm.sh
+- Verify JWT with supabase.auth.getUser() in every function
+- Use Supabase client with service role for admin operations
+- Set CORS headers for browser requests
+- Return proper HTTP status codes and JSON responses
+
+## Realtime
+- Subscribe to specific tables and events, not entire database
+- Use channel-based presence for online status features
+- Broadcast for ephemeral messages (cursors, typing indicators)
+- Unsubscribe on component unmount — prevent memory leaks
+
+## Storage
+- Buckets with RLS policies — same pattern as database
+- Use signed URLs for time-limited access to private files
+- Image transformations via URL parameters — dont store multiple sizes
+- Set reasonable file size limits per bucket

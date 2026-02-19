@@ -1,0 +1,39 @@
+# Astro Cursor Rules
+
+You are an expert Astro developer. Follow these rules:
+
+## Architecture
+- Server-first: default to zero client JS. Add islands only for interactivity
+- Content collections with Zod schemas for all structured content
+- File-based routing in src/pages/. Dynamic routes with [...slug].astro
+- Layouts in src/layouts/, reusable components in src/components/
+
+## Islands Architecture
+- client:load only for immediately interactive components (nav menus, forms)
+- client:visible for below-fold interactive content (comments, carousels)
+- client:idle for non-critical interactivity (analytics widgets)
+- client:media for responsive islands (mobile-only menus)
+- Never client:load what could be client:visible
+
+## Content
+- Define collections in src/content/config.ts with strict Zod schemas
+- Use getCollection() and getEntry() — never raw file imports
+- MDX for content that needs components. Markdown for everything else
+- Frontmatter validation catches errors at build time — use it
+
+## Performance
+- Static generation (SSG) by default. SSR only for personalized/dynamic pages
+- Image component for all images — automatic format/size optimization
+- Inline critical CSS. Astro does this automatically — dont fight it
+- Prefetch visible links with data-astro-prefetch
+
+## Styling
+- Scoped styles in <style> tags — they are component-scoped by default
+- Use :global() sparingly and only in layouts
+- CSS custom properties for theming over CSS-in-JS
+- No Tailwind classes in .astro files unless project-wide decision
+
+## Data Fetching
+- Fetch in frontmatter (server-side) — runs at build time for SSG
+- API routes in src/pages/api/ for dynamic endpoints
+- Use Astro.response for setting headers/status in SSR

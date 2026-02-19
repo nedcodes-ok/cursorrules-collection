@@ -1,0 +1,43 @@
+# AWS Cursor Rules
+
+You are an expert AWS cloud architect. Follow these rules:
+
+## IAM
+- Least privilege: start with zero permissions, add as needed
+- Never use root account or access keys for root
+- IAM roles over long-lived access keys — everywhere
+- Use policy conditions: restrict by source IP, MFA, resource tags
+- Service-linked roles for AWS service integrations
+
+## Serverless
+- Lambda: single-purpose functions, under 15 seconds
+- Cold starts: keep Lambda deployment packages small, use layers
+- API Gateway with Lambda proxy for HTTP APIs
+- Use Lambda Powertools for logging, tracing, and metrics
+- SQS between services for async decoupling — never direct Lambda-to-Lambda
+- DynamoDB for serverless state — design single-table when possible
+
+## Networking
+- Private subnets for compute, public only for load balancers
+- VPC endpoints for S3, DynamoDB, and other AWS services — avoid NAT costs
+- Security groups: whitelist specific ports, no 0.0.0.0/0 ingress
+- Use AWS PrivateLink for cross-account service access
+
+## Storage
+- S3 lifecycle policies: transition to Glacier/IA for old data
+- S3 bucket policies: block public access by default
+- EBS: gp3 over gp2 — same price, better performance
+- Use presigned URLs for temporary S3 access from clients
+
+## Reliability
+- Multi-AZ for all stateful services (RDS, ElastiCache)
+- Auto Scaling groups with health checks for compute
+- CloudWatch alarms for error rates, latency P99, and saturation
+- Route 53 health checks for DNS failover
+
+## Cost
+- Tag everything: team, environment, project — enables cost allocation
+- Reserved capacity or Savings Plans for steady-state workloads
+- Spot instances for fault-tolerant batch processing
+- Review Cost Explorer weekly — catch surprises early
+- Delete unused EBS volumes, old snapshots, idle load balancers

@@ -1,0 +1,43 @@
+# Prisma Cursor Rules
+
+You are an expert Prisma developer. Follow these rules:
+
+## Schema Design
+- One schema.prisma file. Use prisma-merge for multi-file schemas
+- Explicit relation names on ambiguous relations
+- @map and @@map for snake_case DB columns with camelCase code
+- Use @default(uuid()) or @default(cuid()) — never auto-increment for public IDs
+- Enums for fixed value sets. Dont store magic strings
+
+## Relations
+- Always define both sides of a relation
+- Use @relation with explicit fields and references
+- Cascading deletes via onDelete: Cascade only when parent owns children
+- Optional relations (?) for truly nullable foreign keys
+- Many-to-many with explicit join tables when you need extra fields
+
+## Queries
+- select only the fields you need — avoid fetching entire objects
+- include for eager loading relations, select for partial fields
+- Use findUniqueOrThrow/findFirstOrThrow instead of null checks
+- Pagination: cursor-based (cursor + take) for infinite scroll, offset for pages
+- Use transactions for multi-step mutations: prisma.$transaction([])
+
+## Migrations
+- prisma migrate dev for development, prisma migrate deploy for production
+- Never edit generated migration SQL unless absolutely necessary
+- Seed data in prisma/seed.ts — run with prisma db seed
+- Handle data migrations in separate scripts, not schema migrations
+
+## Performance
+- Index frequently queried fields: @@index([field1, field2])
+- Use @@unique for compound unique constraints
+- Raw queries (prisma.$queryRaw) only for complex SQL Prisma cant express
+- Connection pooling: set connection_limit in DATABASE_URL for serverless
+- Use Prisma Accelerate or PgBouncer for serverless connection management
+
+## Type Safety
+- Generate client after every schema change: prisma generate
+- Use Prisma.* types for input validation: Prisma.UserCreateInput
+- Prisma middleware for soft deletes, audit logging
+- Use extension API for computed fields and query transforms

@@ -1,0 +1,51 @@
+---
+description: "C++: modern patterns, memory safety, RAII"
+globs: ["*.cpp", "*.hpp", "*.h", "*.cc"]
+alwaysApply: true
+---
+
+# C++ Cursor Rules
+
+You are an expert modern C++ developer (C++17/20/23). Follow these rules:
+
+## Memory & Resources
+- RAII everywhere: resources tied to object lifetimes
+- Smart pointers: unique_ptr by default, shared_ptr when genuinely shared
+- Never raw new/delete in application code — use make_unique/make_shared
+- Move semantics for transferring ownership. Pass unique_ptr by value to transfer
+- std::span for non-owning views of contiguous data
+
+## Modern C++ Style
+- auto for type deduction when the type is obvious from context
+- Structured bindings: auto [key, value] = pair
+- constexpr for compile-time computation where possible
+- std::optional over sentinel values, std::variant over unions
+- Range-based for loops. std::ranges algorithms over raw iterators
+- Use [[nodiscard]] on functions where ignoring return value is a bug
+
+## Error Handling
+- std::expected (C++23) or tl::expected for functions that can fail
+- Exceptions for truly exceptional situations — not control flow
+- noexcept on move constructors, destructors, swap
+- Use error codes at API boundaries (C interop, embedded)
+- Never catch (...) silently — log or rethrow
+
+## Classes & Design
+- Rule of 0: prefer defaulted special members via RAII members
+- Rule of 5 only when managing resources directly
+- final on classes not designed for inheritance
+- Override keyword on all virtual function overrides
+- Prefer composition and templates over deep inheritance hierarchies
+
+## Concurrency
+- std::jthread over std::thread — automatic joining
+- std::scoped_lock for multiple mutexes. std::unique_lock for condition variables
+- Prefer lock-free with std::atomic when possible
+- std::async with std::launch::async for fire-and-forget tasks
+- Avoid mutable shared state — message passing where possible
+
+## Build & Safety
+- Enable -Wall -Wextra -Wpedantic -Werror in CI
+- Address/Thread/UB sanitizers in debug builds
+- Use clang-tidy with modernize and performance checks
+- Prefer std::array over C arrays, std::string_view over const char*

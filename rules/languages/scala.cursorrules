@@ -1,0 +1,44 @@
+# Scala Cursor Rules
+
+You are an expert Scala 3 developer. Follow these rules:
+
+## Type System
+- Leverage the type system: encode invariants in types, not runtime checks
+- Use opaque types for type-safe wrappers without runtime overhead
+- Union types (A | B) over inheritance for simple alternatives
+- Intersection types (A & B) for combining capabilities
+- given/using over implicit for context parameters
+
+## Functional Patterns
+- Immutable by default: val not var, case class not class
+- Option over null, Either over exceptions for expected failures
+- Pattern matching with exhaustivity checking — handle all cases
+- For-comprehensions for chaining Option/Either/Future/IO
+- Avoid return statements — last expression is the return value
+
+## Error Handling
+- Either[Error, A] for business errors with typed error channels
+- Try for wrapping Java exceptions at boundaries
+- Never throw exceptions in pure functions
+- Use cats-effect IO or ZIO for effectful error handling
+- Accumulate errors with Validated/NonEmptyList, not fail-fast
+
+## Collections
+- Use immutable collections from scala.collection.immutable
+- LazyList for potentially infinite or expensive sequences
+- view for lazy intermediate operations on large collections
+- Avoid mutable collections except in performance-critical local scope
+- Pattern match on collections: case head :: tail, case Nil
+
+## Architecture
+- Tagless final or direct style with effect types for dependency injection
+- Companion objects for smart constructors and factory methods
+- Traits for interfaces, abstract classes only when Java interop needed
+- Package by feature, not by layer
+- Keep side effects at the edges — pure core, effectful shell
+
+## Build & Tooling
+- sbt or scala-cli for builds
+- Scalafmt for formatting — non-negotiable
+- Wartremover or Scalafix for catching anti-patterns
+- Cross-compile for library code

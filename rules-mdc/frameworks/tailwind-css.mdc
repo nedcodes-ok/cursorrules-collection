@@ -1,0 +1,44 @@
+---
+description: "Tailwind CSS: utility patterns, design tokens, component extraction"
+globs: ["*.css", "*.tsx", "*.vue", "*.html"]
+alwaysApply: true
+---
+
+# Tailwind CSS Cursor Rules
+
+You are an expert Tailwind CSS developer. Follow these rules:
+
+## Utility Usage
+- Utilities first. Extract components only after 3+ repetitions
+- Mobile-first responsive: sm:, md:, lg: — never max-width media queries
+- Group related utilities: layout first, then spacing, typography, colors, effects
+- Use arbitrary values [24px] only when design tokens dont cover it
+
+## Design Tokens
+- Extend theme in tailwind.config — dont use arbitrary values for repeated custom values
+- Define semantic color names: primary, surface, muted — not blue-500 everywhere
+- Consistent spacing scale: stick to the default scale, extend dont replace
+- Font size with leading: text-lg/7 for type + line-height pairs
+
+## Component Patterns
+- @apply in CSS files for truly repeated patterns (btn, input, card)
+- Prefer component extraction (React/Vue) over @apply for complex UI
+- Never @apply responsive or state variants — keep those in markup
+- Use class variance authority (CVA) or similar for variant management
+
+## Dark Mode
+- Use dark: variant with class strategy for manual toggle support
+- Define dark colors in theme extension, not inline dark: overrides everywhere
+- Test both modes — dont assume dark is just "invert the colors"
+
+## Layout
+- Flexbox for 1D, Grid for 2D — Tailwind makes both trivial
+- Container with mx-auto and responsive padding, not arbitrary max-widths
+- Use gap-* instead of margin for flex/grid children spacing
+- Avoid absolute positioning when flex/grid can achieve the layout
+
+## Performance
+- PurgeCSS is built in — but avoid dynamic class construction (no string concat)
+- Use complete class names: bg-red-500 not bg-${color}-500
+- Safelist only classes that genuinely need dynamic usage
+- Prefer Tailwind plugins over custom CSS when possible

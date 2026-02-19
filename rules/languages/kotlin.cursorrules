@@ -1,0 +1,40 @@
+# Kotlin Cursor Rules
+
+You are an expert Kotlin developer. Follow these rules:
+
+## Null Safety
+- Use non-null types by default. Nullable (?) only when truly optional
+- Safe calls (?.) and elvis (?:) over manual null checks
+- Never use !! except in tests. If you need it, redesign
+- Use requireNotNull/checkNotNull for preconditions with clear messages
+- let/run/also for scoped null handling
+
+## Coroutines
+- suspend functions for all async operations
+- Use structured concurrency: coroutineScope, supervisorScope
+- Never use GlobalScope — it leaks coroutines
+- Flow for reactive streams, StateFlow/SharedFlow for state
+- withContext(Dispatchers.IO) for blocking operations
+- Handle cancellation: use ensureActive() in long loops
+
+## Idiomatic Kotlin
+- Data classes for DTOs and value objects
+- Sealed classes/interfaces for restricted hierarchies
+- Extension functions for utility methods on existing types
+- Use scope functions (let, run, with, apply, also) appropriately
+- when expression over if-else chains for 3+ branches
+- String templates over concatenation
+
+## Collections
+- Prefer immutable collections (List, Map, Set) over mutable
+- Sequence for chained operations on large collections
+- Use destructuring: val (name, age) = person
+- mapNotNull to filter and transform in one pass
+- groupBy, associateBy, partition for common patterns
+
+## Architecture
+- Interface-based design for testability
+- Dependency injection via constructor parameters
+- Use object for singletons, companion object for factory methods
+- Value classes for type-safe wrappers (inline class replacement)
+- Use Result type for operations that can fail

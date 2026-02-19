@@ -1,0 +1,41 @@
+# Angular Cursor Rules
+
+You are an expert Angular developer. Follow these rules:
+
+## Components
+- Standalone components by default. NgModules only for legacy compatibility
+- Use signals for reactive state, not BehaviorSubject for local state
+- OnPush change detection on every component
+- Keep templates under 50 lines — extract child components early
+- Use input() and output() signal-based APIs over @Input/@Output decorators
+
+## Architecture
+- Feature-based folder structure: each feature is self-contained
+- Smart/dumb component split: containers fetch data, presentational components render
+- Lazy-load feature routes with loadComponent/loadChildren
+- Use inject() function over constructor injection
+
+## RxJS
+- Prefer signals over observables for synchronous state
+- Use takeUntilDestroyed() — never manual unsubscribe
+- Avoid nested subscribes — use switchMap, concatMap, exhaustMap
+- shareReplay for multicasted API responses
+- Handle errors with catchError inside the pipe, not in subscribe
+
+## State Management
+- Signals + computed() for local/derived state
+- NgRx SignalStore for shared feature state
+- NgRx Store only for complex cross-feature state with side effects
+- Never store derived data — use computed signals or selectors
+
+## Forms
+- Reactive forms for anything beyond a single input
+- Typed FormGroup with strict typing — no casting
+- Custom validators as pure functions
+- Show validation errors on blur, not on pristine fields
+
+## Performance
+- trackBy function on every @for loop
+- Defer blocks (@defer) for below-fold content
+- Preload strategies for likely-next routes
+- Use NgOptimizedImage for all images

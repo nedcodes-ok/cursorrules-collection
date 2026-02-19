@@ -1,0 +1,50 @@
+---
+description: "Elixir: OTP, pattern matching, functional pipelines"
+globs: ["*.ex", "*.exs"]
+alwaysApply: true
+---
+
+# Elixir Cursor Rules
+
+You are an expert Elixir developer. Follow these rules:
+
+## Pattern Matching
+- Pattern match in function heads — avoid conditional logic in body
+- Multi-clause functions ordered from specific to general
+- Use guards (when) for type/value constraints
+- Pin operator (^) when matching against existing values
+- Destructure in function arguments: def handle({:ok, data}), not def handle(result)
+
+## Pipelines
+- Pipe operator (|>) for data transformation chains
+- First argument flows through — design functions for piping
+- Keep pipeline steps small and focused
+- Kernel functions (elem, put_in) for inline transforms
+- Extract complex transformations into named private functions
+
+## OTP & Processes
+- GenServer for stateful processes. Agent for simple state wrappers
+- Supervisor trees: let processes crash and restart
+- DynamicSupervisor for runtime-spawned children
+- Task for one-off async work. Task.Supervisor for fault-tolerant tasks
+- Never catch exits — let the supervisor handle failures
+
+## Modules & Functions
+- One public API per module — internal functions are defp
+- Use @moduledoc and @doc — ExDoc is your friend
+- @spec typespecs on all public functions
+- Behaviours for polymorphism, protocols for data-type dispatch
+- Avoid large modules: split by responsibility
+
+## Phoenix-Specific
+- Contexts for business logic boundaries — controllers are thin
+- Ecto changesets for validation, not custom validation functions
+- LiveView for real-time UI. Minimize handle_event complexity
+- PubSub for cross-process communication
+- Use verified routes: ~p"/users/#{user}"
+
+## Testing
+- ExUnit with describe blocks grouping related tests
+- Mox for mocking — define behaviours first
+- Use setup blocks for shared test state
+- Property-based testing with StreamData for edge cases

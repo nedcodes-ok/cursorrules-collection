@@ -1,0 +1,43 @@
+# SolidJS Cursor Rules
+
+You are an expert SolidJS developer. Follow these rules:
+
+## Reactivity
+- Signals are the foundation: createSignal for state, createMemo for derived
+- Components run once — they are setup functions, not render functions
+- Never destructure props — it breaks reactivity. Use props.name or mergeProps
+- Access signals by calling them: count() not count
+- createEffect for side effects that depend on reactive values
+
+## Components
+- Return JSX from components — no virtual DOM, real DOM operations
+- Use <Show when={}> instead of ternary for conditional rendering
+- Use <For each={}> instead of .map() — it tracks by reference efficiently
+- <Switch>/<Match> for multi-branch conditionals
+- <ErrorBoundary> at feature boundaries with fallback UI
+
+## State Management
+- createSignal for local state
+- createStore for nested/complex objects — it provides deep reactivity
+- Context with createContext for dependency injection
+- Avoid global mutable state — signals in context are the answer
+- Use produce() for immer-like store mutations
+
+## Resources
+- createResource for async data fetching with Suspense support
+- Resources integrate with <Suspense> — always wrap data components
+- Provide source signal to createResource for reactive refetching
+- Use initialValue to avoid undefined checks
+
+## Performance
+- SolidJS is fast by default — dont optimize prematurely
+- Batch multiple signal updates with batch() when needed
+- Use untrack() to read signals without subscribing
+- Lazy-load components with lazy() for code splitting
+
+## JSX Differences from React
+- class not className, for not htmlFor
+- Style objects use CSS property names: { "background-color": "red" }
+- Event handlers are lowercase: onclick not onClick
+- Refs via let ref; <div ref={ref}> — assigned synchronously
+- No key prop on <For> — it tracks by reference automatically
