@@ -1,0 +1,29 @@
+# NextAuth.js / Auth.js Rules
+
+## Configuration
+- Define auth config in a single auth.ts file at the project root
+- Use environment variables for all provider secrets (GITHUB_ID, GOOGLE_SECRET, etc.)
+- Always configure a database adapter for production (Prisma, Drizzle, etc.)
+- Set NEXTAUTH_SECRET in environment — never hardcode
+
+## Session Handling
+- Use the session callback to include custom fields (role, id) in the session object
+- Access sessions server-side with auth() (App Router) or getServerSession() (Pages Router)
+- Client-side: use useSession() hook, always handle loading state
+- Do not store sensitive data in the JWT or session — store only IDs and fetch details server-side
+
+## Route Protection
+- Use middleware.ts for protecting routes at the edge
+- Define public routes explicitly, protect everything else by default
+- API routes: check session at the start of every handler
+- Do not rely on client-side redirects as security — always verify server-side
+
+## Providers
+- Credentials provider: hash passwords with bcrypt, never store plain text
+- OAuth providers: request only the scopes you need
+- Map provider profile data to your user model in the profile callback
+
+## Anti-patterns
+- Do not check auth in individual components when middleware can handle it
+- Do not store passwords in the session or JWT
+- Do not skip the database adapter in production (JWT-only loses server-side session control)

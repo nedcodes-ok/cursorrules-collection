@@ -1,46 +1,43 @@
 # Contributing
 
-Thanks for wanting to contribute! Here's how to add rules to the collection.
+Want to add a rule? Here's how.
 
-## Adding a New Rule
+## Adding a new rule
 
-1. **Fork** the repo and create a branch
-2. **Add your `.cursorrules` file** in the appropriate category folder:
-   - `rules/languages/` - Programming languages
-   - `rules/frameworks/` - Frameworks and libraries
-   - `rules/practices/` - Development practices and methodologies
-   - `rules/tools/` - Development tools and platforms
-3. **Update the README** - add your rule to the appropriate table
-4. **Open a PR** with a clear description of what the rule does
+1. Fork this repo
+2. Create both formats:
+   - `rules/[category]/[name].cursorrules` — the rule itself
+   - `rules-mdc/[category]/[name].mdc` — same rule with frontmatter
+3. Pick the right category: `languages/`, `frameworks/`, `tools/`, or `practices/`
+4. Open a PR
 
-## Rule Guidelines
+## .mdc frontmatter
 
-- **Be specific and practical** - rules should directly improve Cursor's output
-- **15-40 lines** is the sweet spot. Too short = not useful. Too long = ignored.
-- **Avoid generic advice** - "write clean code" isn't helpful. "Use guard clauses to reduce nesting" is.
-- **Test your rules** - actually use them with Cursor before submitting
-- **Use clear sections** with markdown headers for organization
-- **Include the WHY** when it's not obvious - helps people understand and customize
+Every `.mdc` file needs this at the top:
 
-## What Makes a Good Rule
-
-Good:
-```
-- Use Result<T, E> for recoverable errors, panic only for bugs
-- Use the ? operator for error propagation
+```yaml
+---
+description: Brief description of what this rule does
+globs: **/relevant/paths/**
+alwaysApply: false
+---
 ```
 
-Not useful:
-```
-- Write good code
-- Handle errors properly
-```
+Set `alwaysApply: true` only if the rule should load on every conversation (keep these short).
 
-## File Naming
+## What makes a good rule
 
-- Use lowercase with hyphens: `my-framework.cursorrules`
-- Match the common name of the technology
+- **Specific over general.** "Use server timestamps in Firestore" beats "write good database code."
+- **Anti-patterns matter.** Tell Cursor what NOT to do, not just what to do.
+- **Testable.** If you can't tell whether the AI followed the rule by reading the output, it's too vague.
+- **Short enough to fit in context.** Rules that are too long get ignored. Aim for under 50 lines.
+
+## What we don't need
+
+- Rules that just restate language defaults
+- Copy-pasted documentation
+- Rules for tools/frameworks nobody uses
 
 ## Questions?
 
-Open an issue if you're not sure where something fits or want to discuss a rule before writing it.
+Open an issue or DM [nedcodes on Dev.to](https://dev.to/nedcodes).

@@ -1,0 +1,29 @@
+---
+description: shadcn/ui component patterns, styling conventions, and form integration
+globs: **/components/ui/**,**/components/**
+alwaysApply: false
+---
+# shadcn/ui Rules
+
+## Component Usage
+- Import components from @/components/ui/, never from shadcn source
+- Use the CLI to add new components: npx shadcn-ui@latest add [component]
+- Do not modify files in components/ui/ directly — extend with wrapper components instead
+- Always check if a component exists before creating a custom version
+
+## Styling
+- Use the cn() utility for conditional classes, never string concatenation
+- Follow the existing color convention: use CSS variables (--primary, --secondary, etc.) not raw Tailwind colors
+- Dark mode: rely on the built-in dark: variants already in shadcn components
+- Do not add custom colors without defining them in globals.css as CSS variables
+
+## Patterns
+- Forms: use react-hook-form + zod with shadcn Form components
+- Dialogs/Sheets: manage open state with controlled components, not refs
+- Tables: use @tanstack/react-table with shadcn DataTable pattern
+- Toast notifications: use the sonner integration, not custom toast implementations
+
+## Anti-patterns
+- Do not wrap shadcn components in unnecessary divs for styling — use className prop
+- Do not mix Headless UI or Radix primitives directly when shadcn already wraps them
+- Do not hardcode colors — always use theme tokens

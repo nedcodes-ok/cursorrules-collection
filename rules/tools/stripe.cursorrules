@@ -1,0 +1,30 @@
+# Stripe Integration Rules
+
+## API Usage
+- Use the official Stripe SDK, not raw HTTP calls
+- Always use API versioning — pin to a specific version in your Stripe config
+- Store Stripe secret keys in environment variables only, never in source code
+- Use test mode keys (sk_test_) during development, never live keys
+
+## Webhooks
+- Always verify webhook signatures using stripe.webhooks.constructEvent()
+- Handle events idempotently — the same event may be delivered multiple times
+- Return 200 immediately, process asynchronously for long-running operations
+- Log raw webhook payloads for debugging, but redact sensitive fields
+
+## Checkout & Payments
+- Use Stripe Checkout or Payment Elements — do not build custom card forms
+- Always create PaymentIntents server-side, never client-side
+- Store customer IDs in your database, not full payment details
+- Handle payment failures gracefully — show specific error messages from Stripe
+
+## Subscriptions
+- Use Stripe's subscription lifecycle webhooks (customer.subscription.updated, etc.)
+- Never trust client-side subscription status — always verify server-side
+- Handle proration when changing plans
+- Implement dunning (failed payment retry) handling via webhooks
+
+## Anti-patterns
+- Do not store card numbers, CVVs, or full card details anywhere in your system
+- Do not rely on client-side price calculations — always confirm amounts server-side
+- Do not skip webhook signature verification, even in development

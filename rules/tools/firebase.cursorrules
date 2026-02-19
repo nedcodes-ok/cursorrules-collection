@@ -1,0 +1,29 @@
+# Firebase Rules
+
+## SDK Usage
+- Use Firebase v9+ modular SDK (import { getFirestore } from 'firebase/firestore')
+- Never use the compat (v8) API in new code
+- Initialize Firebase in a single config file, import the app instance everywhere else
+- Use environment variables for all Firebase config values
+
+## Firestore
+- Define document types/interfaces for every collection
+- Use converters (withConverter) for type-safe reads and writes
+- Batch writes when modifying multiple documents — never rely on sequential individual writes
+- Always handle the case where a document doesn't exist (snapshot.exists())
+- Use server timestamps (serverTimestamp()) not client Date objects
+
+## Authentication
+- Check auth state with onAuthStateChanged, not getCurrentUser (which can be null on page load)
+- Store only the user UID in Firestore references, not email or display name
+- Implement proper security rules — never rely on client-side checks alone
+
+## Security Rules
+- Default deny: start with "allow read, write: if false" and open up specifically
+- Validate data shape in rules, not just authentication
+- Test rules with the Firebase Emulator before deploying
+
+## Anti-patterns
+- Do not store Firebase config in source control without environment variable abstraction
+- Do not use Firestore as a real-time database for high-frequency updates (use RTDB instead)
+- Do not fetch entire collections — always scope queries with where/limit

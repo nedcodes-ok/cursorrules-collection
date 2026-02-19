@@ -3,7 +3,7 @@
 [![Stars](https://img.shields.io/github/stars/cursorrulespacks/cursorrules-collection?style=social)](https://github.com/cursorrulespacks/cursorrules-collection)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-56 rules for Cursor AI in both `.mdc` and `.cursorrules` format. Copy to your project and Cursor actually writes code the way you want it to.
+62 rules for Cursor AI in both `.mdc` and `.cursorrules` format. Copy to your project and Cursor actually writes code the way you want it to.
 
 > **⚠️ Using Cursor agent mode?** Use the `.mdc` files in `rules-mdc/`. Both `.cursorrules` and `.mdc` are loaded, but `.mdc` takes precedence on conflicts and gives you frontmatter (`alwaysApply`, globs). [More details](https://dev.to/nedcodes/cursor-agent-mode-ignores-cursorrules-use-mdc-instead-5flb).
 
@@ -90,6 +90,7 @@ Same prompts, different output. Left side is vanilla Cursor, right side is with 
 | Tailwind CSS | [tailwind-css.mdc](rules-mdc/frameworks/tailwind-css.mdc) | [tailwind-css.cursorrules](rules/frameworks/tailwind-css.cursorrules) |
 | Gatsby | [gatsby.mdc](rules-mdc/frameworks/gatsby.mdc) | [gatsby.cursorrules](rules/frameworks/gatsby.cursorrules) |
 | SolidJS | [solid-js.mdc](rules-mdc/frameworks/solid-js.mdc) | [solid-js.cursorrules](rules/frameworks/solid-js.cursorrules) |
+| shadcn/ui | [shadcn-ui.mdc](rules-mdc/frameworks/shadcn-ui.mdc) | [shadcn-ui.cursorrules](rules/frameworks/shadcn-ui.cursorrules) |
 
 ### Practices
 
@@ -125,6 +126,11 @@ Same prompts, different output. Left side is vanilla Cursor, right side is with 
 | AWS | [aws.mdc](rules-mdc/tools/aws.mdc) | [aws.cursorrules](rules/tools/aws.cursorrules) |
 | Redis | [redis.mdc](rules-mdc/tools/redis.mdc) | [redis.cursorrules](rules/tools/redis.cursorrules) |
 | Nginx | [nginx.mdc](rules-mdc/tools/nginx.mdc) | [nginx.cursorrules](rules/tools/nginx.cursorrules) |
+| Firebase | [firebase.mdc](rules-mdc/tools/firebase.mdc) | [firebase.cursorrules](rules/tools/firebase.cursorrules) |
+| Stripe | [stripe.mdc](rules-mdc/tools/stripe.mdc) | [stripe.cursorrules](rules/tools/stripe.cursorrules) |
+| Drizzle ORM | [drizzle.mdc](rules-mdc/tools/drizzle.mdc) | [drizzle.cursorrules](rules/tools/drizzle.cursorrules) |
+| tRPC | [trpc.mdc](rules-mdc/tools/trpc.mdc) | [trpc.cursorrules](rules/tools/trpc.cursorrules) |
+| NextAuth.js | [nextauth.mdc](rules-mdc/tools/nextauth.mdc) | [nextauth.cursorrules](rules/tools/nextauth.cursorrules) |
 
 ## Using Multiple Rules
 

@@ -1,0 +1,29 @@
+# Drizzle ORM Rules
+
+## Schema
+- Define all tables in a central schema file (db/schema.ts)
+- Use the appropriate column types for your database (pgTable, mysqlTable, sqliteTable)
+- Always define relations explicitly using the relations() function
+- Add indexes for columns used in WHERE clauses and JOINs
+
+## Queries
+- Use the query API (db.query.users.findMany()) for complex joins and nested data
+- Use the CRUD API (db.select().from()) for simple queries
+- Always use parameterized queries — never interpolate values into SQL strings
+- Use transactions (db.transaction()) for multi-step operations that must be atomic
+
+## Migrations
+- Generate migrations with drizzle-kit generate
+- Review generated SQL before applying — never auto-apply without inspection
+- Keep migration files in version control
+- Use drizzle-kit push for development, drizzle-kit migrate for production
+
+## Type Safety
+- Infer types from schema: type User = typeof users.$inferSelect
+- Use insert types for write operations: type NewUser = typeof users.$inferInsert
+- Do not manually define types that duplicate schema definitions
+
+## Anti-patterns
+- Do not use raw SQL when Drizzle's query builder can express the same query
+- Do not skip the migration step — always generate and apply migrations for schema changes
+- Do not mix different database dialects in the same project
