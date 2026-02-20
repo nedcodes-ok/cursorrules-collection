@@ -3,7 +3,7 @@
 [![Stars](https://img.shields.io/github/stars/cursorrulespacks/cursorrules-collection?style=social)](https://github.com/cursorrulespacks/cursorrules-collection)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-62 rules for Cursor AI in both `.mdc` and `.cursorrules` format. Copy to your project and Cursor actually writes code the way you want it to.
+77 rules for Cursor AI in both `.mdc` and `.cursorrules` format. Copy to your project and Cursor actually writes code the way you want it to.
 
 > **⚠️ Using Cursor agent mode?** Use the `.mdc` files in `rules-mdc/`. Both `.cursorrules` and `.mdc` are loaded, but `.mdc` takes precedence on conflicts and gives you frontmatter (`alwaysApply`, globs). [More details](https://dev.to/nedcodes/cursor-agent-mode-ignores-cursorrules-use-mdc-instead-5flb).
 
@@ -97,6 +97,12 @@ Same prompts, different output. Left side is vanilla Cursor, right side is with 
 | Gatsby | [gatsby.mdc](rules-mdc/frameworks/gatsby.mdc) | [gatsby.cursorrules](rules/frameworks/gatsby.cursorrules) |
 | SolidJS | [solid-js.mdc](rules-mdc/frameworks/solid-js.mdc) | [solid-js.cursorrules](rules/frameworks/solid-js.cursorrules) |
 | shadcn/ui | [shadcn-ui.mdc](rules-mdc/frameworks/shadcn-ui.mdc) | [shadcn-ui.cursorrules](rules/frameworks/shadcn-ui.cursorrules) |
+| Zod | [zod.mdc](rules-mdc/frameworks/zod.mdc) | [zod.cursorrules](rules/frameworks/zod.cursorrules) |
+| TanStack Query | [tanstack-query.mdc](rules-mdc/frameworks/tanstack-query.mdc) | [tanstack-query.cursorrules](rules/frameworks/tanstack-query.cursorrules) |
+| Zustand | [zustand.mdc](rules-mdc/frameworks/zustand.mdc) | [zustand.cursorrules](rules/frameworks/zustand.cursorrules) |
+| Hono | [hono.mdc](rules-mdc/frameworks/hono.mdc) | [hono.cursorrules](rules/frameworks/hono.cursorrules) |
+| T3 Stack | [t3-stack.mdc](rules-mdc/frameworks/t3-stack.mdc) | [t3-stack.cursorrules](rules/frameworks/t3-stack.cursorrules) |
+| SWR | [swr.mdc](rules-mdc/frameworks/swr.mdc) | [swr.cursorrules](rules/frameworks/swr.cursorrules) |
 
 ### Practices
 
@@ -114,6 +120,9 @@ Same prompts, different output. Left side is vanilla Cursor, right side is with 
 | Error Handling | [error-handling.mdc](rules-mdc/practices/error-handling.mdc) | [error-handling.cursorrules](rules/practices/error-handling.cursorrules) |
 | Logging | [logging.mdc](rules-mdc/practices/logging.mdc) | [logging.cursorrules](rules/practices/logging.cursorrules) |
 | Monitoring | [monitoring.mdc](rules-mdc/practices/monitoring.mdc) | [monitoring.cursorrules](rules/practices/monitoring.cursorrules) |
+| Migration Safety | [migration-safety.mdc](rules-mdc/practices/migration-safety.mdc) | [migration-safety.cursorrules](rules/practices/migration-safety.cursorrules) |
+| Refactoring | [refactoring.mdc](rules-mdc/practices/refactoring.mdc) | [refactoring.cursorrules](rules/practices/refactoring.cursorrules) |
+| AI-Assisted Development | [ai-assisted-development.mdc](rules-mdc/practices/ai-assisted-development.mdc) | [ai-assisted-development.cursorrules](rules/practices/ai-assisted-development.cursorrules) |
 
 ### Tools
 
@@ -137,6 +146,12 @@ Same prompts, different output. Left side is vanilla Cursor, right side is with 
 | Drizzle ORM | [drizzle.mdc](rules-mdc/tools/drizzle.mdc) | [drizzle.cursorrules](rules/tools/drizzle.cursorrules) |
 | tRPC | [trpc.mdc](rules-mdc/tools/trpc.mdc) | [trpc.cursorrules](rules/tools/trpc.cursorrules) |
 | NextAuth.js | [nextauth.mdc](rules-mdc/tools/nextauth.mdc) | [nextauth.cursorrules](rules/tools/nextauth.cursorrules) |
+| Playwright | [playwright.mdc](rules-mdc/tools/playwright.mdc) | [playwright.cursorrules](rules/tools/playwright.cursorrules) |
+| Vitest | [vitest.mdc](rules-mdc/tools/vitest.mdc) | [vitest.cursorrules](rules/tools/vitest.cursorrules) |
+| Turborepo | [turborepo.mdc](rules-mdc/tools/turborepo.mdc) | [turborepo.cursorrules](rules/tools/turborepo.cursorrules) |
+| SQLite | [sqlite.mdc](rules-mdc/tools/sqlite.mdc) | [sqlite.cursorrules](rules/tools/sqlite.cursorrules) |
+| Clerk | [clerk.mdc](rules-mdc/tools/clerk.mdc) | [clerk.cursorrules](rules/tools/clerk.cursorrules) |
+| Convex | [convex.mdc](rules-mdc/tools/convex.mdc) | [convex.cursorrules](rules/tools/convex.cursorrules) |
 
 ## Using Multiple Rules
 

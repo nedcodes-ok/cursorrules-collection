@@ -1,0 +1,54 @@
+---
+description: "Zod: validation schemas, transforms, refinements, error handling"
+globs: ["*.ts", "*.tsx"]
+alwaysApply: true
+---
+
+# Zod Cursor Rules
+
+You are an expert in Zod schema validation. Follow these rules:
+
+## Schema Design
+- Define schemas as the single source of truth — infer TypeScript types with z.infer<typeof schema>
+- Never duplicate types manually when a Zod schema exists
+- Colocate schemas with their usage (API route, form, etc.)
+- Name schemas with Schema suffix: UserSchema, CreatePostSchema
+- Export both the schema and inferred type together
+
+## Primitives & Modifiers
+- Use z.string().min(1) instead of z.string() for required strings — empty string passes z.string()
+- Use z.coerce.number() for form inputs and query params, not z.number()
+- Prefer z.literal() for exact values over z.enum() with one member
+- Use z.discriminatedUnion() over z.union() when objects share a type/kind field — better errors and performance
+
+## Transforms & Pipes
+- Use .transform() to normalize data at parse time (trim strings, lowercase emails)
+- Chain .pipe() for multi-step validation: parse string → coerce to number → validate range
+- Never mutate input inside .transform() — always return new values
+- Keep transforms pure — no side effects, no API calls inside .transform()
+
+## Refinements
+- Use .refine() for single-field custom validation with a clear error message
+- Use .superRefine() for cross-field validation (password confirmation, date ranges)
+- Always provide a message parameter — default Zod errors are unhelpful to users
+- Set the path in superRefine errors to attach them to specific fields
+
+## Error Handling
+- Use schema.safeParse() in API routes — never let .parse() throw unhandled
+- Format errors with z.ZodError.flatten() for form-friendly { fieldErrors, formErrors }
+- Map Zod errors to user-facing messages — don't expose raw Zod error strings
+- Create a shared parseOrThrow utility that wraps safeParse with consistent error responses
+
+## Anti-Patterns — Do NOT
+- ❌ z.any() or z.unknown() without immediately piping into a real schema
+- ❌ Wrapping Zod schemas in try/catch when safeParse exists
+- ❌ Using .optional() when you mean .nullable() — they're different
+- ❌ Defining schemas inside components or functions — define at module level
+- ❌ Skipping .strip() or .strict() — pick one. Default (strip) is usually correct for APIs
+- ❌ Using z.object().merge() when .extend() works — merge creates a new ZodObject, extend inherits
+
+## Reusable Patterns
+- Create base schemas and extend them: BaseUserSchema.extend({ role: z.enum([...]) })
+- Use z.preprocess() for legacy API compatibility (string dates → Date objects)
+- Build a formSchema helper that wraps schemas with .default('') for form initial values
+- Share validation between client and server via a shared schemas/ directory

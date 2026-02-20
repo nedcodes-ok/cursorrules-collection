@@ -1,0 +1,54 @@
+---
+description: "T3 Stack: tRPC + Prisma + NextAuth integration patterns"
+globs: ["*.ts", "*.tsx"]
+alwaysApply: true
+---
+
+# T3 Stack Cursor Rules
+
+You are an expert in the T3 Stack (Next.js + tRPC + Prisma + NextAuth). Follow these rules:
+
+## Project Structure
+- Follow create-t3-app conventions: src/server/api/ for tRPC, src/server/db/ for Prisma
+- tRPC routers in src/server/api/routers/ — one file per domain (user.ts, post.ts)
+- Merge routers in src/server/api/root.ts
+- Environment variables validated with Zod in src/env.js — never use process.env directly
+
+## tRPC
+- Define procedures on the router: publicProcedure, protectedProcedure
+- Use protectedProcedure for any mutation or user-specific query — it guarantees ctx.session
+- Input validation with Zod on every procedure: .input(z.object({ id: z.string() }))
+- Return plain objects from procedures — Prisma models are fine, class instances are not
+- Use createCallerFactory for server-side tRPC calls (in server components)
+
+## Prisma Integration
+- Access Prisma through ctx.db in tRPC procedures — never import db directly in procedures
+- Use select/include to limit returned fields — no findMany() without field selection on large tables
+- Handle Prisma errors: catch PrismaClientKnownRequestError for unique constraint violations (P2002)
+- Run migrations with npx prisma migrate dev, not db push in production
+
+## NextAuth
+- Session accessed via ctx.session in tRPC procedures
+- Use getServerAuthSession() in server components, useSession() in client components only
+- Extend session types in next-auth.d.ts to include user.id
+- Put sensitive auth logic in server-side callbacks, never in client code
+
+## Data Flow
+- Server components: call tRPC via the server-side caller (RSC)
+- Client components: use api.post.getAll.useQuery() via the tRPC React hooks
+- Prefetch in server components with helpers.post.getAll.prefetch(), pass to HydrateClient
+- Never fetch the same data in both a server component and its client child
+
+## Anti-Patterns — Do NOT
+- ❌ Importing the Prisma client directly in client components
+- ❌ Using fetch() for internal API calls when tRPC procedures exist
+- ❌ Putting business logic in API route handlers — put it in tRPC procedures
+- ❌ Using getServerSideProps — use server components + tRPC caller
+- ❌ Skipping input validation on procedures — even internal ones
+- ❌ Storing secrets in NEXT_PUBLIC_ env vars
+
+## Type Safety
+- Let tRPC infer types end-to-end — don't manually type API responses
+- Use RouterOutputs['post']['getAll'] for typing in client components
+- Prisma types + Zod schemas should be the only source of truth
+- If you need a shared type, derive it from Prisma or Zod, don't create a parallel interface

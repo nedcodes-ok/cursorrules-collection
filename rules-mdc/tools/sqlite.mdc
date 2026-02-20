@@ -1,0 +1,59 @@
+---
+description: "SQLite: queries, WAL mode, migrations, edge deployment"
+globs: ["*.sql", "*.ts", "*.db"]
+alwaysApply: true
+---
+
+# SQLite Cursor Rules
+
+You are an expert in SQLite. Follow these rules:
+
+## Configuration
+- Enable WAL mode immediately after opening: PRAGMA journal_mode=WAL
+- Set busy timeout to avoid SQLITE_BUSY errors: PRAGMA busy_timeout=5000
+- Enable foreign keys: PRAGMA foreign_keys=ON (off by default in SQLite)
+- Use PRAGMA optimize on connection close for query planner stats
+- Set PRAGMA synchronous=NORMAL with WAL mode — FULL is unnecessary overhead
+
+## Schema Design
+- Use INTEGER PRIMARY KEY for auto-incrementing IDs (alias for rowid)
+- Use TEXT for dates in ISO 8601 format — SQLite has no native date type
+- Use STRICT tables when available (SQLite 3.37+) to enforce column types
+- Add NOT NULL constraints by default — make nullable only when needed
+- Use CHECK constraints for enums: CHECK(status IN ('active', 'inactive', 'pending'))
+
+## Queries
+- Use parameterized queries always — never string-concatenate user input
+- Use INSERT OR REPLACE / ON CONFLICT for upserts
+- Prefer EXISTS over COUNT(*) > 0 for checking existence
+- Use EXPLAIN QUERY PLAN to verify index usage before deploying
+- Use COALESCE() for default values instead of application-level null checks
+
+## Indexing
+- Create indexes for all WHERE, JOIN, and ORDER BY columns
+- Use covering indexes (include all SELECT columns) for hot queries
+- Composite indexes: most selective column first
+- Partial indexes with WHERE clause for queries on subsets: CREATE INDEX idx ON orders(status) WHERE status = 'pending'
+- Don't over-index — each index slows writes
+
+## Migrations
+- Use sequential numbered files: 001_create_users.sql, 002_add_email_index.sql
+- Track applied migrations in a _migrations table
+- Write both up and down migrations
+- Never modify a migration that has been applied — create a new one
+- Test migrations on a copy of production data before deploying
+
+## Edge/Serverless Deployment
+- Use read replicas (Turso, LiteFS) for distributed reads
+- Keep write operations on the primary instance
+- Embedded SQLite (better-sqlite3, Bun.sqlite) for single-server or edge
+- Use connection pooling if your runtime doesn't keep connections alive
+- Bundle the .db file in the deploy artifact for read-only datasets
+
+## Anti-Patterns — Do NOT
+- ❌ Using AUTOINCREMENT — it adds overhead. Plain INTEGER PRIMARY KEY auto-increments
+- ❌ Storing JSON blobs instead of normalized tables (unless genuinely schemaless)
+- ❌ Opening multiple write connections — SQLite allows only one writer at a time
+- ❌ Using VACUUM in production during traffic — it locks the entire database
+- ❌ Ignoring PRAGMA foreign_keys=ON — it's off by default and won't enforce constraints
+- ❌ Using ORM-generated queries without checking the EXPLAIN plan

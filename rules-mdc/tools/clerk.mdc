@@ -1,0 +1,55 @@
+---
+description: "Clerk: auth, middleware, user management, org patterns"
+globs: ["*.ts", "*.tsx"]
+alwaysApply: true
+---
+
+# Clerk Cursor Rules
+
+You are an expert in Clerk authentication. Follow these rules:
+
+## Setup
+- Wrap the app with ClerkProvider at the root layout
+- Set publishableKey from env: NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+- Configure sign-in/sign-up routes in env: NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+- Use Clerk's pre-built components (<SignIn />, <SignUp />) unless custom UI is required
+
+## Middleware
+- Use clerkMiddleware() in middleware.ts for all auth protection
+- Protect routes with createRouteMatcher: const isProtected = createRouteMatcher(['/dashboard(.*)'])
+- Call auth().protect() inside the middleware for protected routes
+- Public routes (marketing, auth pages) don't need explicit configuration — they're unprotected by default
+- Place middleware.ts at project root (or src/ if using src directory)
+
+## Server-Side Auth
+- Use auth() in server components and API routes to get { userId, sessionId, orgId }
+- Use currentUser() when you need the full user object (name, email, metadata)
+- Check auth().userId — it's null for unauthenticated requests
+- Never trust client-sent user IDs — always derive from auth() server-side
+
+## Client-Side Auth
+- Use useAuth() for { userId, isSignedIn, isLoaded } in client components
+- Use useUser() for full user object in client components
+- Always check isLoaded before rendering auth-dependent UI
+- Use <SignedIn> and <SignedOut> components for conditional rendering
+
+## User Management
+- Store Clerk userId as the foreign key in your database — not email
+- Sync user data via webhooks (user.created, user.updated) not on every request
+- Use publicMetadata for role/permissions (readable by client, writable only by backend)
+- Use privateMetadata for sensitive flags (server-only, never sent to client)
+- Use unsafeMetadata only for user-editable preferences
+
+## Organizations
+- Use useOrganization() for current org context
+- Check orgId in middleware for org-scoped routes
+- Use org roles for permission checks: auth().orgRole === 'admin'
+- Create org-scoped data by storing orgId alongside records
+
+## Anti-Patterns — Do NOT
+- ❌ Storing passwords or implementing custom auth alongside Clerk
+- ❌ Using email as a unique identifier — users can change emails. Use userId
+- ❌ Checking auth on the client and trusting it on the server
+- ❌ Calling Clerk API on every request — cache user data in your database
+- ❌ Exposing CLERK_SECRET_KEY to the client (NEXT_PUBLIC_ prefix)
+- ❌ Building custom sign-in forms when Clerk components handle edge cases (MFA, OAuth, etc.)

@@ -1,0 +1,60 @@
+---
+description: "Hono: routing, middleware, edge deployment patterns"
+globs: ["*.ts", "*.tsx"]
+alwaysApply: true
+---
+
+# Hono Cursor Rules
+
+You are an expert in the Hono web framework. Follow these rules:
+
+## App Structure
+- Create the app with new Hono() and export default app (or export default { fetch: app.fetch })
+- Group related routes with app.route('/api/users', usersRoute)
+- Define route files as separate Hono instances: const route = new Hono()
+- Use app.basePath('/api/v1') for API versioning
+- Keep the main app file thin — just mounting route groups and global middleware
+
+## Routing
+- Use path parameters with type validation: app.get('/users/:id{[0-9]+}', handler)
+- Chain methods for same-path different-methods: app.get('/users', list).post('/users', create)
+- Use c.req.param('id') for path params, c.req.query('page') for query strings
+- Return responses with c.json(), c.text(), c.html() — never raw Response unless needed
+- Use c.notFound() and c.redirect() helpers
+
+## Middleware
+- Write middleware as: async (c, next) => { /* before */ await next(); /* after */ }
+- Use Hono's built-in middleware: cors(), logger(), prettyJSON(), secureHeaders()
+- Apply middleware to route groups, not globally when possible
+- Order matters: auth middleware before route handlers, CORS before everything
+- Use c.set('user', user) and c.get('user') for passing data through middleware
+
+## Validation
+- Use Hono's validator with Zod: validator('json', schema) or @hono/zod-validator
+- Validate params, query, json, and headers separately
+- Return 400 with clear error messages on validation failure
+- Type the validated data — Hono infers types from validators automatically
+
+## Edge/Runtime Patterns
+- Keep handlers stateless — no in-memory caches that assume single-instance
+- Use c.env to access runtime bindings (Cloudflare Workers: D1, KV, R2)
+- Use c.executionCtx.waitUntil() for background tasks that shouldn't block response
+- Keep cold start minimal: lazy-import heavy dependencies
+
+## Error Handling
+- Use app.onError() for global error handling — return proper JSON error responses
+- Use HTTPException for expected errors: throw new HTTPException(404, { message: 'Not found' })
+- Never expose stack traces in production error responses
+- Log errors in onError before returning the response
+
+## Anti-Patterns — Do NOT
+- ❌ Using Express middleware directly — Hono has its own middleware format
+- ❌ Blocking the event loop with sync operations in edge runtimes
+- ❌ Storing state in module-level variables in serverless/edge deployments
+- ❌ Using node:fs or Node-specific APIs without checking runtime compatibility
+- ❌ Returning plain objects without c.json() — response won't have proper headers
+
+## Testing
+- Use app.request() for testing: const res = await app.request('/api/users')
+- Assert on res.status and await res.json()
+- Mock c.env bindings in tests for Cloudflare Workers

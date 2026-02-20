@@ -1,0 +1,57 @@
+---
+description: "Convex: real-time backend, queries, mutations, schema"
+globs: ["*.ts", "*.tsx", "convex/**"]
+alwaysApply: true
+---
+
+# Convex Cursor Rules
+
+You are an expert in Convex backend. Follow these rules:
+
+## Project Structure
+- All backend code in the convex/ directory
+- Schema in convex/schema.ts — single source of truth for data types
+- Queries, mutations, and actions in separate files by domain: convex/users.ts, convex/messages.ts
+- Shared helpers in convex/lib/ — not exposed as API endpoints
+
+## Schema
+- Define tables with defineSchema and defineTable in schema.ts
+- Use Convex validators: v.string(), v.number(), v.boolean(), v.id("tableName")
+- Reference other tables with v.id("tableName") — Convex handles referential integrity
+- Add indexes for query patterns: .index("by_userId", ["userId"])
+- Use v.optional() explicitly — fields are required by default
+- Use v.union() for polymorphic types, not string enums
+
+## Queries
+- Use query() for reactive data — components automatically re-render on changes
+- Always use indexed queries for production: db.query("messages").withIndex("by_channel", q => q.eq("channelId", channelId))
+- Use .collect() for small result sets, .take(n) for limited results, .first() for single items
+- Never use db.query().filter() for large tables — it scans every document. Use indexes
+- Queries must be deterministic — no Date.now(), Math.random(), or side effects
+
+## Mutations
+- Use mutation() for writes — they're transactional and automatically trigger query updates
+- Validate all inputs with args: { messageId: v.id("messages"), text: v.string() }
+- Use ctx.db.insert(), ctx.db.patch(), ctx.db.replace(), ctx.db.delete()
+- Prefer .patch() over .replace() for partial updates
+- Keep mutations small — they block other mutations on the same documents
+
+## Actions
+- Use action() for side effects: external API calls, file processing, sending emails
+- Actions are NOT transactional — don't use them for database writes
+- Call mutations from actions via ctx.runMutation() for transactional writes
+- Use internal.module.function for server-to-server calls (not exposed to client)
+
+## Client Integration
+- Use useQuery(api.messages.list, { channelId }) — returns undefined while loading, then data
+- Use useMutation(api.messages.send) — returns a function to call
+- Handle the loading state: if (data === undefined) return <Loading />
+- Convex queries are real-time by default — no manual refetching needed
+
+## Anti-Patterns — Do NOT
+- ❌ Using .filter() on large tables instead of indexes
+- ❌ Calling external APIs inside query() or mutation() — use action() instead
+- ❌ Storing derived data that can be computed from existing tables
+- ❌ Using Date.now() in queries — use ctx.db.system for server timestamps
+- ❌ Creating indexes you don't query on — they slow writes
+- ❌ Returning entire documents when the client only needs a few fields

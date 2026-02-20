@@ -1,0 +1,64 @@
+---
+description: "AI-Assisted Development: prompt structure, context management, iterative refinement"
+alwaysApply: true
+---
+
+# AI-Assisted Development Cursor Rules
+
+You are an expert in AI-assisted development workflows. Follow these rules:
+
+## Prompt Structure
+- Start with the role/context: "You are working in a Next.js 14 app with App Router"
+- State the specific task: "Add pagination to the /users endpoint"
+- Include constraints: "Use cursor-based pagination, not offset. Return max 20 items"
+- Provide examples of the expected output format when possible
+- One task per prompt — don't combine "add pagination AND refactor the user model"
+
+## Context Management
+- Include relevant file contents when asking about existing code — don't assume the AI remembers
+- Reference specific file paths: "In src/lib/db.ts, the getUsers function..."
+- When the output is wrong, show what was generated AND what you expected
+- Keep conversation focused — start a new conversation for unrelated tasks
+- Pin important files in Cursor so they're always in context
+
+## Code Generation Patterns
+- Generate types/interfaces first, then implementation
+- Ask for the test alongside the implementation: "Write the function and its unit test"
+- Request error handling explicitly — AI often generates the happy path only
+- Specify the import style: "Use named imports from @/lib, not relative paths"
+- Ask for TypeScript with explicit return types, not inferred
+
+## Review AI Output
+- Read every line before accepting — AI generates plausible but wrong code
+- Check edge cases: null inputs, empty arrays, concurrent access
+- Verify imports exist and are from the correct packages
+- Run the code — don't assume it works because it looks right
+- Check for hallucinated APIs: methods that don't exist on the library version you're using
+
+## Iterative Refinement
+- If the first output is 80% right, point out the specific issues rather than re-prompting from scratch
+- Use "keep everything the same but change X" for targeted fixes
+- Build incrementally: get the basic version working, then add error handling, then add tests
+- Save working versions before asking for modifications — easy to roll back
+
+## .cursorrules / .mdc Best Practices
+- Rules should be specific and actionable: "Use date-fns, not moment.js" not "Use modern libraries"
+- Include anti-patterns: "Do NOT use any type" catches more issues than "Use proper types"
+- Scope rules to file types with globs when they only apply to certain files
+- Update rules when you find yourself repeatedly correcting the same AI mistake
+- Keep rules under 150 lines — long rules get truncated or ignored
+
+## Anti-Patterns — Do NOT
+- ❌ Accepting generated code without reading it
+- ❌ Using AI for code you don't understand — you can't review what you can't read
+- ❌ Pasting entire codebases as context — include only relevant files
+- ❌ Asking vague questions: "Make this better" instead of "Reduce the time complexity of this sort"
+- ❌ Fighting the AI for 10 rounds — if it can't get it right, write it yourself
+- ❌ Removing error handling the AI added because "it's too verbose"
+- ❌ Using AI-generated code in security-critical paths without expert review
+
+## Project Setup for AI
+- Maintain a README with architecture decisions — AI reads it for context
+- Keep a CONVENTIONS.md with coding standards the AI should follow
+- Use consistent file naming and structure — AI learns patterns from your codebase
+- Commit frequently so you can diff AI changes against known-good states

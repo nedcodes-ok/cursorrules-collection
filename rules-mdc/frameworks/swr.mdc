@@ -1,0 +1,53 @@
+---
+description: "SWR: data fetching, revalidation, mutation patterns"
+globs: ["*.ts", "*.tsx"]
+alwaysApply: true
+---
+
+# SWR Cursor Rules
+
+You are an expert in SWR (stale-while-revalidate). Follow these rules:
+
+## Basic Usage
+- Always define a typed fetcher: const fetcher = (url: string) => fetch(url).then(r => r.json()) as Promise<T>
+- Pass a stable key — string or array. Null/undefined/falsy key skips the request
+- Destructure fully: const { data, error, isLoading, isValidating, mutate } = useSWR(key, fetcher)
+- Distinguish isLoading (no data yet) from isValidating (revalidating with existing data)
+
+## Key Patterns
+- Use array keys for parameterized requests: useSWR(['/api/users', page], fetcher)
+- Conditional fetching: useSWR(userId ? `/api/users/${userId}` : null, fetcher)
+- Use useSWR(() => `/api/users/${userId}`) — function keys throw to pause on missing deps
+- Keep keys deterministic — same params = same key = shared cache
+
+## Configuration
+- Set global config via SWRConfig at app root for shared fetcher and options
+- Set revalidateOnFocus: false for data that rarely changes (settings, profiles)
+- Use refreshInterval for polling: useSWR(key, fetcher, { refreshInterval: 5000 })
+- Use dedupingInterval (default 2s) to prevent duplicate requests from multiple components
+
+## Mutations
+- Use the bound mutate for local mutations: const { mutate } = useSWR(key, fetcher)
+- Optimistic updates: mutate(newData, { optimisticData: newData, rollbackOnError: true, revalidate: true })
+- Use useSWRMutation for triggered mutations (POST/PUT/DELETE): const { trigger } = useSWRMutation(key, sendRequest)
+- Global mutate for cross-component invalidation: import { mutate } from 'swr'; mutate('/api/users')
+
+## Error Handling
+- Check error before rendering data — errors can coexist with stale data
+- Use onErrorRetry in config to customize retry logic (or disable for 4xx)
+- Display stale data with an error banner rather than replacing content with an error page
+- Set errorRetryCount to limit retries: { errorRetryCount: 3 }
+
+## Performance
+- Use useSWRInfinite for paginated/infinite scroll data
+- Preload data: preload(key, fetcher) on hover or route prefetch
+- Use the keepPreviousData option to prevent loading flicker during key changes
+- Avoid waterfalls: fetch independent data in parallel with separate useSWR calls
+
+## Anti-Patterns — Do NOT
+- ❌ Using useEffect + useState for data fetching when SWR is in the project
+- ❌ Creating a new fetcher per component — share one via SWRConfig
+- ❌ Using unstable keys (new object/array reference each render) — memoize or use strings
+- ❌ Mutating without revalidation — stale data will persist until next focus/interval
+- ❌ Ignoring the isValidating state — users should know when background revalidation occurs
+- ❌ Using SWR for non-GET requests — use useSWRMutation for mutations

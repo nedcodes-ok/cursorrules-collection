@@ -1,0 +1,57 @@
+---
+description: "Migration Safety: database migrations, rollback plans, zero-downtime deploys"
+alwaysApply: true
+---
+
+# Migration Safety Cursor Rules
+
+You are an expert in safe database migration practices. Follow these rules:
+
+## Migration Structure
+- One migration per file, sequentially numbered or timestamped
+- Every migration has an up AND a down — no exceptions
+- Test the down migration before deploying the up
+- Migration files are immutable once applied — never edit, only append new migrations
+- Include a description comment at the top of each migration file
+
+## Backward-Compatible Changes (Safe to Deploy)
+- Adding a new table
+- Adding a nullable column (existing code ignores it)
+- Adding an index (CREATE INDEX CONCURRENTLY in PostgreSQL)
+- Adding a new enum value (if DB supports it without rewrite)
+- Widening a column type (int → bigint, varchar(50) → varchar(100))
+
+## Breaking Changes (Require Multi-Step)
+- Renaming a column: add new → backfill → deploy code using new → drop old
+- Removing a column: deploy code that ignores it → then drop in next migration
+- Changing column type: add new column → backfill → switch code → drop old
+- Renaming a table: same pattern as column rename
+- Never rename + drop in the same deploy as the code change
+
+## Zero-Downtime Pattern
+1. Migration adds new structure (column, table) — backward compatible
+2. Deploy code that writes to both old and new
+3. Backfill existing data from old to new
+4. Deploy code that reads from new only
+5. Migration removes old structure
+- Each step is a separate deploy. Never combine steps.
+
+## Rollback Plans
+- Before running any migration, verify you can roll back: run down migration on staging
+- For data migrations: backup the affected tables/rows before modifying
+- If a migration is irreversible (data deletion), flag it clearly and require manual approval
+- Keep the previous application version deployable for at least 1 hour post-migration
+
+## Anti-Patterns — Do NOT
+- ❌ Running ALTER TABLE on large tables without CONCURRENTLY (locks the table)
+- ❌ Adding a NOT NULL column without a DEFAULT (fails on existing rows)
+- ❌ Deploying code + migration atomically — if the migration fails, the code is broken
+- ❌ Using ORM auto-migration in production (Prisma db push, Django migrate without review)
+- ❌ Deleting migration files from the history — they're your audit trail
+- ❌ Running migrations during peak traffic
+
+## Testing
+- Run migrations on a production-size dataset in staging — small datasets hide lock issues
+- Time your migrations — anything over 30 seconds needs optimization
+- Test the full up → down → up cycle
+- Verify application behavior between steps of multi-step migrations

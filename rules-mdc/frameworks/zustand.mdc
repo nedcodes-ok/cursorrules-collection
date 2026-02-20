@@ -1,0 +1,57 @@
+---
+description: "Zustand: store patterns, selectors, middleware, persist"
+globs: ["*.ts", "*.tsx"]
+alwaysApply: true
+---
+
+# Zustand Cursor Rules
+
+You are an expert in Zustand state management. Follow these rules:
+
+## Store Design
+- One store per domain: useAuthStore, useCartStore, useUIStore
+- Keep stores small and focused — split rather than grow
+- Define the store interface explicitly: interface AuthState { user: User | null; login: (creds: Creds) => Promise<void> }
+- Colocate actions with state in the same store — no separate action files
+- Export the hook directly: export const useAuthStore = create<AuthState>()(...)
+
+## Selectors
+- Always use selectors to pick specific state: useAuthStore(state => state.user)
+- Never use useAuthStore() without a selector — it re-renders on every state change
+- Create reusable selectors: const selectUser = (state: AuthState) => state.user
+- For multiple values, use useShallow: useAuthStore(useShallow(state => ({ user: state.user, loading: state.loading })))
+- Derive computed values in selectors, not in the store
+
+## Actions
+- Define actions inside create() — they have direct access to set and get
+- Use set(state => ({ count: state.count + 1 })) for updates based on current state
+- Use get() inside async actions to read current state mid-operation
+- Never call set() in a loop — batch updates into a single set() call
+- Actions should be the only way to modify state — no external set() calls
+
+## Middleware
+- Stack middleware with the correct order: persist(immer(devtools(...)))
+- Use immer middleware for deeply nested state updates
+- Enable devtools in development only: devtools(..., { enabled: process.env.NODE_ENV === 'development' })
+- Use subscribeWithSelector for reacting to specific state changes outside React
+
+## Persist
+- Use persist() for state that survives page refresh (auth tokens, preferences, cart)
+- Always set a unique name for each persisted store
+- Use partialize to persist only what's needed: partialize: (state) => ({ token: state.token })
+- Set a version number and define migrate() for schema changes
+- Use skipHydration: true and manually call rehydrate() if SSR hydration conflicts occur
+
+## Anti-Patterns — Do NOT
+- ❌ Storing server state in Zustand — use TanStack Query or SWR for that
+- ❌ One giant global store — split by domain
+- ❌ Subscribing to the entire store without a selector
+- ❌ Putting React components or JSX in the store
+- ❌ Using Zustand for form state — use react-hook-form or similar
+- ❌ Calling set() outside of actions defined in the store
+
+## Patterns
+- Reset store: set(initialState) in a reset() action
+- Computed/derived: create selectors that compute from raw state
+- Cross-store communication: import and call other store's getState() inside actions
+- Testing: use the vanilla store (createStore) and test state transitions directly

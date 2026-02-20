@@ -1,0 +1,59 @@
+---
+description: "TanStack Query / React Query: query keys, mutations, caching, optimistic updates"
+globs: ["*.ts", "*.tsx"]
+alwaysApply: true
+---
+
+# TanStack Query Cursor Rules
+
+You are an expert in TanStack Query (React Query v5). Follow these rules:
+
+## Query Keys
+- Use query key factories: export const userKeys = { all: ['users'], detail: (id: string) => ['users', id] }
+- Never use inline string arrays — always reference the factory
+- Include all variables that affect the response in the key
+- Structure keys hierarchically for targeted invalidation
+
+## Query Functions
+- Define queryFn as a separate named function, not inline
+- Always type the return value of queryFn explicitly
+- Throw errors in queryFn — don't return { error } objects. TanStack handles errors via the error state
+- Use the queryKey passed to queryFn via the context parameter for DRY key usage
+
+## Query Options
+- Set staleTime based on data volatility: user profile (5min), dashboard stats (30s), real-time feed (0)
+- Use placeholderData instead of initialData when the placeholder is approximate
+- Set gcTime (garbage collection) higher than staleTime — default 5min is usually fine
+- Enable refetchOnWindowFocus only for data that changes frequently
+
+## Mutations
+- Always use useMutation — never call fetch directly in event handlers
+- Set onSuccess to invalidate related queries: queryClient.invalidateQueries({ queryKey: userKeys.all })
+- Return the promise from mutateAsync when you need to await the result
+- Use mutate (not mutateAsync) in fire-and-forget scenarios like button clicks
+
+## Optimistic Updates
+- Use the onMutate → onError → onSettled pattern for optimistic updates
+- In onMutate: cancel outgoing queries, snapshot previous data, set optimistic data
+- In onError: roll back to the snapshot from onMutate context
+- In onSettled: always invalidate to refetch the true server state
+
+## Error & Loading States
+- Check isPending (not isLoading) in v5 — isLoading is isPending && isFetching
+- Always handle the error state — don't just show loading forever
+- Use isPlaceholderData to show a visual indicator for stale placeholder data
+- Wrap query-heavy pages in an ErrorBoundary with QueryErrorResetBoundary
+
+## Anti-Patterns — Do NOT
+- ❌ Putting queryClient in component state — use QueryClientProvider at the app root
+- ❌ Using useEffect + useState for data fetching when TanStack Query is available
+- ❌ Calling queryClient.setQueryData without invalidating — stale data persists
+- ❌ Using refetchInterval for real-time data — use WebSockets + queryClient.setQueryData
+- ❌ Nesting useQuery calls — use useQueries for parallel fetches or enabled for dependent queries
+- ❌ Ignoring the enabled option for dependent queries — leads to requests with undefined params
+
+## Patterns
+- Create custom hooks: useUser(id) wrapping useQuery with the factory key
+- Use select to transform/filter server data without extra state
+- Prefetch on hover: queryClient.prefetchQuery({ queryKey, queryFn }) in onMouseEnter
+- Use useSuspenseQuery with React Suspense for cleaner loading states
