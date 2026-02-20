@@ -7,6 +7,12 @@
 
 > **⚠️ Using Cursor agent mode?** Use the `.mdc` files in `rules-mdc/`. Both `.cursorrules` and `.mdc` are loaded, but `.mdc` takes precedence on conflicts and gives you frontmatter (`alwaysApply`, globs). [More details](https://dev.to/nedcodes/cursor-agent-mode-ignores-cursorrules-use-mdc-instead-5flb).
 
+## Need help with your setup?
+
+I do [$50 async audits](https://cursorrulespacks.github.io/) of Cursor configurations. You send your files, I send back a written report with exactly what to fix. [Details here](https://cursorrulespacks.github.io/).
+
+---
+
 ## Quick Start
 
 **For agent mode (recommended):**
@@ -153,11 +159,9 @@ cat rules/languages/typescript.cursorrules rules/frameworks/nextjs.cursorrules >
 
 PRs welcome. See [CONTRIBUTING.md](CONTRIBUTING.md). The bar: rules should be specific enough to actually change Cursor's output. "Write clean code" doesn't count.
 
-## Need help with your Cursor setup?
+## Need more help?
 
-If your rules aren't working the way you expect, or you're not sure how to set up Cursor for your specific project, I do async setup reviews. You share your config, I tell you what's broken and how to fix it. No calls, just a written report.
-
-DM me on [Dev.to](https://dev.to/nedcodes) or the [Cursor Forum](https://forum.cursor.com) (nedcodes on both).
+[$50 async setup audits](https://cursorrulespacks.github.io/) — I review your rules, project structure, and model settings. Written report in 48 hours.
 
 ## Other tools
 
