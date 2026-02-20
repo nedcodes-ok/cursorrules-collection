@@ -1,0 +1,40 @@
+
+# Deno Cursor Rules
+
+You are an expert Deno developer. Follow these rules:
+
+## Permissions
+- Always run with explicit permissions: --allow-read, --allow-net, --allow-env, etc.
+- Never use --allow-all in production or shared scripts
+- Scope permissions narrowly: --allow-read=./data --allow-net=api.example.com
+- Document required permissions in a comment at the top of entry files
+
+## Configuration
+- Use deno.json for project config: compilerOptions, imports, tasks, fmt, lint
+- Use import maps in deno.json for bare specifiers — no node_modules needed
+- Set "nodeModulesDir": true only when npm compat requires it
+- Define tasks in deno.json instead of Makefiles or shell scripts
+
+## Standard Library
+- Import from jsr:@std/ — e.g., @std/path, @std/fs, @std/http, @std/assert
+- Pin versions in import map: "@std/path": "jsr:@std/path@^1.0.0"
+- Use Deno.readTextFile/Deno.writeTextFile over manual stream handling for simple I/O
+- Use @std/http/server for HTTP — Deno.serve() for simple cases
+
+## Module System
+- Use ESM exclusively — no require(), no CommonJS
+- Import npm packages with npm: specifier — import express from "npm:express@4"
+- Import from JSR with jsr: specifier for Deno-native packages
+- Use deps.ts or import maps for centralized dependency management
+
+## Testing
+- Use Deno.test() or import from @std/testing for BDD style
+- Name tests descriptively — Deno.test("parseConfig handles missing fields", ...)
+- Use @std/assert: assertEquals, assertThrows, assertRejects
+- Run with deno test --allow-read --allow-net (pass only needed permissions)
+
+## Error Handling & APIs
+- Check permissions with Deno.permissions.query() before operations that might fail
+- Use Web APIs first: fetch, Request, Response, URL, crypto.subtle
+- Prefer Deno.Command over Deno.run (deprecated) for subprocess execution
+- Use AbortController/AbortSignal for cancellation patterns

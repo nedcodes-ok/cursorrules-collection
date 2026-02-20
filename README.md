@@ -3,7 +3,7 @@
 [![Stars](https://img.shields.io/github/stars/cursorrulespacks/cursorrules-collection?style=social)](https://github.com/cursorrulespacks/cursorrules-collection)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-77 rules for Cursor AI in both `.mdc` and `.cursorrules` format. Copy to your project and Cursor actually writes code the way you want it to.
+97 rules for Cursor AI in both `.mdc` and `.cursorrules` format. Copy to your project and Cursor actually writes code the way you want it to.
 
 > **⚠️ Using Cursor agent mode?** Use the `.mdc` files in `rules-mdc/`. Both `.cursorrules` and `.mdc` are loaded, but `.mdc` takes precedence on conflicts and gives you frontmatter (`alwaysApply`, globs). [More details](https://dev.to/nedcodes/cursor-agent-mode-ignores-cursorrules-use-mdc-instead-5flb).
 
@@ -107,6 +107,14 @@ Same prompts, different output. Left side is vanilla Cursor, right side is with 
 | Hono | [hono.mdc](rules-mdc/frameworks/hono.mdc) | [hono.cursorrules](rules/frameworks/hono.cursorrules) |
 | T3 Stack | [t3-stack.mdc](rules-mdc/frameworks/t3-stack.mdc) | [t3-stack.cursorrules](rules/frameworks/t3-stack.cursorrules) |
 | SWR | [swr.mdc](rules-mdc/frameworks/swr.mdc) | [swr.cursorrules](rules/frameworks/swr.cursorrules) |
+| NestJS | [nestjs.mdc](rules-mdc/frameworks/nestjs.mdc) | [nestjs.cursorrules](rules/frameworks/nestjs.cursorrules) |
+| Flask | [flask.mdc](rules-mdc/frameworks/flask.mdc) | [flask.cursorrules](rules/frameworks/flask.cursorrules) |
+| Spring Boot | [spring-boot.mdc](rules-mdc/frameworks/spring-boot.mdc) | [spring-boot.cursorrules](rules/frameworks/spring-boot.cursorrules) |
+| htmx | [htmx.mdc](rules-mdc/frameworks/htmx.mdc) | [htmx.cursorrules](rules/frameworks/htmx.cursorrules) |
+| SvelteKit | [sveltekit.mdc](rules-mdc/frameworks/sveltekit.mdc) | [sveltekit.cursorrules](rules/frameworks/sveltekit.cursorrules) |
+| Expo / React Native | [expo.mdc](rules-mdc/frameworks/expo.mdc) | [expo.cursorrules](rules/frameworks/expo.cursorrules) |
+| Electron | [electron.mdc](rules-mdc/frameworks/electron.mdc) | [electron.cursorrules](rules/frameworks/electron.cursorrules) |
+| Tauri | [tauri.mdc](rules-mdc/frameworks/tauri.mdc) | [tauri.cursorrules](rules/frameworks/tauri.cursorrules) |
 
 ### Practices
 
@@ -127,6 +135,8 @@ Same prompts, different output. Left side is vanilla Cursor, right side is with 
 | Migration Safety | [migration-safety.mdc](rules-mdc/practices/migration-safety.mdc) | [migration-safety.cursorrules](rules/practices/migration-safety.cursorrules) |
 | Refactoring | [refactoring.mdc](rules-mdc/practices/refactoring.mdc) | [refactoring.cursorrules](rules/practices/refactoring.cursorrules) |
 | AI-Assisted Development | [ai-assisted-development.mdc](rules-mdc/practices/ai-assisted-development.mdc) | [ai-assisted-development.cursorrules](rules/practices/ai-assisted-development.cursorrules) |
+| Monorepo | [monorepo.mdc](rules-mdc/practices/monorepo.mdc) | [monorepo.cursorrules](rules/practices/monorepo.cursorrules) |
+| Database Migrations | [database-migrations.mdc](rules-mdc/practices/database-migrations.mdc) | [database-migrations.cursorrules](rules/practices/database-migrations.cursorrules) |
 
 ### Tools
 
@@ -156,6 +166,16 @@ Same prompts, different output. Left side is vanilla Cursor, right side is with 
 | SQLite | [sqlite.mdc](rules-mdc/tools/sqlite.mdc) | [sqlite.cursorrules](rules/tools/sqlite.cursorrules) |
 | Clerk | [clerk.mdc](rules-mdc/tools/clerk.mdc) | [clerk.cursorrules](rules/tools/clerk.cursorrules) |
 | Convex | [convex.mdc](rules-mdc/tools/convex.mdc) | [convex.cursorrules](rules/tools/convex.cursorrules) |
+| Bun | [bun.mdc](rules-mdc/tools/bun.mdc) | [bun.cursorrules](rules/tools/bun.cursorrules) |
+| Deno | [deno.mdc](rules-mdc/tools/deno.mdc) | [deno.cursorrules](rules/tools/deno.cursorrules) |
+| Jest | [jest.mdc](rules-mdc/tools/jest.mdc) | [jest.cursorrules](rules/tools/jest.cursorrules) |
+| Cypress | [cypress.mdc](rules-mdc/tools/cypress.mdc) | [cypress.cursorrules](rules/tools/cypress.cursorrules) |
+| Storybook | [storybook.mdc](rules-mdc/tools/storybook.mdc) | [storybook.cursorrules](rules/tools/storybook.cursorrules) |
+| Pydantic | [pydantic.mdc](rules-mdc/tools/pydantic.mdc) | [pydantic.cursorrules](rules/tools/pydantic.cursorrules) |
+| SQLAlchemy | [sqlalchemy.mdc](rules-mdc/tools/sqlalchemy.mdc) | [sqlalchemy.cursorrules](rules/tools/sqlalchemy.cursorrules) |
+| pytest | [pytest.mdc](rules-mdc/tools/pytest.mdc) | [pytest.cursorrules](rules/tools/pytest.cursorrules) |
+| LangChain | [langchain.mdc](rules-mdc/tools/langchain.mdc) | [langchain.cursorrules](rules/tools/langchain.cursorrules) |
+| Ruff | [ruff.mdc](rules-mdc/tools/ruff.mdc) | [ruff.cursorrules](rules/tools/ruff.cursorrules) |
 
 ## Using Multiple Rules
 

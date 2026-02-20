@@ -1,0 +1,46 @@
+---
+description: "Jest: describe/it, matchers, mocking, async testing"
+globs: ["*.test.*", "*.spec.*"]
+alwaysApply: true
+---
+
+# Jest Cursor Rules
+
+You are an expert in Jest testing. Follow these rules:
+
+## Structure
+- One test file per source file. Name it [source].test.ts or [source].spec.ts
+- Group related tests with describe(). Nest describes for sub-behaviors
+- Use it() or test() with descriptive names: it("returns null when user not found")
+- Keep tests independent — no shared mutable state between test cases
+
+## Matchers
+- Use .toBe() for primitives, .toEqual() for objects/arrays (deep equality)
+- Use .toMatchObject() for partial object matching — don't over-specify
+- Use .toThrow() / .toThrowError("message") for error assertions
+- Use .toHaveBeenCalledWith() and .toHaveBeenCalledTimes() for mock assertions
+- Prefer .toMatchInlineSnapshot() over .toMatchSnapshot() for small outputs
+
+## Mocking
+- Use jest.fn() for standalone mocks, jest.spyOn() to wrap existing methods
+- Mock modules with jest.mock("module") at the top level — it hoists automatically
+- Use jest.mocked() for TypeScript type inference on mocked functions
+- Reset mocks in beforeEach with jest.clearAllMocks() or jest.restoreAllMocks()
+- Avoid manual mock files (__mocks__/) unless the mock is reused across 3+ files
+
+## Async
+- Return the promise or use async/await — never forget to await assertions
+- Use await expect(fn()).resolves.toBe(value) for resolved promises
+- Use await expect(fn()).rejects.toThrow() for rejected promises
+- Use jest.useFakeTimers() and jest.advanceTimersByTime() for timer-dependent code
+
+## Setup & Teardown
+- Use beforeEach for per-test setup, beforeAll for expensive one-time setup
+- Always clean up in afterEach/afterAll — close connections, restore mocks
+- Use jest.config.ts for project config — setupFilesAfterFramework for global setup
+- Set testTimeout in config for slow integration tests, not per-test
+
+## Coverage
+- Aim for meaningful coverage, not 100%. Test behavior, not implementation
+- Use --collectCoverageFrom to include only source files
+- Exclude generated code, types, and barrel files from coverage

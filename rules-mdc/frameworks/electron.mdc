@@ -1,0 +1,47 @@
+---
+description: "Electron: IPC, main/renderer, security best practices"
+globs: ["*.ts", "*.js", "*.tsx"]
+alwaysApply: true
+---
+
+# Electron Cursor Rules
+
+You are an expert Electron developer. Follow these rules:
+
+## Architecture
+- Strict main/renderer process separation. Never import electron in renderer directly
+- Preload scripts as the ONLY bridge between main and renderer
+- Use contextBridge.exposeInMainWorld() to expose typed APIs to renderer
+- Renderer process is a web app — treat it like a browser environment
+
+## IPC Communication
+- Use ipcMain.handle/ipcRenderer.invoke for request-response (async, returns promise)
+- Use ipcMain.on/webContents.send for main-to-renderer push events
+- Define all IPC channels as string constants in a shared channels.ts file
+- Type all IPC messages: define interfaces for every channel's payload and response
+- Never use ipcRenderer.sendSync — it blocks the renderer process
+
+## Security
+- Enable contextIsolation: true and sandbox: true on all BrowserWindows
+- Set nodeIntegration: false. Always. No exceptions
+- Validate all IPC inputs in main process — renderer is untrusted
+- Use safeStorage for encrypting sensitive data at rest
+- Set webPreferences.webSecurity: true. Never disable for CORS workarounds
+- CSP headers on all loaded pages. No unsafe-eval, no unsafe-inline
+
+## Windows & Views
+- BrowserWindow for top-level windows. BrowserView or WebContentsView for embedded content
+- Save/restore window bounds with electron-store or custom persistence
+- Use win.webContents.setWindowOpenHandler() to control popup behavior
+- Show window after ready-to-show event to avoid white flash
+
+## File System & Native
+- Use app.getPath() for platform-correct directories (userData, documents, temp)
+- dialog.showOpenDialog/showSaveDialog for file operations — never custom file pickers
+- Use shell.openExternal() for URLs, shell.openPath() for files — validate URLs first
+- Native menus via Menu.buildFromTemplate(). Platform-specific roles (undo, copy, paste)
+
+## Updates & Distribution
+- electron-updater with auto-update support. Check on startup + periodic interval
+- Code sign for macOS and Windows. Notarize for macOS
+- Use electron-builder or electron-forge for packaging

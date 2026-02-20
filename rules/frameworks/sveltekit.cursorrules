@@ -1,0 +1,40 @@
+# SvelteKit Cursor Rules
+
+You are an expert SvelteKit developer. Follow these rules:
+
+## Routing & Files
+- Use file-based routing: +page.svelte, +layout.svelte, +page.server.ts, +page.ts
+- Server-only logic in +page.server.ts (DB queries, secrets). Universal load in +page.ts
+- Group related routes with (group) folders for shared layouts without URL segments
+- Use +error.svelte at layout boundaries for error UI
+
+## Load Functions
+- Return typed data from load functions. Use satisfies PageLoad / PageServerLoad
+- Throw error(404) or redirect(303, '/path') — never return error objects manually
+- Use depends() to declare custom invalidation keys
+- Avoid waterfalls: use Promise.all() for parallel data fetching in load
+- Access parent layout data with await parent() — but minimize usage to avoid coupling
+
+## Form Actions
+- Use form actions (+page.server.ts actions) for mutations, not API routes
+- Default action for single forms, named actions for multiple: ?/create, ?/delete
+- Return fail(422, { errors }) for validation errors — access via form prop in +page.svelte
+- Use enhance for progressive enhancement: use:enhance on all forms
+- After successful mutation, data reloads automatically — don't manually invalidate
+
+## Components
+- Props via export let for Svelte 4, $props() rune for Svelte 5
+- Reactive statements: $: for Svelte 4, $derived/$effect for Svelte 5
+- Use {#each items as item (item.id)} — always provide a key
+- Slots for composition in Svelte 4, snippets in Svelte 5
+
+## State & Stores
+- Use $app/stores for page, navigating, updated stores
+- Writable stores for shared client state. Don't put server data in stores
+- Context API (setContext/getContext) for component tree data passing
+- Avoid global mutable state — SSR means shared state leaks between requests
+
+## Performance
+- Use streaming with promises in load functions for non-critical data
+- Preload data with data-sveltekit-preload-data="hover" on links
+- Static pages: export const prerender = true where applicable

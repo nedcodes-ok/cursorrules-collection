@@ -1,0 +1,40 @@
+# htmx Cursor Rules
+
+You are an expert htmx developer. Follow these rules:
+
+## Core Principles
+- Server returns HTML fragments, not JSON. Every endpoint returns renderable markup
+- Progressive enhancement: pages work without JavaScript first, htmx enhances
+- Hypermedia as the engine of application state — URLs and links drive navigation
+- Prefer hx-get/hx-post over fetch/XMLHttpRequest. No client-side state management
+
+## Attributes
+- Always set hx-target to scope updates. Never rely on default (innerHTML of triggering element)
+- Use hx-swap="outerHTML" for replacing elements, "innerHTML" for updating contents
+- hx-indicator for loading states on every network request. Users need feedback
+- hx-push-url="true" on navigation requests to maintain browser history
+- hx-confirm for destructive actions (delete, reset)
+
+## Server Responses
+- Return 200 with HTML fragment for success. Use HX-Trigger response header for events
+- Return 422 with form HTML (including errors) for validation failures — htmx swaps it in
+- Use HX-Redirect header for server-side redirects, not 301/302
+- Return 204 No Content to do nothing. Return empty string with HX-Trigger for event-only responses
+- Use HX-Retarget and HX-Reswap headers to override client-side targeting from the server
+
+## Patterns
+- Inline editing: hx-get to fetch edit form, hx-put to save, swap back to display view
+- Infinite scroll: hx-get with hx-trigger="revealed" on sentinel element
+- Active search: hx-get with hx-trigger="input changed delay:300ms" and hx-indicator
+- Bulk operations: use hx-include to gather checkbox values, hx-vals for extra data
+
+## Forms
+- hx-post on forms, not buttons. Let the form handle submission semantics
+- Use name attributes on all inputs. Server reads standard form data, not JSON
+- Disable buttons during submission with htmx:beforeRequest/afterRequest events
+- Return the full form with errors on validation failure, not just error messages
+
+## Organization
+- Keep htmx attributes in HTML, not added via JavaScript
+- Server-side partials/fragments for reusable components
+- Use hx-boost="true" on body or nav for automatic AJAX navigation

@@ -1,0 +1,46 @@
+---
+description: "LangChain: chains, agents, memory, tools"
+globs: ["*.py", "*.ts"]
+alwaysApply: true
+---
+
+# LangChain Cursor Rules
+
+You are an expert in LangChain development. Follow these rules:
+
+## Chains (LCEL)
+- Use LangChain Expression Language (LCEL) with pipe operator: prompt | llm | parser
+- Use RunnablePassthrough, RunnableParallel, RunnableLambda for chain composition
+- Always end chains with an output parser: StrOutputParser, JsonOutputParser, PydanticOutputParser
+- Use .with_config(run_name="...") for observability in LangSmith traces
+- Use .batch() and .abatch() for parallel execution over multiple inputs
+
+## Prompts
+- Use ChatPromptTemplate.from_messages() for chat models — never raw string formatting
+- Use MessagesPlaceholder for dynamic message insertion (history, agent scratchpad)
+- Keep system prompts in separate files or constants — not inline in chain definitions
+- Use .partial() to pre-fill template variables at chain construction time
+
+## Agents
+- Use create_tool_calling_agent() with tool-calling models — not legacy AgentExecutor patterns
+- Define tools with @tool decorator — include docstrings (the LLM reads them)
+- Set max_iterations on AgentExecutor to prevent infinite loops (default is too high)
+- Use return_intermediate_steps=True for debugging and logging agent reasoning
+
+## Memory & History
+- Use RunnableWithMessageHistory for conversation state — not ConversationBufferMemory (legacy)
+- Store history in persistent backends (Redis, PostgreSQL) — not in-memory for production
+- Trim history with trim_messages() to control context window usage
+- Use ConversationSummaryMemory only when context window is a hard constraint
+
+## Retrieval (RAG)
+- Use create_retrieval_chain() or LCEL with retriever | format_docs | prompt | llm
+- Set search_kwargs={"k": 4} explicitly on retrievers — don't rely on defaults
+- Use RecursiveCharacterTextSplitter with appropriate chunk_size and chunk_overlap
+- Add metadata to documents at indexing time for filtered retrieval
+
+## Tools & Output
+- Tools must have clear, concise descriptions — the model selects tools based on descriptions
+- Use PydanticOutputParser with output_fixing_parser for structured LLM output
+- Handle LLM errors with fallbacks: chain.with_fallbacks([fallback_chain])
+- Use callbacks for streaming: chain.stream() or chain.astream() for real-time output

@@ -1,0 +1,44 @@
+---
+description: "Ruff: linting, formatting, rule selection, configuration"
+globs: ["*.py", "pyproject.toml", "ruff.toml"]
+alwaysApply: true
+---
+
+# Ruff Cursor Rules
+
+You are an expert in Ruff Python linting and formatting. Follow these rules:
+
+## Configuration
+- Configure in pyproject.toml [tool.ruff] or standalone ruff.toml — not both
+- Set target-version = "py312" (or your minimum Python version) explicitly
+- Set line-length = 88 (Black default) or 120 — be explicit, don't rely on default
+- Use src = ["src"] to help Ruff resolve first-party imports correctly
+
+## Rule Selection
+- Start with select = ["E", "F", "W", "I", "UP", "B", "SIM", "N"] for a solid baseline
+- Add "S" (bandit) for security, "PT" for pytest style, "D" for docstrings as needed
+- Use ignore sparingly and document why: ignore = ["E501"]  # handled by formatter
+- Use per-file-ignores for test/migration exceptions: {"tests/**" = ["S101"], "migrations/**" = ["E501"]}
+
+## Formatting
+- Use ruff format as a drop-in Black replacement — same output, faster
+- Don't mix Ruff formatter with Black — pick one
+- Set format.quote-style = "double" and format.indent-style = "space" explicitly
+- Use ruff check --fix && ruff format for the standard fix-then-format workflow
+
+## Import Sorting
+- Enable isort rules with "I" in select — Ruff replaces isort entirely
+- Configure [tool.ruff.isort] for known-first-party, known-third-party if needed
+- Use force-single-line = true if your team prefers one import per line
+- Set combine-as-imports = true to group aliased imports
+
+## Integration
+- Run in CI: ruff check . && ruff format --check .
+- Use --fix only in local development, never in CI (CI should fail, not auto-fix)
+- Pre-commit hook: use ruff-pre-commit (official) — not generic pre-commit hooks
+- VS Code: install charliermarsh.ruff extension, disable pylint/flake8/isort extensions
+
+## Noqa & Suppression
+- Use inline # noqa: RULE_CODE with specific codes — never bare # noqa
+- Use per-file-ignores over blanket noqa comments when an entire file needs exceptions
+- Run ruff check --statistics to see which rules fire most — fix patterns, not symptoms

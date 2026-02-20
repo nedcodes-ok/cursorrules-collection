@@ -1,0 +1,47 @@
+---
+description: "Tauri: commands, events, Rust backend patterns"
+globs: ["*.rs", "*.ts", "*.tsx", "*.svelte", "*.vue"]
+alwaysApply: true
+---
+
+# Tauri Cursor Rules
+
+You are an expert Tauri developer. Follow these rules:
+
+## Architecture
+- Frontend is a web app (React/Svelte/Vue). Backend logic in Rust (src-tauri/)
+- Use Tauri commands (#[tauri::command]) for frontend→backend communication
+- Use events (app.emit/app.listen) for backend→frontend push notifications
+- Keep frontend framework-agnostic where possible — @tauri-apps/api abstracts the bridge
+
+## Commands
+- #[tauri::command] functions are the API boundary. Type inputs and outputs carefully
+- Return Result<T, String> from commands. Never panic in command handlers
+- Use State<T> parameter for shared app state (managed via app.manage())
+- Async commands with async keyword — Tauri runs them on a thread pool
+- Serialize/deserialize with serde. All command inputs/outputs must impl Serialize + Deserialize
+
+## State Management
+- App state via tauri::State<Mutex<T>> or tauri::State<RwLock<T>> for thread safety
+- Initialize state in setup() callback, not in main()
+- Use Arc<Mutex<T>> only when state needs to be shared outside command handlers
+- Database connections: use connection pools (r2d2/deadpool) in managed state
+
+## Security
+- Allowlist in tauri.conf.json — only enable APIs you actually use
+- Validate all inputs from frontend in command handlers. Frontend is untrusted
+- Use tauri::scope for file system and shell access restrictions
+- Never expose shell commands directly. Wrap in typed Rust functions
+- CSP configured in tauri.conf.json. No unsafe-eval
+
+## Events
+- app.emit_all() to broadcast to all windows. app.emit_to() for specific windows
+- Frontend listens via listen()/once() from @tauri-apps/api/event
+- Use typed event payloads. Define shared types in a types module
+- Clean up listeners in frontend component unmount/destroy
+
+## Build & Packaging
+- tauri.conf.json for app metadata, window config, security settings
+- Use Tauri's updater for auto-updates with signing
+- Platform-specific code via cfg attributes: #[cfg(target_os = "macos")]
+- Test Rust backend independently: cargo test in src-tauri/

@@ -1,0 +1,47 @@
+---
+description: "Expo/React Native: native modules, navigation, platform-specific code"
+globs: ["*.tsx", "*.ts", "*.jsx"]
+alwaysApply: true
+---
+
+# Expo Cursor Rules
+
+You are an expert Expo/React Native developer. Follow these rules:
+
+## Project Structure
+- Use Expo Router for file-based navigation. Routes in app/ directory
+- Shared components in components/, hooks in hooks/, utils in utils/
+- Platform-specific files: Component.ios.tsx, Component.android.tsx, Component.web.tsx
+- Use expo-constants for app config. Access via Constants.expoConfig
+
+## Navigation (Expo Router)
+- File-based routing: app/(tabs)/index.tsx, app/[id].tsx, app/_layout.tsx
+- Use Stack, Tabs, Drawer from expo-router for layout types
+- Type-safe navigation with useRouter() and Link component
+- Deep linking configured via app.json scheme field
+- Use useLocalSearchParams() for route params, typed with generics
+
+## Components & Styling
+- StyleSheet.create() for all styles — never inline style objects
+- Use Pressable over TouchableOpacity. Better accessibility and customization
+- Platform.select() for platform-specific values, not runtime if/else
+- SafeAreaView (from react-native-safe-area-context) on all screen components
+- FlatList for lists, never ScrollView with .map() — virtualization matters
+
+## State & Data
+- TanStack Query for server state. AsyncStorage for local persistence
+- Zustand or Jotai for global client state — avoid Redux in Expo projects
+- Use expo-secure-store for sensitive data (tokens, credentials), not AsyncStorage
+- Handle offline state: check NetInfo, queue mutations, sync on reconnect
+
+## Native Features
+- Use Expo SDK modules first (expo-camera, expo-location, expo-notifications)
+- Request permissions with expo-* permission hooks. Handle denied state in UI
+- Use expo-image over React Native Image — better caching and performance
+- Animations: react-native-reanimated for complex, Animated API for simple
+
+## Build & Config
+- EAS Build for production builds. Never eject unless absolutely required
+- app.json/app.config.ts for all Expo config. Use config plugins for native customization
+- Environment variables via .env with expo-constants, not process.env
+- OTA updates with expo-updates. Set fallbackToCacheTimeout for reliability

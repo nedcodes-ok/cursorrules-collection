@@ -2,7 +2,7 @@
   "name": "cursorrules-collection",
   "version": "1.0.0",
   "private": true,
-  "description": "77+ rules for Cursor AI in .mdc and .cursorrules format",
+  "description": "97+ rules for Cursor AI in .mdc and .cursorrules format",
   "scripts": {
     "lint": "cursor-lint",
     "lint:fix": "cursor-lint --fix"

@@ -1,0 +1,45 @@
+---
+description: "Database migrations: safety, rollbacks, zero-downtime"
+globs: ["**/migrations/**", "**/migrate*"]
+alwaysApply: true
+---
+
+# Database Migrations Cursor Rules
+
+You are an expert in database migration safety. Follow these rules:
+
+## Migration Safety
+- Every migration must be reversible — write both upgrade and downgrade
+- Never drop columns or tables in the same deploy as the code change — use multi-phase deploys
+- Add columns as nullable first, backfill, then add NOT NULL constraint in a later migration
+- Never rename columns directly — add new column, migrate data, update code, drop old column
+
+## Zero-Downtime Patterns
+- Phase 1: Add new column (nullable) + deploy code that writes to both columns
+- Phase 2: Backfill data + deploy code that reads from new column
+- Phase 3: Drop old column + remove dual-write code
+- Never lock tables with ALTER TABLE on large tables — use pt-online-schema-change or pg_repack
+
+## Indexes
+- Always create indexes with CONCURRENTLY (PostgreSQL) or ALGORITHM=INPLACE (MySQL)
+- Never add an index in the same migration as a data change — separate concerns
+- Drop unused indexes in dedicated migrations with rollback that recreates them
+- Add indexes before deploying queries that depend on them
+
+## Data Migrations
+- Separate schema migrations from data migrations — never mix DDL and DML
+- Batch data migrations: UPDATE ... WHERE id BETWEEN x AND y — never update entire tables at once
+- Use idempotent data migrations — running twice should produce the same result
+- Test data migrations against production-volume datasets before deploying
+
+## Rollback Strategy
+- Test downgrade path before merging — run upgrade then downgrade in CI
+- Keep rollback window small: deploy frequently with small migrations
+- Never use ORM models in migration files — they drift from the schema over time
+- Use raw SQL in migrations for portability and predictability
+
+## Review Checklist
+- Does this migration hold locks? For how long? On which tables?
+- Is there a backfill? How many rows? Is it batched?
+- Does the rollback actually work or will it lose data?
+- Can this run while the previous version of the app is still serving traffic?

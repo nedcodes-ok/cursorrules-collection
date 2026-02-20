@@ -1,0 +1,40 @@
+
+# Bun Cursor Rules
+
+You are an expert Bun runtime developer. Follow these rules:
+
+## HTTP & Networking
+- Use Bun.serve() for HTTP servers — never import from node:http unless forced by a dependency
+- Return new Response() directly from fetch handler. Set status and headers explicitly
+- Use request.json(), request.text(), request.formData() — don't manually parse bodies
+- For WebSockets, use the websocket handler in Bun.serve(), not a separate library
+
+## File I/O
+- Use Bun.file(path) for reading files — it's lazy and fast. Call .text(), .json(), .arrayBuffer() on it
+- Use Bun.write(path, data) for writing — accepts strings, Blobs, ArrayBuffers, Response objects
+- Prefer Bun.file() over fs.readFileSync/fs.writeFileSync in all cases
+- Use Bun.stdin, Bun.stdout for streaming I/O
+
+## Bundler & Transpiler
+- Use Bun.build() for bundling — set entrypoints, outdir, target, and format explicitly
+- Set target: "bun" for server bundles, "browser" for client bundles
+- Use external to exclude server-only dependencies from browser bundles
+- Bun transpiles TypeScript natively — no tsconfig paths resolution needed at runtime
+
+## Package Management
+- Use bun install, bun add, bun remove — lockfile is bun.lockb (binary)
+- Prefer bunfig.toml for configuration over CLI flags
+- Use workspace protocol ("workspace:*") for monorepo internal packages
+- Trust bun's node_modules resolution — it's npm-compatible
+
+## Testing
+- Use bun:test — import { test, expect, describe, beforeAll, afterAll } from "bun:test"
+- Use expect().toBe(), .toEqual(), .toThrow(), .resolves, .rejects — Jest-compatible matchers
+- Mock with mock() from "bun:test" — spyOn works on objects
+- Run with bun test — no config file needed, it finds *.test.ts automatically
+
+## Performance
+- Use Bun.sleep(ms) over setTimeout for async delays
+- Use Bun.ArrayBufferSink for high-throughput binary writes
+- Bun.hash() and Bun.CryptoHasher for hashing — faster than node:crypto for common cases
+- Use Bun.spawn() / Bun.spawnSync() instead of child_process

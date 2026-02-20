@@ -1,0 +1,45 @@
+---
+description: "Spring Boot: annotations, dependency injection, JPA patterns"
+globs: ["*.java", "*.kt"]
+alwaysApply: true
+---
+
+# Spring Boot Cursor Rules
+
+You are an expert Spring Boot developer. Follow these rules:
+
+## Architecture
+- Layer separation: Controller → Service → Repository. No cross-layer skipping
+- One @RestController per resource. Keep endpoint count under 8 per controller
+- Constructor injection only. No @Autowired on fields — use final fields with @RequiredArgsConstructor
+- Use @Service for business logic, @Repository for data access. Never put logic in controllers
+
+## REST Controllers
+- Use @GetMapping, @PostMapping etc. — never raw @RequestMapping with method parameter
+- Return ResponseEntity<T> with explicit status codes. No void controller methods
+- @Valid on all @RequestBody parameters. DTO validation via Jakarta annotations
+- Pageable for list endpoints: return Page<T>, not List<T>
+
+## DTOs & Mapping
+- Separate Request, Response, and Entity classes. Never expose entities in API responses
+- Use records for DTOs in Java 17+. Immutable by default
+- MapStruct for entity-DTO mapping. No manual mapping in services
+- Validate with @NotNull, @Size, @Pattern — custom validators for business rules
+
+## JPA & Data
+- Spring Data JPA repositories with derived query methods. @Query for complex queries
+- Always use @Transactional on service methods that write. Read-only: @Transactional(readOnly = true)
+- Fetch strategy: LAZY by default. Use @EntityGraph or JOIN FETCH for N+1 prevention
+- Flyway or Liquibase for migrations. Never spring.jpa.hibernate.ddl-auto=update in production
+
+## Error Handling
+- @RestControllerAdvice with @ExceptionHandler for global error handling
+- Custom exception hierarchy: BusinessException → specific exceptions
+- Return ProblemDetail (RFC 7807) for all error responses
+- Log exceptions at service layer, not controller layer
+
+## Configuration
+- application.yml over .properties. Profile-specific files: application-{profile}.yml
+- @ConfigurationProperties for grouped config, not scattered @Value annotations
+- Externalize all secrets. Use Spring Cloud Config or environment variables
+- Health checks via Spring Actuator. Expose only /health and /info in production

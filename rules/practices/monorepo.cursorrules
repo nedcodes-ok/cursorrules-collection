@@ -1,0 +1,40 @@
+
+# Monorepo Cursor Rules
+
+You are an expert in monorepo architecture. Follow these rules:
+
+## Workspace Structure
+- Use a flat packages/ or apps/ + packages/ layout — max one level of nesting
+- Each package has its own package.json/pyproject.toml with explicit dependencies
+- Shared code goes in packages/ — apps consume packages, never import across apps
+- Every package must build independently — no reliance on root-level config
+
+## Dependency Management
+- Use workspace protocol for internal deps: "workspace:*" (pnpm/yarn) or file: references
+- Hoist shared devDependencies to root — keep runtime deps in each package
+- Pin external dependency versions at root to prevent drift across packages
+- Use a lockfile at root — never per-package lockfiles
+
+## Boundaries
+- Never import from another app — apps are deployment units, not libraries
+- Shared types/utils go in a dedicated package (e.g., @repo/shared, @repo/types)
+- Enforce boundaries with ESLint import rules or turborepo/nx task dependencies
+- Each package declares its public API via exports field or index.ts — no deep imports
+
+## Build & Tasks
+- Use Turborepo, Nx, or similar for task orchestration with caching
+- Define task dependencies: build depends on ^build (build deps first)
+- Use --filter to run tasks for changed packages only: turbo run build --filter=...[HEAD~1]
+- Cache build outputs — never rebuild unchanged packages in CI
+
+## CI/CD
+- Run affected-only tests: only test packages changed in the PR
+- Use separate deploy pipelines per app — never deploy all apps on every merge
+- Validate the entire dependency graph in CI: no circular deps, no missing deps
+- Use changesets or similar for coordinated versioning and changelogs
+
+## Code Sharing Patterns
+- Extract shared logic only when used by 3+ consumers — premature sharing creates coupling
+- Version internal packages at 0.x until stable — breaking changes are expected
+- Shared configs (ESLint, TypeScript, Prettier) go in a @repo/config package
+- Use TypeScript project references or composite builds for cross-package type checking

@@ -1,0 +1,46 @@
+---
+description: "Pydantic: BaseModel, validators, Field, Settings"
+globs: ["*.py"]
+alwaysApply: true
+---
+
+# Pydantic Cursor Rules
+
+You are an expert in Pydantic v2 data modeling. Follow these rules:
+
+## Models
+- Inherit from BaseModel for all data classes — never use plain dataclasses for validated data
+- Use model_config = ConfigDict(...) instead of inner class Config (v2 style)
+- Set model_config = ConfigDict(strict=True) when you need strict type coercion
+- Use frozen=True for immutable models — especially for value objects and configs
+
+## Fields
+- Use Field() for metadata: Field(description="...", examples=[...], ge=0, max_length=100)
+- Set Field(default=...) or Field(default_factory=list) — never use mutable defaults
+- Use Annotated[int, Field(gt=0)] style for reusable constrained types
+- Mark optional fields explicitly: name: str | None = None
+
+## Validators
+- Use @field_validator("field_name") for single-field validation
+- Use @model_validator(mode="before") for cross-field or raw-input transforms
+- Use @model_validator(mode="after") for cross-field validation on parsed models
+- Return the value from field validators — forgetting this silently sets None
+- Use mode="wrap" validators only when you need to control the entire parsing pipeline
+
+## Serialization
+- Use model_dump() and model_dump_json() — never dict() (deprecated)
+- Use model_dump(exclude_none=True) to omit unset optional fields
+- Use @field_serializer for custom output formatting (dates, enums, decimals)
+- Use model_validate() and model_validate_json() for deserialization
+
+## Settings
+- Use BaseSettings for environment/config with SettingsConfigDict(env_prefix="APP_")
+- Layer sources: .env file → environment variables → constructor args
+- Use @field_validator for settings that need post-load transformation
+- Separate settings by concern: DatabaseSettings, AuthSettings, AppSettings
+
+## Patterns
+- Use TypeAdapter for validating non-model types: lists, dicts, unions
+- Use discriminated unions with Literal + Discriminator for polymorphic models
+- Use computed_field for derived properties that should appear in serialization
+- Define reusable types: PositiveInt = Annotated[int, Field(gt=0)]
