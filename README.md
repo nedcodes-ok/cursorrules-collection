@@ -9,7 +9,7 @@
 
 ## Need help with your setup?
 
-I do [$50 async audits](https://cursorrulespacks.github.io/) of Cursor configurations. You send your files, I send back a written report with exactly what to fix. [Details here](https://cursorrulespacks.github.io/).
+I do $50 async audits of Cursor configurations. You send your files, I send back a written report with exactly what to fix. Email **cursorrulespacks@gmail.com** to get started. [Details here](https://cursorrulespacks.github.io/).
 
 ---
 
@@ -176,7 +176,7 @@ PRs welcome. See [CONTRIBUTING.md](CONTRIBUTING.md). The bar: rules should be sp
 
 ## Need more help?
 
-[$50 async setup audits](https://cursorrulespacks.github.io/) — I review your rules, project structure, and model settings. Written report in 48 hours.
+$50 async setup audits — I review your rules, project structure, and model settings. Written report in 48 hours. Email **cursorrulespacks@gmail.com** or [see details](https://cursorrulespacks.github.io/).
 
 ## Other tools
 
