@@ -186,3 +186,11 @@ $50 async setup audits — I review your rules, project structure, and model set
 ## License
 
 MIT
+
+---
+
+## Related
+
+- [cursor-lint](https://github.com/cursorrulespacks/cursor-lint) — CLI tool to check your .cursorrules and .mdc files for errors
+- [Cursor Setup Audit](https://cursorrulespacks.gumroad.com/l/cursor-setup-audit) — Professional review of your rules setup ($50)
+- [Articles on Dev.to](https://dev.to/nedcodes) — Guides on writing effective Cursor rules
