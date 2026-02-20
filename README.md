@@ -7,9 +7,13 @@
 
 > **⚠️ Using Cursor agent mode?** Use the `.mdc` files in `rules-mdc/`. Both `.cursorrules` and `.mdc` are loaded, but `.mdc` takes precedence on conflicts and gives you frontmatter (`alwaysApply`, globs). [More details](https://dev.to/nedcodes/cursor-agent-mode-ignores-cursorrules-use-mdc-instead-5flb).
 
-## Need help with your setup?
+## Validate your rules
 
-I do $50 async audits of Cursor configurations. You send your files, I send back a written report with exactly what to fix. Email **cursorrulespacks@gmail.com** to get started. [Details here](https://cursorrulespacks.github.io/).
+```bash
+npx cursor-lint
+```
+
+Catches broken frontmatter, missing `alwaysApply`, bad globs, and other silent failures. [More info](https://github.com/cursorrulespacks/cursor-lint).
 
 ---
 
@@ -174,14 +178,29 @@ cat rules/languages/typescript.cursorrules rules/frameworks/nextjs.cursorrules >
 
 PRs welcome. See [CONTRIBUTING.md](CONTRIBUTING.md). The bar: rules should be specific enough to actually change Cursor's output. "Write clean code" doesn't count.
 
-## Need more help?
+## Validate Your Rules
 
-$50 async setup audits — I review your rules, project structure, and model settings. Written report in 48 hours. Email **cursorrulespacks@gmail.com** or [see details](https://cursorrulespacks.github.io/).
+**[cursor-lint](https://github.com/cursorrulespacks/cursor-lint)** catches broken frontmatter, missing `alwaysApply`, and other silent failures before they waste your tokens.
 
-## Other tools
+```bash
+npx cursor-lint
+```
 
-- [cursor-lint](https://github.com/cursorrulespacks/cursor-lint) — Lint your Cursor rules. Catches common mistakes before they break your workflow.
-- [More articles on Dev.to](https://dev.to/nedcodes) — Tests, guides, and things I've learned about making Cursor actually listen.
+Works in CI too — **[cursor-lint-action](https://github.com/cursorrulespacks/cursor-lint-action)** runs on every PR:
+
+```yaml
+- uses: cursorrulespacks/cursor-lint-action@v1
+```
+
+Also available as a [VS Code / Cursor extension](https://open-vsx.org/extension/nedcodes/cursor-lint).
+
+## Need a setup review?
+
+**[$50 async audit](https://cursorrulespacks.gumroad.com/l/cursor-setup-audit)** — I review your rules, project structure, and model settings. Written report with exactly what to fix, delivered in 48 hours. Use code **FIRSTAUDIT** for 20% off.
+
+## More
+
+- [Articles on Dev.to](https://dev.to/nedcodes) — Tests, experiments, and guides on making Cursor actually listen
 
 ## License
 
