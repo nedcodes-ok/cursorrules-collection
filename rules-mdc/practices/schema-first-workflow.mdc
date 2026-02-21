@@ -1,0 +1,40 @@
+---
+description: "Schema-first development: define data models and docs before writing application code"
+alwaysApply: false
+---
+
+# Schema-First Development Workflow
+
+Follow this workflow strictly. Do not skip ahead to application code.
+
+## Phase 1: Documentation
+- Write a PRD (product requirements doc) before touching any code
+- Define the architecture: which services, how they communicate, what owns what
+- Get the docs right first. If the docs are wrong, the code will be wrong
+
+## Phase 2: Data Models
+- Define all database schemas, API contracts, and type definitions
+- Use your ORM's schema definition (Prisma, Drizzle, SQLAlchemy, TypeORM)
+- Every entity needs: fields, types, relationships, constraints, indexes
+- Write seed data that exercises all relationships and edge cases
+- Validate schemas against the PRD. If they don't match, fix the schema, not the PRD
+
+## Phase 3: Schema Validation
+- Run migrations. Verify they apply cleanly
+- Load seed data. Verify relationships work
+- Write schema-level tests: unique constraints, cascade deletes, required fields
+- Do NOT proceed until the data layer is solid
+
+## Phase 4: Application Code
+- Now build features against the validated schemas
+- Every feature references the existing schema types. No inline type definitions
+- If a feature needs a schema change, go back to Phase 2 first
+- Do NOT add columns, tables, or fields ad-hoc during feature development
+
+## Schema Changes Mid-Build
+- Stop current feature work
+- Update the schema definition
+- Write and run the migration
+- Update seed data
+- Verify existing tests still pass
+- Then resume feature work with the updated types

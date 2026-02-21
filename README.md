@@ -3,7 +3,7 @@
 [![Stars](https://img.shields.io/github/stars/cursorrulespacks/cursorrules-collection?style=social)](https://github.com/cursorrulespacks/cursorrules-collection)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-97 rules for Cursor AI in both `.mdc` and `.cursorrules` format. Copy to your project and Cursor actually writes code the way you want it to.
+98 rules for Cursor AI in both `.mdc` and `.cursorrules` format. Copy to your project and Cursor actually writes code the way you want it to.
 
 > **⚠️ Using Cursor agent mode?** Use the `.mdc` files in `rules-mdc/`. Both `.cursorrules` and `.mdc` are loaded, but `.mdc` takes precedence on conflicts and gives you frontmatter (`alwaysApply`, globs). [More details](https://dev.to/nedcodes/cursor-agent-mode-ignores-cursorrules-use-mdc-instead-5flb).
 
@@ -37,6 +37,27 @@ Each `.mdc` file includes:
 - `alwaysApply: true` (required for agent mode)
 - `globs` for file-type scoping where applicable (e.g. Python rules only apply to `*.py`)
 - `description` for Cursor's context
+
+## 🔧 Make It Yours
+
+These rules are starting points, not finished configs. The more specific they are to YOUR project, the better they work.
+
+**Step 1:** Grab the rule for your stack (e.g. `react.mdc`)
+
+**Step 2:** Open it and delete anything that doesn't match your patterns. Using Redux instead of Context? Zustand instead of TanStack Query? Edit the rule.
+
+**Step 3:** Add your project-specific conventions:
+```markdown
+## Our Conventions
+- All API calls go through src/lib/api.ts
+- Use date-fns, not moment
+- Component files are PascalCase, utilities are camelCase
+- Tests live next to the file they test (Button.test.tsx)
+```
+
+**Step 4:** Validate with `npx cursor-lint` to make sure the frontmatter is correct.
+
+The generic version gets you 70% there. The last 30% is what makes the rule actually useful for your codebase.
 
 ## 📝 Articles & Guides
 
