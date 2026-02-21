@@ -222,6 +222,10 @@ Also available as a [VS Code / Cursor extension](https://open-vsx.org/extension/
 
 - [Articles on Dev.to](https://dev.to/nedcodes) — Tests, experiments, and guides on making Cursor actually listen
 
+---
+
+If these rules saved you time, [⭐ star the repo](https://github.com/cursorrulespacks/cursorrules-collection) so others can find it.
+
 ## License
 
 MIT
