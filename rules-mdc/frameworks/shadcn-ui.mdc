@@ -3,27 +3,41 @@ description: shadcn/ui component patterns, styling conventions, and form integra
 globs: **/components/ui/**,**/components/**
 alwaysApply: false
 ---
+
 # shadcn/ui Rules
 
 ## Component Usage
-- Import components from @/components/ui/, never from shadcn source
-- Use the CLI to add new components: npx shadcn-ui@latest add [component]
-- Do not modify files in components/ui/ directly — extend with wrapper components instead
-- Always check if a component exists before creating a custom version
+- Import components from @/components/ui/, never from the underlying Radix/react-aria source directly
+- Add new components via CLI: `npx shadcn-ui@latest add [component]` — this copies source into your project, not a node_modules dependency
+- Do not modify files in components/ui/ directly — create wrapper components in components/ that compose the ui/ primitives. When you re-run `add`, your changes get overwritten
+- Check if a shadcn component exists before building custom: Button, Dialog, Sheet, Popover, Command, Table, Form, Toast, Tabs, Accordion, etc. — the library covers more than people expect
+- shadcn components are unstyled skeletons using your theme — they look broken without your tailwind config and globals.css set up
 
 ## Styling
-- Use the cn() utility for conditional classes, never string concatenation
-- Follow the existing color convention: use CSS variables (--primary, --secondary, etc.) not raw Tailwind colors
-- Dark mode: rely on the built-in dark: variants already in shadcn components
-- Do not add custom colors without defining them in globals.css as CSS variables
+- Use the cn() utility (lib/utils.ts) for all conditional classes — it wraps clsx + tailwind-merge so conflicting utilities resolve correctly
+- Follow the existing color convention: CSS variables in globals.css (--primary, --secondary, --muted, --destructive, --ring, etc.) mapped in tailwind.config — never use raw Tailwind colors like `bg-blue-500` in shadcn components
+- Dark mode is built in via CSS variable switching — the same component renders both modes if your CSS variables are set up for both .dark and :root
+- When extending a component's style, pass className to the component root — shadcn components forward className and merge it with cn()
 
-## Patterns
-- Forms: use react-hook-form + zod with shadcn Form components
-- Dialogs/Sheets: manage open state with controlled components, not refs
-- Tables: use @tanstack/react-table with shadcn DataTable pattern
-- Toast notifications: use the sonner integration, not custom toast implementations
+## Forms
+- Use react-hook-form + zod + shadcn `<Form>` components together — FormField, FormItem, FormLabel, FormControl, FormMessage provide accessible wiring automatically
+- FormField's `render` prop gives you `field` — spread it onto the shadcn input: `<Input {...field} />`. Don't manually wire onChange/value
+- FormMessage renders the zod error for that field automatically — no need for custom error display logic
+- For select/combobox in forms, use shadcn Select inside FormControl — it handles the hidden input value that react-hook-form needs
+
+## Dialog/Sheet/Modal Patterns
+- Manage open state with controlled components (open + onOpenChange props), not refs or imperative handles
+- To close a dialog after a form submission: call `setOpen(false)` in the onSubmit success handler, not in the action
+- Nested dialogs are possible but fragile — prefer Sheet for secondary panels instead of stacking Dialogs
+- CommandDialog (cmdk integration) is the pattern for command palettes / search — don't build custom
+
+## Data Table
+- Use @tanstack/react-table with the shadcn DataTable pattern — column definitions are typed, features like sorting/filtering/pagination are composable
+- Column header components handle sort indicators — don't build custom sort UIs
+- Row selection, column visibility, and faceted filters are all documented patterns — check shadcn docs before building custom
 
 ## Anti-patterns
-- Do not wrap shadcn components in unnecessary divs for styling — use className prop
-- Do not mix Headless UI or Radix primitives directly when shadcn already wraps them
-- Do not hardcode colors — always use theme tokens
+- Do not wrap shadcn components in unnecessary divs for styling — use className prop, they accept it
+- Do not import Radix primitives directly when shadcn already wraps them — you'll lose the styling and accessibility wiring
+- Do not hardcode colors anywhere — always use theme tokens (--primary, etc.)
+- Do not use `toast()` from other libraries when sonner is already integrated via shadcn — one toast system per app

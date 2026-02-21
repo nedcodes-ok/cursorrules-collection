@@ -83,6 +83,9 @@ Same prompts, different output. Left side is vanilla Cursor, right side is with 
 
 ### Languages
 
+**Deep coverage:** Python, JavaScript, TypeScript, Go, Rust, Java — version-specific gotchas, tested patterns, real traps.
+**Starter templates:** C#, Ruby, PHP, Swift, Kotlin, Elixir, Scala, C++ — solid foundations, customize for your project.
+
 | Rule | .mdc (agent mode) | .cursorrules (legacy) |
 |------|---|---|
 | Python | [python.mdc](rules-mdc/languages/python.mdc) | [python.cursorrules](rules/languages/python.cursorrules) |
@@ -101,6 +104,9 @@ Same prompts, different output. Left side is vanilla Cursor, right side is with 
 | C++ | [cpp.mdc](rules-mdc/languages/cpp.mdc) | [cpp.cursorrules](rules/languages/cpp.cursorrules) |
 
 ### Frameworks
+
+**Deep coverage:** React, Next.js, Vue, Angular, Django, FastAPI, Express, Tailwind CSS, shadcn/ui — version-specific, gotcha-heavy, opinionated.
+**Solid coverage:** Everything else — good patterns and conventions, ready to customize.
 
 | Rule | .mdc (agent mode) | .cursorrules (legacy) |
 |------|---|---|

@@ -1,39 +1,54 @@
 ---
-description: "Modern Java: records, sealed classes, streams"
+description: "Modern Java: records, sealed classes, streams, virtual threads"
 globs: ["*.java"]
 alwaysApply: true
 ---
 
 # Java Cursor Rules
 
-You are an expert Java developer. Follow these rules:
+You are an expert Java developer (17+, preferably 21+). Follow these rules:
 
-## Code Style
-- Target Java 17+: records, sealed classes, pattern matching, text blocks
-- Use records for immutable data carriers instead of POJOs
-- Use sealed classes for restricted type hierarchies
-- Follow Google Java Style Guide
+## Modern Java Features
+- Target Java 17+ minimum: records, sealed classes, pattern matching for instanceof, text blocks, switch expressions
+- Java 21+: virtual threads, record patterns, sequenced collections, pattern matching for switch
+- `record UserDTO(String name, String email) {}` for immutable data carriers — replaces POJOs with equals/hashCode/toString generated. Don't add mutable fields or setters to records
+- `sealed interface Shape permits Circle, Rectangle {}` for closed type hierarchies — the compiler ensures all subtypes are handled in switch/pattern matching
+- Text blocks (`"""`) for multi-line strings (SQL, JSON, HTML templates) — no more string concatenation hell
+- Switch expressions: `var label = switch(status) { case ACTIVE -> "Active"; case INACTIVE -> "Disabled"; };` — exhaustiveness checked by compiler with sealed types
 
 ## Design
-- Favor composition over inheritance
-- Apply SOLID principles: single responsibility, dependency inversion
-- Use Optional<T> for return types that may be absent. Never pass Optional as parameter
-- Make classes immutable by default: final fields, no setters
+- Composition over inheritance — `extends` creates tight coupling. Use interfaces + delegation
+- `Optional<T>` for return types that may be absent. Never use Optional as a method parameter, field, or collection element — it's a return type signal, not a general-purpose wrapper
+- Immutable by default: `final` fields, no setters, constructor initialization. Use `record` or manually immutable classes. Mutable state is the source of most concurrency bugs
+- Dependency injection via constructor, not field injection (`@Autowired` on fields) — constructor injection is explicit, testable, and fails fast on missing dependencies
 
 ## Collections & Streams
-- Use List.of(), Map.of(), Set.of() for immutable collections
-- Use Stream API for transformations (max 4-5 operations per chain)
-- Prefer var for local variables when type is obvious
-- Use EnumMap/EnumSet for enum-keyed collections
+- `List.of()`, `Map.of()`, `Set.of()` for immutable collections — they throw on modification attempts. `List.copyOf()` for defensive copies
+- Stream API for transformations, keep chains to 4-5 operations max. Beyond that, extract intermediate variables or helper methods — unreadable streams are worse than loops
+- `var` for local variables when the type is obvious from the right side: `var users = repository.findAll()`. Don't use `var` when the type isn't clear: `var result = process(data)` — what's result?
+- `EnumMap` / `EnumSet` for enum-keyed collections — faster and more memory-efficient than HashMap/HashSet with enum keys
+- `toList()` (Java 16+) over `.collect(Collectors.toList())` — shorter and returns an unmodifiable list
+
+## Concurrency
+- Virtual threads (Java 21+): `Thread.ofVirtual().start(() -> ...)` or `Executors.newVirtualThreadPerTaskExecutor()` for I/O-bound work — millions of threads without thread pool tuning
+- Don't use virtual threads for CPU-bound work — they share carrier threads and CPU-bound tasks block them
+- `synchronized` blocks for simple cases, `ReentrantLock` when you need tryLock or timed waiting. `ConcurrentHashMap` over synchronized HashMap
+- Never catch `InterruptedException` and ignore it — re-set the interrupt flag: `Thread.currentThread().interrupt()` or propagate it
 
 ## Error Handling
-- Create domain-specific exceptions extending RuntimeException
-- Use try-with-resources for all AutoCloseable resources
-- Log exceptions with full context at catch site
-- Never catch Exception or Throwable unless at outermost boundary
+- Domain-specific exceptions extending `RuntimeException` (unchecked) for business logic errors. Checked exceptions only for recoverable conditions the caller must handle
+- `try-with-resources` for all `AutoCloseable` resources — files, connections, streams. Missing this causes resource leaks that only show up under load
+- Log exceptions with full context at the catch site: `log.error("Failed to fetch user {}: {}", userId, e.getMessage(), e)` — the third arg `e` gives you the stack trace
+- Never catch `Exception` or `Throwable` unless at the outermost boundary (main, request handler). Catching broadly hides bugs
 
 ## Testing
-- Use JUnit 5 with @DisplayName annotations
-- Use Mockito for mocking, AssertJ for fluent assertions
-- Structure tests as Arrange-Act-Assert
-- Use @ParameterizedTest for data-driven tests
+- JUnit 5 with `@DisplayName("returns empty list when no users match filter")` — test names in CI output should read as documentation
+- Mockito for mocking dependencies: `@ExtendWith(MockitoExtension.class)` + `@Mock` + `@InjectMocks`. Don't mock types you own — use test doubles or in-memory implementations
+- AssertJ for fluent assertions: `assertThat(users).hasSize(3).extracting(User::name).contains("Alice")` — far more readable than JUnit's assertEquals
+- `@ParameterizedTest` with `@CsvSource` or `@MethodSource` for data-driven tests — one test method, many inputs
+
+## Common Traps
+- `==` compares references for objects, `.equals()` compares values. `Integer` values outside -128 to 127 are different objects, so `==` fails silently
+- `String.format()` is slow in hot paths — use concatenation or StringBuilder for performance-critical logging/string building
+- `HashMap` with mutable keys is a silent data corruption bug — if the key's hashCode changes after insertion, the entry becomes unretrievable
+- `@Transactional` on a private method does nothing in Spring — the proxy can't intercept it. Must be on a public method called from outside the class
