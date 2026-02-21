@@ -1,0 +1,44 @@
+---
+description: "AGENTS.md: project instructions for OpenAI Codex and compatible tools"
+globs: ["AGENTS.md", "AGENTS.override.md"]
+alwaysApply: false
+---
+
+# AGENTS.md Rules
+
+AGENTS.md is the instruction file for OpenAI Codex (and increasingly, other tools like GitHub Copilot coding agent, Zed, and OpenCode). It's loaded once per session before any work begins.
+
+## Discovery Chain
+- **Global**: `~/.codex/AGENTS.md` (or `AGENTS.override.md` if it exists — override takes priority, only one file at this level)
+- **Project**: Starting from the Git root, Codex walks down to your current working directory, checking each directory for `AGENTS.override.md` then `AGENTS.md`. At most one file per directory
+- **Merge order**: Files concatenate root-to-leaf, separated by blank lines. Later files override earlier guidance because they appear last in the combined prompt
+- **Size limit**: 32 KiB combined by default (`project_doc_max_bytes` config). If you hit it, split instructions into subdirectory files
+
+## What Goes In AGENTS.md
+- **Working agreements**: "Always run `npm test` after modifying JavaScript files," "Prefer `pnpm` when installing dependencies"
+- **Verification commands**: How to build, test, lint, typecheck. Codex runs these to validate its own changes
+- **Repo conventions**: naming patterns, directory structure expectations, PR requirements
+- **Tool preferences**: which package manager, which test runner, which formatter — Codex won't guess correctly without this
+
+## Override Files
+- `AGENTS.override.md` in any directory replaces `AGENTS.md` at that same level — useful for temporary overrides without editing the base file
+- Common use: a `services/payments/AGENTS.override.md` that says "use `make test-payments` instead of `npm test`" for that specific service
+- Delete the override to restore the base instructions
+
+## Patterns That Work
+- Keep global (`~/.codex/AGENTS.md`) minimal — personal preferences that apply everywhere (coding style, preferred tools, commit message format)
+- Project root AGENTS.md handles repo-wide setup: build commands, CI expectations, PR conventions
+- Subdirectory overrides for teams/services with different tooling or constraints
+- Commands first, conventions second — Codex needs to know how to verify its work before anything else
+
+## Anti-Patterns
+- Don't duplicate what's in your README or CONTRIBUTING.md — Codex can read files. AGENTS.md is for persistent behavioral instructions, not documentation
+- Don't put task-specific instructions in AGENTS.md — it's loaded every session. "Fix the payment bug in checkout.ts" doesn't belong here
+- Don't rely on AGENTS.md to change the model's personality or communication style — it's designed for code-level working agreements
+- Avoid very long files — 32 KiB is the hard limit, and attention degrades well before that. Be concise
+
+## AGENTS.md Is Becoming a Standard
+- GitHub Copilot coding agent now reads AGENTS.md files (announced July 2025)
+- GitHub also supports CLAUDE.md and GEMINI.md at the repo root as alternatives
+- Copilot has its own format too: `.github/copilot-instructions.md` and path-specific `.github/instructions/*.instructions.md`
+- The ecosystem is fragmenting — if you support multiple tools, you may need multiple instruction files. AGENTS.md has the broadest adoption beyond its origin tool

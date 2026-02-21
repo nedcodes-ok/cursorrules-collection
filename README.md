@@ -3,7 +3,7 @@
 [![Stars](https://img.shields.io/github/stars/cursorrulespacks/cursorrules-collection?style=social)](https://github.com/cursorrulespacks/cursorrules-collection)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-98 rules for Cursor AI in both `.mdc` and `.cursorrules` format. Copy to your project and Cursor actually writes code the way you want it to.
+104 rules for AI coding tools — Cursor, Claude Code, Copilot, Windsurf, Gemini CLI, and Codex. Available in `.mdc` and `.cursorrules` format. Copy to your project and Cursor actually writes code the way you want it to.
 
 > **⚠️ Using Cursor agent mode?** Use the `.mdc` files in `rules-mdc/`. Both `.cursorrules` and `.mdc` are loaded, but `.mdc` takes precedence on conflicts and gives you frontmatter (`alwaysApply`, globs). [More details](https://dev.to/nedcodes/cursor-agent-mode-ignores-cursorrules-use-mdc-instead-5flb).
 
@@ -203,6 +203,19 @@ Same prompts, different output. Left side is vanilla Cursor, right side is with 
 | pytest | [pytest.mdc](rules-mdc/tools/pytest.mdc) | [pytest.cursorrules](rules/tools/pytest.cursorrules) |
 | LangChain | [langchain.mdc](rules-mdc/tools/langchain.mdc) | [langchain.cursorrules](rules/tools/langchain.cursorrules) |
 | Ruff | [ruff.mdc](rules-mdc/tools/ruff.mdc) | [ruff.cursorrules](rules/tools/ruff.cursorrules) |
+
+### AI Tools (NEW)
+
+Not just Cursor — rules and patterns for configuring any AI coding tool.
+
+| Rule | .mdc |
+|------|------|
+| CLAUDE.md (Claude Code) | [claude-md.mdc](rules-mdc/ai-tools/claude-md.mdc) |
+| AGENTS.md (OpenAI Codex) | [agents-md.mdc](rules-mdc/ai-tools/agents-md.mdc) |
+| GitHub Copilot Instructions | [copilot-instructions.mdc](rules-mdc/ai-tools/copilot-instructions.mdc) |
+| Windsurf Rules & Workflows | [windsurf-rules.mdc](rules-mdc/ai-tools/windsurf-rules.mdc) |
+| GEMINI.md (Gemini CLI) | [gemini-md.mdc](rules-mdc/ai-tools/gemini-md.mdc) |
+| Cross-Tool Config Guide | [cross-tool-config.mdc](rules-mdc/ai-tools/cross-tool-config.mdc) |
 
 ## Using Multiple Rules
 

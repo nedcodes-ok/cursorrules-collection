@@ -1,0 +1,53 @@
+---
+description: "Windsurf: rules files, workflows, and Cascade customization"
+globs: [".windsurfrules", ".windsurf/rules/**", ".windsurf/workflows/**"]
+alwaysApply: false
+---
+
+# Windsurf Rules
+
+Windsurf (formerly Codeium) has two customization systems: Rules (persistent context) and Workflows (step-by-step sequences).
+
+## Rules (Persistent Context)
+- **Current format (Wave 8+)**: Markdown files in `.windsurf/rules/` at the project root. Each file gets a descriptive name and contains rules in plain markdown
+- **Legacy format**: Single `.windsurfrules` file at the project root (still supported, but the new format is preferred)
+- Rules provide persistent context to Cascade (Windsurf's AI agent) for every interaction — similar to .cursorrules or CLAUDE.md
+- The GUI provides a visual editor wrapper around the markdown files, but you can edit them directly
+
+## Rules Discovery
+- Windsurf searches for `.windsurf/rules/` directories in your current workspace, sub-directories, and parent directories up to the Git root
+- When multiple workspaces are open, rules are deduplicated and shown with the shortest relative path
+- Rules files are limited to 12,000 characters each
+
+## What Goes In Rules
+- Build, test, and deployment commands
+- Framework and library preferences
+- Coding conventions and style requirements
+- File organization expectations
+- Things Cascade should avoid: "don't modify files in vendor/," "don't use deprecated API v1 endpoints"
+
+## Workflows (Step-by-Step Sequences)
+- Markdown files in `.windsurf/workflows/` directories
+- Each workflow has a title, description, and a series of steps with specific instructions
+- Invoked via slash command: `/[workflow-name]` in Cascade
+- Cascade processes each step sequentially — useful for repetitive multi-step processes
+
+## Workflow Use Cases
+- Deployment sequences: build → test → deploy → verify
+- PR review processes: check code → run tests → review checklist
+- Environment setup: install deps → configure env → seed database → verify
+- Incident response: check logs → identify issue → apply fix → validate
+
+## Workflow Discovery
+- Same directory scanning as rules: current workspace, sub-directories, and up to Git root
+- System-level workflows (Enterprise): placed in OS-specific directories, globally available, admin-controlled
+  - macOS: `/Library/Application Support/Windsurf/workflows/*.md`
+  - Linux: `/etc/windsurf/workflows/*.md`
+- You can ask Cascade to generate workflows for you — describe the process and it creates the markdown file
+
+## Key Differences From Other Tools
+- Windsurf is the only tool with a built-in Workflow system (step-by-step sequences). Other tools just have flat instruction files
+- Rules format is plain markdown with no frontmatter metadata — no equivalent to Cursor's `alwaysApply`, `globs`, or `description` fields
+- No global user-level rules file (unlike CLAUDE.md's `~/.claude/CLAUDE.md` or AGENTS.md's `~/.codex/AGENTS.md`) — rules are always project-scoped
+- The 12,000 character limit per file is stricter than other tools. Split large rule sets into multiple files in the `.windsurf/rules/` directory
+- Legacy `.windsurfrules` is a single flat file at the project root, similar to `.cursorrules`. The new system in `.windsurf/rules/` allows multiple files

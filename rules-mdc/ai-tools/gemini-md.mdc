@@ -1,0 +1,44 @@
+---
+description: "GEMINI.md: project context for Gemini CLI and Google AI tools"
+globs: ["GEMINI.md"]
+alwaysApply: false
+---
+
+# GEMINI.md Rules
+
+GEMINI.md provides instructional context to the Gemini CLI. It's loaded with every prompt, so instructions defined once apply to every interaction without repeating them.
+
+## Discovery Hierarchy
+- **Global**: `~/.gemini/GEMINI.md` — default instructions for all projects
+- **Project root and ancestors**: Gemini CLI searches for GEMINI.md from your current working directory up through each parent directory to the project root (identified by `.git` folder)
+- **Sub-directory files**: Also scans subdirectories below your current working directory. Respects `.gitignore` and `.geminiignore`
+- All found files are concatenated and sent with every prompt. The CLI footer shows the number of loaded context files
+
+## What Goes In GEMINI.md
+- Coding style: indentation, naming conventions, formatting preferences
+- Project-specific patterns: "prefix interface names with `I`," "use strict equality," "always add JSDoc comments"
+- Tool preferences: build system, test framework, package manager
+- Architecture context: what the project does, how it's structured, key directories
+
+## The /memory Command
+- Use `/memory` (or `/mem`) in Gemini CLI to interact with loaded context files
+- View which files are loaded, see their contents, and understand the active context
+- Useful for debugging when instructions aren't being followed — check if the file is actually loaded
+
+## Patterns That Work
+- Keep global GEMINI.md minimal — personal style preferences that apply to all your projects
+- Project root GEMINI.md covers stack, conventions, build/test commands
+- Subdirectory GEMINI.md files for component-specific or module-specific instructions
+- Use `.geminiignore` to prevent scanning directories that don't need context files (build output, node_modules)
+
+## Anti-Patterns
+- Don't duplicate information available in project files — Gemini can read your code. GEMINI.md is for behavioral instructions, not documentation
+- Don't make files too long — all files concatenate into one context block. Quality over quantity
+- Don't put secrets or credentials in GEMINI.md — it's a committed file
+
+## Gemini vs Other Tools
+- GEMINI.md follows the same general pattern as CLAUDE.md and AGENTS.md: hierarchical, markdown-based, loaded every session
+- GitHub Copilot also recognizes GEMINI.md at the repo root as an alternative to its own instruction format
+- No override file concept (unlike AGENTS.override.md)
+- No frontmatter or metadata — pure markdown content
+- Sub-directory scanning is unique: most other tools only walk upward from the current directory, Gemini also scans downward
