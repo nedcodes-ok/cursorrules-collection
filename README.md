@@ -3,7 +3,7 @@
 [![Stars](https://img.shields.io/github/stars/nedcodes-ok/cursorrules-collection?style=social)](https://github.com/nedcodes-ok/cursorrules-collection)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-104 rules for AI coding tools — Cursor, Claude Code, Copilot, Windsurf, Gemini CLI, and Codex. Available in `.mdc` and `.cursorrules` format. Copy to your project and Cursor actually writes code the way you want it to.
+105+ tested rules for AI coding tools — Cursor, Claude Code, Copilot, Windsurf, Gemini CLI, and Codex. Every rule contains something you can't get from a generic LLM prompt. Copy to your project and start getting better output.
 
 > **⚠️ Using Cursor agent mode?** Use the `.mdc` files in `rules-mdc/`. Both `.cursorrules` and `.mdc` are loaded, but `.mdc` takes precedence on conflicts and gives you frontmatter (`alwaysApply`, globs). [More details](https://dev.to/nedcodes/cursor-agent-mode-ignores-cursorrules-use-mdc-instead-5flb).
 
