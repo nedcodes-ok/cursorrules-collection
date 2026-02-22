@@ -256,7 +256,7 @@ Also available as a [VS Code / Cursor extension](https://open-vsx.org/extension/
 
 ## Need a setup review?
 
-**[$50 async audit](https://cursorrulespacks.gumroad.com/l/cursor-setup-audit)** — I review your rules, project structure, and model settings. Written report with exactly what to fix, delivered in 48 hours. Use code **FIRSTAUDIT** for 20% off.
+**[$50 async audit](https://nedcodes.gumroad.com/l/cursor-setup-audit)** — I review your rules, project structure, and model settings. Written report with exactly what to fix, delivered in 48 hours. Use code **FIRSTAUDIT** for 20% off.
 
 ## More
 
@@ -275,5 +275,5 @@ MIT
 ## Related
 
 - [cursor-lint](https://github.com/cursorrulespacks/cursor-lint) — CLI tool to check your .cursorrules and .mdc files for errors
-- [Cursor Setup Audit](https://cursorrulespacks.gumroad.com/l/cursor-setup-audit) — Professional review of your rules setup ($50)
+- [Cursor Setup Audit](https://nedcodes.gumroad.com/l/cursor-setup-audit) — Professional review of your rules setup ($50)
 - [Articles on Dev.to](https://dev.to/nedcodes) — Guides on writing effective Cursor rules
