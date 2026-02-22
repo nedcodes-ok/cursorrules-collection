@@ -272,6 +272,10 @@ MIT
 
 ---
 
+## Stay Updated
+
+Get experiment results and Cursor findings in your inbox: [subscribe](https://buttondown.com/nedcodes)
+
 ## Related
 
 - [cursor-lint](https://github.com/nedcodes-ok/cursor-lint) — CLI tool to check your .cursorrules and .mdc files for errors
