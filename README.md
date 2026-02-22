@@ -1,6 +1,6 @@
 # cursorrules-collection
 
-[![Stars](https://img.shields.io/github/stars/cursorrulespacks/cursorrules-collection?style=social)](https://github.com/cursorrulespacks/cursorrules-collection)
+[![Stars](https://img.shields.io/github/stars/nedcodes-ok/cursorrules-collection?style=social)](https://github.com/nedcodes-ok/cursorrules-collection)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 104 rules for AI coding tools — Cursor, Claude Code, Copilot, Windsurf, Gemini CLI, and Codex. Available in `.mdc` and `.cursorrules` format. Copy to your project and Cursor actually writes code the way you want it to.
@@ -13,7 +13,7 @@
 npx cursor-lint
 ```
 
-Catches broken frontmatter, missing `alwaysApply`, bad globs, and other silent failures. [More info](https://github.com/cursorrulespacks/cursor-lint).
+Catches broken frontmatter, missing `alwaysApply`, bad globs, and other silent failures. [More info](https://github.com/nedcodes-ok/cursor-lint).
 
 ---
 
@@ -24,13 +24,13 @@ Catches broken frontmatter, missing `alwaysApply`, bad globs, and other silent f
 ```bash
 # Copy the .mdc file into your project's .cursor/rules/ directory
 mkdir -p .cursor/rules
-curl -o .cursor/rules/typescript.mdc https://raw.githubusercontent.com/cursorrulespacks/cursorrules-collection/main/rules-mdc/languages/typescript.mdc
+curl -o .cursor/rules/typescript.mdc https://raw.githubusercontent.com/nedcodes-ok/cursorrules-collection/main/rules-mdc/languages/typescript.mdc
 ```
 
 **For regular Cursor sessions (composer, chat):**
 
 ```bash
-curl -o .cursorrules https://raw.githubusercontent.com/cursorrulespacks/cursorrules-collection/main/rules/languages/typescript.cursorrules
+curl -o .cursorrules https://raw.githubusercontent.com/nedcodes-ok/cursorrules-collection/main/rules/languages/typescript.cursorrules
 ```
 
 Each `.mdc` file includes:
@@ -240,16 +240,16 @@ PRs welcome. See [CONTRIBUTING.md](CONTRIBUTING.md). The bar: rules should be sp
 
 ## Validate Your Rules
 
-**[cursor-lint](https://github.com/cursorrulespacks/cursor-lint)** catches broken frontmatter, missing `alwaysApply`, and other silent failures before they waste your tokens.
+**[cursor-lint](https://github.com/nedcodes-ok/cursor-lint)** catches broken frontmatter, missing `alwaysApply`, and other silent failures before they waste your tokens.
 
 ```bash
 npx cursor-lint
 ```
 
-Works in CI too — **[cursor-lint-action](https://github.com/cursorrulespacks/cursor-lint-action)** runs on every PR:
+Works in CI too — **[cursor-lint-action](https://github.com/nedcodes-ok/cursor-lint-action)** runs on every PR:
 
 ```yaml
-- uses: cursorrulespacks/cursor-lint-action@v1
+- uses: nedcodes-ok/cursor-lint-action@v1
 ```
 
 Also available as a [VS Code / Cursor extension](https://open-vsx.org/extension/nedcodes/cursor-lint).
@@ -264,7 +264,7 @@ Also available as a [VS Code / Cursor extension](https://open-vsx.org/extension/
 
 ---
 
-If these rules saved you time, [⭐ star the repo](https://github.com/cursorrulespacks/cursorrules-collection) so others can find it.
+If these rules saved you time, [⭐ star the repo](https://github.com/nedcodes-ok/cursorrules-collection) so others can find it.
 
 ## License
 
@@ -274,6 +274,6 @@ MIT
 
 ## Related
 
-- [cursor-lint](https://github.com/cursorrulespacks/cursor-lint) — CLI tool to check your .cursorrules and .mdc files for errors
+- [cursor-lint](https://github.com/nedcodes-ok/cursor-lint) — CLI tool to check your .cursorrules and .mdc files for errors
 - [Cursor Setup Audit](https://nedcodes.gumroad.com/l/cursor-setup-audit) — Professional review of your rules setup ($50)
 - [Articles on Dev.to](https://dev.to/nedcodes) — Guides on writing effective Cursor rules
