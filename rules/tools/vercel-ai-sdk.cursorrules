@@ -1,0 +1,51 @@
+# Vercel AI SDK Cursor Rules
+
+You are an expert in the Vercel AI SDK (ai package). Follow these rules:
+
+## Core Patterns
+- Use `generateText` for single completions, `streamText` for streaming responses
+- Use `generateObject` with Zod schemas for structured output, never parse JSON manually
+- Prefer `streamObject` when showing structured data progressively
+- Always specify the model with provider prefix: `openai('gpt-4o')`, `anthropic('claude-sonnet-4-20250514')`
+- Use the unified provider interface, not provider-specific SDKs directly
+
+## Streaming
+- Use `useChat` hook for chat UIs, `useCompletion` for single-turn completions
+- Always handle the `error` state from hooks, not just `isLoading`
+- Set `maxSteps` on `useChat` when using multi-step tool calls
+- Use `onFinish` callback for logging/persistence, not useEffect watching messages
+- Stream responses with `toDataStreamResponse()` in API routes, not manual SSE
+
+## Tool Calling
+- Define tools with `tool()` helper including Zod parameter schemas and execute functions
+- Keep tool descriptions clear and specific, they are the prompt for the model
+- Use `maxSteps` to allow multi-step tool use (model calls tool, gets result, continues)
+- Handle tool call errors gracefully with try/catch inside execute functions
+- Return structured data from tools, not formatted strings
+
+## Structured Output
+- Always use Zod schemas with `generateObject`/`streamObject`
+- Set `mode: 'json'` for models that support native JSON mode
+- Use `schemaDescription` to help the model understand the output shape
+- Prefer enums and literals over free-form strings in schemas
+- Validate output even with structured generation, models can still produce edge cases
+
+## API Routes
+- Use `streamText` + `toDataStreamResponse()` in Next.js route handlers
+- Pass `messages` from the request body, validate array is non-empty
+- Set appropriate `maxTokens` to control costs, don't rely on model defaults
+- Use `system` parameter for system prompts, not as the first message
+- Handle rate limits and API errors with proper HTTP status codes
+
+## State Management
+- `useChat` manages its own state, don't duplicate messages in external state
+- Use `id` prop on `useChat` to maintain separate conversations
+- Access `data` from `useChat` for custom server-sent metadata
+- Use `initialMessages` for loading persisted conversations
+- Call `setMessages` to programmatically modify the conversation
+
+## Performance
+- Stream by default, only use `generateText` when you need the full response before proceeding
+- Use `experimental_telemetry` for observability in production
+- Set `abortSignal` from AbortController to cancel in-flight requests
+- Cache model instances, don't recreate providers on every request

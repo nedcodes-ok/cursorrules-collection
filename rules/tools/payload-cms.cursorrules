@@ -1,0 +1,56 @@
+# Payload CMS Cursor Rules
+
+You are an expert in Payload CMS (v3+). Follow these rules:
+
+## Collections
+- Define collections in separate files, export from `payload.config.ts`
+- Use TypeScript-first config, every collection gets generated types via `payload generate:types`
+- Set `slug` to lowercase kebab-case matching the filename
+- Always define `access` control on every collection, never leave defaults in production
+- Use `admin.useAsTitle` to set which field displays in the admin list view
+- Group related collections with `admin.group`
+
+## Fields
+- Use the most specific field type: `email` not `text` for emails, `number` not `text` for counts
+- Set `required: true` explicitly on mandatory fields
+- Use `validate` functions for custom validation, return a string on error
+- Relationship fields: set `hasMany` explicitly, use `relationTo` with collection slugs
+- Rich text: use Lexical editor (default in v3), configure toolbar features explicitly
+- Use `tabs` and `collapsible` for organizing complex field schemas
+- Define reusable field groups as shared configs, not copy-paste
+
+## Hooks
+- Use `beforeChange` for data transformation, validation, and slug generation
+- Use `afterChange` for side effects (emails, webhooks, cache invalidation)
+- Use `beforeRead` / `afterRead` for computed fields or data enrichment
+- Keep hooks focused on one concern, chain multiple hooks for complex logic
+- Always type hook arguments: `CollectionBeforeChangeHook<YourType>`
+- Access `req.user` in hooks for auth context, `req.payload` for API calls
+
+## Access Control
+- Define `access.create`, `access.read`, `access.update`, `access.delete` on every collection
+- Return `true`/`false` for simple rules, return a `Where` query for field-level filtering
+- Use `req.user` to check roles/permissions, never trust client-side data
+- Create a reusable `isAdmin` access function, don't repeat role checks
+- Field-level access via `access.read` and `access.update` on individual fields
+
+## API Usage
+- Use the Local API (`payload.find`, `payload.create`) in server-side code, not REST
+- Always pass `depth` to control relationship population, default can be expensive
+- Use `where` queries with proper operators (`equals`, `contains`, `in`)
+- Paginate with `limit` and `page`, never fetch all documents without limits
+- Use `select` to fetch only needed fields when performance matters
+
+## Admin UI
+- Custom components go in separate files, use `admin.components` to register
+- Use `admin.description` on fields to guide content editors
+- Set `admin.condition` to conditionally show/hide fields based on other values
+- Custom views via `admin.views` for dashboards or specialized interfaces
+- Keep admin customization minimal, prefer configuration over custom React components
+
+## Performance
+- Add `index: true` on fields used in queries and filters
+- Use `versions` and `drafts` intentionally, they multiply storage
+- Set `defaultSort` on collections to avoid expensive unindexed sorts
+- Use `pagination: false` only when you genuinely need all results
+- Cache expensive Local API calls when data doesn't change frequently

@@ -1,0 +1,65 @@
+---
+description: "Cloudflare Workers: edge computing, KV, D1, R2, Durable Objects"
+globs: ["*.ts", "*.js"]
+alwaysApply: true
+---
+
+# Cloudflare Workers Cursor Rules
+
+You are an expert in Cloudflare Workers and the Workers ecosystem. Follow these rules:
+
+## Request Handling
+- Export a default object with a `fetch` handler, not `addEventListener`
+- Type the `Env` interface for all bindings (KV, D1, R2, secrets)
+- Always return a `Response` object, never throw unhandled errors
+- Use `Request.clone()` before reading the body if you need it multiple times
+- Check `request.method` early and return 405 for unsupported methods
+- Use URL pattern matching or a lightweight router (Hono, itty-router), not giant if/else chains
+
+## Environment and Bindings
+- Access secrets via `env.SECRET_NAME`, never hardcode credentials
+- Define all bindings in `wrangler.toml` and type them in the `Env` interface
+- Use `wrangler secret put` for sensitive values, not `vars` in wrangler.toml
+- Service bindings for worker-to-worker communication instead of fetch to public URLs
+
+## KV Storage
+- KV is eventually consistent, don't use it for data that needs immediate read-after-write
+- Always set appropriate TTL with `expirationTtl` for cache-like data
+- Use `getWithMetadata` when you need to check freshness or store auxiliary info
+- Batch reads with `list` + individual `get` calls, there is no `getMany`
+- Keys are strings, keep them short and structured (e.g., `user:123:profile`)
+
+## D1 Database
+- Use parameterized queries with `?` placeholders, never string concatenation
+- Prefer `db.batch()` for multiple related queries in one round trip
+- D1 is SQLite-based: use SQLite syntax and types (TEXT, INTEGER, REAL, BLOB)
+- Always handle the `results` and `error` fields from query responses
+- Create indexes for columns used in WHERE and ORDER BY clauses
+
+## R2 Storage
+- Use R2 for files and blobs, not KV (KV has a 25MB value limit)
+- Always set `Content-Type` when putting objects
+- Use `onlyIf` with `httpMetadata` for conditional requests (ETags, If-Modified-Since)
+- Multipart uploads for files over 100MB via `createMultipartUpload`
+- Set CORS headers on responses when serving to browsers
+
+## Durable Objects
+- Use for coordination, sessions, rate limiting, or anything needing strong consistency
+- Keep state minimal, Durable Objects are not databases
+- Use `blockConcurrencyWhile` in the constructor for async initialization
+- Implement `alarm()` for scheduled cleanup or background work
+- Handle WebSocket connections in Durable Objects for real-time features
+
+## Performance
+- Workers have a 128MB memory limit and 30s CPU time (paid plan)
+- Avoid large JSON parsing in the hot path, stream when possible
+- Use `waitUntil` for logging, analytics, and non-critical async work after response
+- Cache API (`caches.default`) for caching dynamic responses at the edge
+- Keep cold start time low: minimize top-level imports and initialization
+
+## Common Pitfalls
+- No Node.js built-in modules (fs, path, etc.) unless using nodejs_compat flag
+- `Date.now()` returns the time the request started, not current wall time
+- Subrequests are limited (50 on free, 1000 on paid per request)
+- Global variables persist between requests on the same isolate, don't leak state
+- Always handle CORS preflight (OPTIONS) requests explicitly

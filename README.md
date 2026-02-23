@@ -3,7 +3,7 @@
 [![Stars](https://img.shields.io/github/stars/nedcodes-ok/cursorrules-collection?style=social)](https://github.com/nedcodes-ok/cursorrules-collection)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-105+ tested rules for AI coding tools — Cursor, Claude Code, Copilot, Windsurf, Gemini CLI, and Codex. Every rule contains something you can't get from a generic LLM prompt. Copy to your project and start getting better output.
+110+ tested rules for AI coding tools — Cursor, Claude Code, Copilot, Windsurf, Gemini CLI, and Codex. Every rule contains something you can't get from a generic LLM prompt. Copy to your project and start getting better output.
 
 > **⚠️ Using Cursor agent mode?** Use the `.mdc` files in `rules-mdc/`. Both `.cursorrules` and `.mdc` are loaded, but `.mdc` takes precedence on conflicts and gives you frontmatter (`alwaysApply`, globs). [More details](https://dev.to/nedcodes/cursor-agent-mode-ignores-cursorrules-use-mdc-instead-5flb).
 
@@ -143,6 +143,7 @@ Same prompts, different output. Left side is vanilla Cursor, right side is with 
 | Spring Boot | [spring-boot.mdc](rules-mdc/frameworks/spring-boot.mdc) | [spring-boot.cursorrules](rules/frameworks/spring-boot.cursorrules) |
 | htmx | [htmx.mdc](rules-mdc/frameworks/htmx.mdc) | [htmx.cursorrules](rules/frameworks/htmx.cursorrules) |
 | SvelteKit | [sveltekit.mdc](rules-mdc/frameworks/sveltekit.mdc) | [sveltekit.cursorrules](rules/frameworks/sveltekit.cursorrules) |
+| React Native | [react-native.mdc](rules-mdc/frameworks/react-native.mdc) | [react-native.cursorrules](rules/frameworks/react-native.cursorrules) |
 | Expo / React Native | [expo.mdc](rules-mdc/frameworks/expo.mdc) | [expo.cursorrules](rules/frameworks/expo.cursorrules) |
 | Electron | [electron.mdc](rules-mdc/frameworks/electron.mdc) | [electron.cursorrules](rules/frameworks/electron.cursorrules) |
 | Tauri | [tauri.mdc](rules-mdc/frameworks/tauri.mdc) | [tauri.cursorrules](rules/frameworks/tauri.cursorrules) |
@@ -207,6 +208,9 @@ Same prompts, different output. Left side is vanilla Cursor, right side is with 
 | pytest | [pytest.mdc](rules-mdc/tools/pytest.mdc) | [pytest.cursorrules](rules/tools/pytest.cursorrules) |
 | LangChain | [langchain.mdc](rules-mdc/tools/langchain.mdc) | [langchain.cursorrules](rules/tools/langchain.cursorrules) |
 | Ruff | [ruff.mdc](rules-mdc/tools/ruff.mdc) | [ruff.cursorrules](rules/tools/ruff.cursorrules) |
+| Vercel AI SDK | [vercel-ai-sdk.mdc](rules-mdc/tools/vercel-ai-sdk.mdc) | [vercel-ai-sdk.cursorrules](rules/tools/vercel-ai-sdk.cursorrules) |
+| Cloudflare Workers | [cloudflare-workers.mdc](rules-mdc/tools/cloudflare-workers.mdc) | [cloudflare-workers.cursorrules](rules/tools/cloudflare-workers.cursorrules) |
+| Payload CMS | [payload-cms.mdc](rules-mdc/tools/payload-cms.mdc) | [payload-cms.cursorrules](rules/tools/payload-cms.cursorrules) |
 
 ### AI Tools (NEW)
 
