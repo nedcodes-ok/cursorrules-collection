@@ -282,7 +282,7 @@ MIT
 
 ## Stay Updated
 
-Get experiment results and Cursor findings in your inbox: [subscribe](https://buttondown.com/nedcodes)
+📋 [Free Cursor Safety Checklist](https://nedcodes.gumroad.com/l/cursor-safety-checklist) — pre-flight checklist for AI-assisted coding sessions, based on tested experiments
 
 ## Related
 
