@@ -7,17 +7,21 @@
 
 > **⚠️ Using Cursor agent mode?** Use the `.mdc` files in `rules-mdc/`. Both `.cursorrules` and `.mdc` are loaded, but `.mdc` takes precedence on conflicts and gives you frontmatter (`alwaysApply`, globs). [More details](https://dev.to/nedcodes/cursor-agent-mode-ignores-cursorrules-use-mdc-instead-5flb).
 
-## Validate your rules
+## 🔧 Auto-setup with cursor-lint
+
+Don't copy files manually. cursor-lint detects your stack and downloads the right rules:
 
 ```bash
-npx cursor-lint
+npx cursor-lint --generate
 ```
 
-Catches broken frontmatter, missing `alwaysApply`, bad globs, and other silent failures. [More info](https://github.com/nedcodes-ok/cursor-lint).
+It reads your `package.json` / `requirements.txt` / `pyproject.toml`, figures out what you're using, and pulls matching rules from this collection into `.cursor/rules/`. Also lints your existing rules for silent failures (missing `alwaysApply`, bad frontmatter, broken globs).
+
+**[→ cursor-lint on GitHub](https://github.com/nedcodes-ok/cursor-lint)** · **[→ cursor-lint on npm](https://www.npmjs.com/package/cursor-lint)**
 
 ---
 
-## Quick Start
+## Quick Start (manual)
 
 **For agent mode (recommended):**
 
