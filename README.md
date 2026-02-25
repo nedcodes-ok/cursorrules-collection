@@ -176,6 +176,7 @@ Same prompts, different output. Left side is vanilla Cursor, right side is with 
 |------|---|---|
 | Docker | [docker.mdc](rules-mdc/tools/docker.mdc) | [docker.cursorrules](rules/tools/docker.cursorrules) |
 | Terraform | [terraform.mdc](rules-mdc/tools/terraform.mdc) | [terraform.cursorrules](rules/tools/terraform.cursorrules) |
+| TensorFlow | [tensorflow.mdc](rules-mdc/tools/tensorflow.mdc) | [tensorflow.cursorrules](rules/tools/tensorflow.cursorrules) |
 | Kubernetes | [kubernetes.mdc](rules-mdc/tools/kubernetes.mdc) | [kubernetes.cursorrules](rules/tools/kubernetes.cursorrules) |
 | CI/CD | [ci-cd.mdc](rules-mdc/tools/ci-cd.mdc) | [ci-cd.cursorrules](rules/tools/ci-cd.cursorrules) |
 | VS Code / Cursor | [vscode.mdc](rules-mdc/tools/vscode.mdc) | [vscode.cursorrules](rules/tools/vscode.cursorrules) |
@@ -185,6 +186,7 @@ Same prompts, different output. Left side is vanilla Cursor, right side is with 
 | MongoDB | [mongodb.mdc](rules-mdc/tools/mongodb.mdc) | [mongodb.cursorrules](rules/tools/mongodb.cursorrules) |
 | PostgreSQL | [postgresql.mdc](rules-mdc/tools/postgresql.mdc) | [postgresql.cursorrules](rules/tools/postgresql.cursorrules) |
 | AWS | [aws.mdc](rules-mdc/tools/aws.mdc) | [aws.cursorrules](rules/tools/aws.cursorrules) |
+| Ansible | [ansible.mdc](rules-mdc/tools/ansible.mdc) | [ansible.cursorrules](rules/tools/ansible.cursorrules) |
 | Redis | [redis.mdc](rules-mdc/tools/redis.mdc) | [redis.cursorrules](rules/tools/redis.cursorrules) |
 | Nginx | [nginx.mdc](rules-mdc/tools/nginx.mdc) | [nginx.cursorrules](rules/tools/nginx.cursorrules) |
 | Firebase | [firebase.mdc](rules-mdc/tools/firebase.mdc) | [firebase.cursorrules](rules/tools/firebase.cursorrules) |
@@ -203,14 +205,17 @@ Same prompts, different output. Left side is vanilla Cursor, right side is with 
 | Jest | [jest.mdc](rules-mdc/tools/jest.mdc) | [jest.cursorrules](rules/tools/jest.cursorrules) |
 | Cypress | [cypress.mdc](rules-mdc/tools/cypress.mdc) | [cypress.cursorrules](rules/tools/cypress.cursorrules) |
 | Storybook | [storybook.mdc](rules-mdc/tools/storybook.mdc) | [storybook.cursorrules](rules/tools/storybook.cursorrules) |
+| Sequelize | [sequelize.mdc](rules-mdc/tools/sequelize.mdc) | [sequelize.cursorrules](rules/tools/sequelize.cursorrules) |
 | Pydantic | [pydantic.mdc](rules-mdc/tools/pydantic.mdc) | [pydantic.cursorrules](rules/tools/pydantic.cursorrules) |
 | SQLAlchemy | [sqlalchemy.mdc](rules-mdc/tools/sqlalchemy.mdc) | [sqlalchemy.cursorrules](rules/tools/sqlalchemy.cursorrules) |
 | pytest | [pytest.mdc](rules-mdc/tools/pytest.mdc) | [pytest.cursorrules](rules/tools/pytest.cursorrules) |
+| PyTorch | [pytorch.mdc](rules-mdc/tools/pytorch.mdc) | [pytorch.cursorrules](rules/tools/pytorch.cursorrules) |
 | LangChain | [langchain.mdc](rules-mdc/tools/langchain.mdc) | [langchain.cursorrules](rules/tools/langchain.cursorrules) |
 | Ruff | [ruff.mdc](rules-mdc/tools/ruff.mdc) | [ruff.cursorrules](rules/tools/ruff.cursorrules) |
 | Vercel AI SDK | [vercel-ai-sdk.mdc](rules-mdc/tools/vercel-ai-sdk.mdc) | [vercel-ai-sdk.cursorrules](rules/tools/vercel-ai-sdk.cursorrules) |
 | Cloudflare Workers | [cloudflare-workers.mdc](rules-mdc/tools/cloudflare-workers.mdc) | [cloudflare-workers.cursorrules](rules/tools/cloudflare-workers.cursorrules) |
 | Payload CMS | [payload-cms.mdc](rules-mdc/tools/payload-cms.mdc) | [payload-cms.cursorrules](rules/tools/payload-cms.cursorrules) |
+| PNPM | [pnpm.mdc](rules-mdc/tools/pnpm.mdc) | [pnpm.cursorrules](rules/tools/pnpm.cursorrules) |
 
 ### AI Tools (NEW)
 

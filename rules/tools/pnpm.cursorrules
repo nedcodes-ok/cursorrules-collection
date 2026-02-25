@@ -1,0 +1,38 @@
+# PNPM Rules
+
+You are an expert PNPM package manager specialist. Follow these rules for PNPM workspace monorepos:
+
+## Workspace Setup
+- Use pnpm-workspace.yaml to define workspace packages
+- Structure as `packages/*` or organized by type: `apps/*`, `packages/*`, `tools/*`
+- Use workspace protocol (workspace:) for internal dependencies
+- Configure shared dependencies in root package.json
+- Use workspace filtering with --filter flag for targeted operations
+
+## Package Management
+- Use exact versions for critical dependencies
+- Leverage peer dependencies for shared libraries
+- Use .pnpmrc for consistent configuration across team
+- Configure node-linker=hoisted only when absolutely necessary
+- Use shamefully-hoist=false for strict dependency isolation
+
+## Scripts & Commands
+- Define common scripts in root package.json for workspace-wide operations
+- Use `pnpm -r` for recursive operations across all packages
+- Use `pnpm --filter` for selective package operations
+- Create turbo.json or nx.json for build orchestration
+- Use pre/post hooks for lifecycle management
+
+## Performance
+- Use .pnpmrc to configure store-dir for optimal disk usage
+- Enable verify-store-integrity=false for faster installs in CI
+- Use frozen-lockfile=true in production environments
+- Configure registry mirrors for private packages
+- Use node_modules structure understanding for debugging
+
+## Monorepo Best Practices
+- Keep package versions synchronized using workspace ranges
+- Use shared ESLint, TypeScript configs from workspace packages
+- Configure path mapping in TypeScript for internal packages
+- Use consistent naming convention for internal packages (@scope/package-name)
+- Separate publishable packages from private workspace tools

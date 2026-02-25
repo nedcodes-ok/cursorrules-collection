@@ -1,0 +1,49 @@
+---
+description: "Ansible: automation, playbooks, infrastructure as code"
+globs: ["*.yml", "*.yaml", "ansible.cfg", "requirements.yml"]
+alwaysApply: true
+---
+
+# Ansible Rules
+
+## Playbook Structure
+- Organize playbooks by functionality, not server type
+- Use meaningful play names that describe the purpose
+- Group related tasks into roles for reusability
+- Use tags for selective execution of tasks
+- Implement proper error handling with failed_when and ignore_errors
+
+## Inventory Management
+- Use dynamic inventory when possible (cloud providers, etc.)
+- Group hosts logically by environment, function, or location
+- Define host and group variables in separate files
+- Use consistent naming conventions for hosts and groups
+- Implement host patterns for targeted deployments
+
+## Task Best Practices
+- Use idempotent modules (avoid shell/command when possible)
+- Implement proper task naming for clear output
+- Use when conditions to control task execution
+- Register task results for conditional logic
+- Use block/rescue/always for error handling
+
+## Variables & Templates
+- Use group_vars and host_vars for variable organization
+- Implement variable precedence understanding
+- Use Jinja2 templates for configuration files
+- Define default values in role defaults/main.yml
+- Use ansible-vault for sensitive data encryption
+
+## Role Development
+- Follow Ansible Galaxy role structure
+- Use role dependencies sparingly and document them
+- Implement role testing with molecule
+- Use meta/main.yml for role metadata
+- Create reusable roles for common tasks
+
+## Security & Safety
+- Use become (sudo) only when necessary
+- Implement dry-run testing with --check mode
+- Use ansible-vault for passwords and secrets
+- Validate user inputs with assert module
+- Test playbooks in development environments first

@@ -1,0 +1,45 @@
+# Sequelize Rules
+
+You are an expert Sequelize ORM developer. Follow these rules for database management:
+
+## Model Definition
+- Use sequelize.define() or class-based models extending Model
+- Define attributes with proper data types and validation rules
+- Use underscored naming convention for database columns
+- Implement proper indexes for performance-critical fields
+- Define timestamps (createdAt, updatedAt) explicitly
+
+## Associations
+- Define associations in model files or separate association files
+- Use hasMany, hasOne, belongsTo, belongsToMany appropriately
+- Always define foreign key constraints and onDelete/onUpdate actions
+- Use include option for eager loading related data
+- Implement through models for many-to-many relationships
+
+## Migrations
+- Create migrations for all database schema changes
+- Use descriptive migration filenames with timestamps
+- Implement both up and down methods for rollback capability
+- Add proper indexes in migrations, not just model definitions
+- Use transactions in migrations for atomicity
+
+## Querying
+- Use findOne, findAll, findByPk for basic queries
+- Implement proper where clauses with operators (Op.eq, Op.like, etc.)
+- Use attributes option to select specific fields
+- Implement pagination with limit and offset
+- Use raw queries sparingly and with proper parameter binding
+
+## Validation & Hooks
+- Implement model-level validations for data integrity
+- Use beforeSave, afterSave hooks for business logic
+- Implement custom validation functions when needed
+- Use paranoid models for soft deletes when appropriate
+- Add proper error handling for validation failures
+
+## Performance
+- Use connection pooling configuration
+- Implement proper eager loading to avoid N+1 queries
+- Use database transactions for complex operations
+- Add database indexes for frequently queried fields
+- Use read replicas for read-heavy operations
