@@ -7,17 +7,17 @@
 
 > **⚠️ Using Cursor agent mode?** Use the `.mdc` files in `rules-mdc/`. Both `.cursorrules` and `.mdc` are loaded, but `.mdc` takes precedence on conflicts and gives you frontmatter (`alwaysApply`, globs). [More details](https://dev.to/nedcodes/cursor-agent-mode-ignores-cursorrules-use-mdc-instead-5flb).
 
-## 🔧 Auto-setup with cursor-lint
+## 🔧 Auto-setup with cursor-doctor
 
-Don't copy files manually. cursor-lint detects your stack and downloads the right rules:
+Don't copy files manually. cursor-doctor detects your stack, checks your rules for problems, and auto-fixes them:
 
 ```bash
-npx cursor-lint --generate
+npx cursor-doctor scan
 ```
 
-It reads your `package.json` / `requirements.txt` / `pyproject.toml`, figures out what you're using, and pulls matching rules from this collection into `.cursor/rules/`. Also lints your existing rules for silent failures (missing `alwaysApply`, bad frontmatter, broken globs).
+It checks your `.cursor/rules/` for broken frontmatter, conflicting rules, token budget issues, and missing coverage. Pro version auto-fixes everything it finds.
 
-**[→ cursor-lint on GitHub](https://github.com/nedcodes-ok/cursor-lint)** · **[→ cursor-lint on npm](https://www.npmjs.com/package/cursor-lint)**
+**[→ cursor-doctor on GitHub](https://github.com/nedcodes-ok/cursor-doctor)** · **[→ cursor-doctor on npm](https://www.npmjs.com/package/cursor-doctor)**
 
 ---
 
@@ -59,7 +59,7 @@ These rules are starting points, not finished configs. The more specific they ar
 - Tests live next to the file they test (Button.test.tsx)
 ```
 
-**Step 4:** Validate with `npx cursor-lint` to make sure the frontmatter is correct.
+**Step 4:** Validate with `npx cursor-doctor lint` to make sure the frontmatter is correct.
 
 The generic version gets you 70% there. The last 30% is what makes the rule actually useful for your codebase.
 
@@ -253,23 +253,17 @@ PRs welcome. See [CONTRIBUTING.md](CONTRIBUTING.md). The bar: rules should be sp
 
 ## Validate Your Rules
 
-**[cursor-lint](https://github.com/nedcodes-ok/cursor-lint)** catches broken frontmatter, missing `alwaysApply`, and other silent failures before they waste your tokens.
+**[cursor-doctor](https://github.com/nedcodes-ok/cursor-doctor)** catches broken frontmatter, conflicting rules, token budget waste, and other silent failures before they hurt your output.
 
 ```bash
-npx cursor-lint
+npx cursor-doctor scan    # health score + issues
+npx cursor-doctor lint    # detailed rule linting
+npx cursor-doctor fix     # auto-repair (Pro)
 ```
 
-Works in CI too — **[cursor-lint-action](https://github.com/nedcodes-ok/cursor-lint-action)** runs on every PR:
+## Need a deeper audit?
 
-```yaml
-- uses: nedcodes-ok/cursor-lint-action@v1
-```
-
-Also available as a [VS Code / Cursor extension](https://open-vsx.org/extension/nedcodes/cursor-lint).
-
-## Need a setup review?
-
-**[$50 async audit](https://nedcodes.gumroad.com/l/cursor-setup-audit)** — I review your rules, project structure, and model settings. Written report with exactly what to fix, delivered in 48 hours. Use code **FIRSTAUDIT** for 20% off.
+**[cursor-doctor Pro](https://nedcodes.gumroad.com/l/cursor-doctor-pro)** ($9 one-time) — full diagnostic report with conflict detection, redundancy analysis, token budget breakdown, and auto-fix. Run `npx cursor-doctor audit` for the full report.
 
 ## More
 
@@ -291,6 +285,6 @@ MIT
 
 ## Related
 
-- [cursor-lint](https://github.com/nedcodes-ok/cursor-lint) — CLI tool to check your .cursorrules and .mdc files for errors
-- [Cursor Setup Audit](https://nedcodes.gumroad.com/l/cursor-setup-audit) — Professional review of your rules setup ($50)
+- [cursor-doctor](https://github.com/nedcodes-ok/cursor-doctor) — CLI tool to diagnose and auto-fix your Cursor AI setup
+- [cursor-doctor Pro](https://nedcodes.gumroad.com/l/cursor-doctor-pro) — Full diagnostics, conflict detection, and auto-repair ($9)
 - [Articles on Dev.to](https://dev.to/nedcodes) — Guides on writing effective Cursor rules

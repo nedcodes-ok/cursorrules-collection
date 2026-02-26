@@ -4,11 +4,11 @@
   "private": true,
   "description": "97+ rules for Cursor AI in .mdc and .cursorrules format",
   "scripts": {
-    "lint": "cursor-lint",
-    "lint:fix": "cursor-lint --fix"
+    "lint": "cursor-doctor lint",
+    "lint:fix": "cursor-doctor fix"
   },
   "devDependencies": {
-    "cursor-lint": "^0.3.1"
+    "cursor-doctor": "^1.1.4"
   },
   "keywords": ["cursor", "cursorrules", "mdc", "cursor-ai"]
 }
