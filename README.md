@@ -7,15 +7,15 @@
 
 > **⚠️ Using Cursor agent mode?** Use the `.mdc` files in `rules-mdc/`. Both `.cursorrules` and `.mdc` are loaded, but `.mdc` takes precedence on conflicts and gives you frontmatter (`alwaysApply`, globs). [More details](https://dev.to/nedcodes/cursor-agent-mode-ignores-cursorrules-use-mdc-instead-5flb).
 
-## 🔧 Auto-setup with cursor-doctor
+## 🔧 Check your setup first
 
-Don't copy files manually. cursor-doctor detects your stack, checks your rules for problems, and auto-fixes them:
+Before adding new rules, see if your current setup has issues:
 
 ```bash
 npx cursor-doctor scan
 ```
 
-It checks your `.cursor/rules/` for broken frontmatter, conflicting rules, token budget issues, and missing coverage. Pro version auto-fixes everything it finds.
+Catches broken frontmatter, conflicting rules, token budget problems, and missing coverage. Takes about 2 seconds.
 
 **[→ cursor-doctor on GitHub](https://github.com/nedcodes-ok/cursor-doctor)** · **[→ cursor-doctor on npm](https://www.npmjs.com/package/cursor-doctor)**
 
