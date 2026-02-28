@@ -263,7 +263,7 @@ npx cursor-doctor fix     # auto-repair (Pro)
 
 ## Need a deeper audit?
 
-**[cursor-doctor Pro](https://nedcodes.gumroad.com/l/cursor-doctor-pro)** ($9 one-time) — full diagnostic report with conflict detection, redundancy analysis, token budget breakdown, and auto-fix. Run `npx cursor-doctor audit` for the full report.
+**[cursor-doctor Pro](https://nedcodes.dev)** ($9 one-time) — full diagnostic report with conflict detection, redundancy analysis, token budget breakdown, and auto-fix. Run `npx cursor-doctor audit` for the full report.
 
 ## More
 
@@ -281,10 +281,10 @@ MIT
 
 ## Stay Updated
 
-📋 [Free Cursor Safety Checklist](https://nedcodes.gumroad.com/l/cursor-safety-checklist) — pre-flight checklist for AI-assisted coding sessions, based on tested experiments
+📋 [Free Cursor Safety Checklist](https://nedcodes.dev) — pre-flight checklist for AI-assisted coding sessions, based on tested experiments
 
 ## Related
 
 - [cursor-doctor](https://github.com/nedcodes-ok/cursor-doctor) — CLI tool to diagnose and auto-fix your Cursor AI setup
-- [cursor-doctor Pro](https://nedcodes.gumroad.com/l/cursor-doctor-pro) — Full diagnostics, conflict detection, and auto-repair ($9)
+- [cursor-doctor Pro](https://nedcodes.dev) — Full diagnostics, conflict detection, and auto-repair ($9)
 - [Articles on Dev.to](https://dev.to/nedcodes) — Guides on writing effective Cursor rules
